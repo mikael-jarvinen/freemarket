@@ -28,7 +28,10 @@ const ControlBar = () => {
         </Box>
       </Box>
       <Box display='flex' paddingTop={2} justifyContent='center'>
-        <SearchBar placeholder='search...'/>
+        <SearchBar
+          placeholder='search...'
+          onSearch={value => console.log(value)}
+        />
       </Box>
     </Box>
   )
