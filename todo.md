@@ -1,16 +1,16 @@
 frontend
 - mainpage
 - setup testing
-- products viewing
-- individual product viewing
-- product posting
+- listing viewing
+- individual listing viewing
+- listing posting
 - user login
 - user pages
 - styling all of the above
 
 backend
-- figure out how to serve products data
-- routes for viewing individual products
+- figure out how to serve listings data
+- routes for viewing individual listings
 - routes for creating users
 - routes for loggin in
 - authorization
