@@ -12,10 +12,10 @@ listingsRouter.post('/', async (request, response, next) => {
 
   try {
     const newListing = new Listing({
-      title,
-      description,
-      locality,
-      author
+      title: body.title,
+      description: body.description,
+      locality: body.locality,
+      author: body.author
     })
     response.json(await newListing.save())
   } catch (e) {
@@ -23,7 +23,7 @@ listingsRouter.post('/', async (request, response, next) => {
   }
 })
 
-listingsRouter.get('/:id', async (request, response) => {
+listingsRouter.get('/:id', async (request, response, next) => {
   const id = request.params.id
 
   try {
