@@ -14,6 +14,11 @@ const listingSchema = mongoose.Schema({
   locality: {
     type: String,
     required: true,
+  },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
 })
 
