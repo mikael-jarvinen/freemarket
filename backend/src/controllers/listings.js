@@ -39,3 +39,5 @@ listingsRouter.get('/', async (request, response) => {
 
   response.json(allListings(l => l.toJSON()))
 })
+
+module.exports = listingsRouter

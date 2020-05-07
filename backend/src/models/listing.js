@@ -22,8 +22,8 @@ const listingSchema = mongoose.Schema({
   }
 })
 
-userSchema.plugin((uniqueValidator))
-userSchema.set('toJSON', {
+listingSchema.plugin((uniqueValidator))
+listingSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -31,4 +31,4 @@ userSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model('Listing', userSchema)
+module.exports = mongoose.model('Listing', listingSchema)
