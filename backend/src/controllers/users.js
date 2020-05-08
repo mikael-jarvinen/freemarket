@@ -50,6 +50,17 @@ usersRouter.get('/:id', async (request, response, next) => {
   }
 })
 
+usersRouter.delete('/:id', async (request, response, next) => {
+  const id = request.params.id
+
+  try {
+    await User.findByIdAndDelete(id)
+    response.status(204).send()
+  } catch (e) {
+    next(e)
+  }
+})
+
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({})
 
