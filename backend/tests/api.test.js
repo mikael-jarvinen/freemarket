@@ -125,7 +125,64 @@ describe('api', () => {
   })
 
   describe('listings endpoint', () => {
+    test('returns initial listings', async () => {
+      const response = await api.get('/api/listings')
 
+      expect(response.body).toHaveLength(initialValues.listings.length)
+    })
+
+    test('listings can be posted', async () => {
+      const newListing = {
+        title: 'Posted listing',
+        description: 'this listing was posted in test environment',
+        locality: 'Turku',
+        author: initialValues.users[0]._id
+      }
+
+      await api
+        .post('/api/listings')
+        .send(newListing)
+        .expect(200)
+
+      const listingsAfter = (await api.get('/api/listings')).body
+      expect(listingsAfter).toHaveLength(initialValues.listings.length + 1)
+    })
+
+    test('invalid listings can\'t be posted', async () => {
+      const newListing1 = {
+        title: 'missing fields',
+        locality: 'NYC'
+      }
+
+      const newListing2 = {
+        title: 'Listing1',
+        description: 'not unique title',
+        locality: 'Berlin',
+        author: initialValues.users[0]._id
+      }
+
+      await api
+        .post('/api/listings')
+        .send(newListing1)
+        .expect(400)
+      
+      await api
+        .post('/api/listings')
+        .send(newListing2)
+        .expect(500)
+      
+      const listingsAfter = (await api.get('/api/listings')).body
+      expect(listingsAfter).toHaveLength(initialValues.listings.length)
+    })
+
+    test('tests can be deleted', async () => {
+      await api
+        .delete(`/api/listings/${initialValues.listings[0]._id}`)
+        .expect(204)
+      
+      const listingsAfter = (await api.get('/api/listings')).body
+      expect(listingsAfter).toHaveLength(initialValues.listings.length - 1)
+    })
   })
 })
 

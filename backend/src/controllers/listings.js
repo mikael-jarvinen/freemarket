@@ -34,10 +34,21 @@ listingsRouter.get('/:id', async (request, response, next) => {
   }
 })
 
+listingsRouter.delete('/:id', async (request, response, next) => {
+  const id = request.params.id
+
+  try {
+    await Listing.findByIdAndDelete(id)
+    response.status(204).send()
+  } catch (e) {
+    next(e)
+  }
+})
+
 listingsRouter.get('/', async (request, response) => {
   const allListings = await Listing.find({})
 
-  response.json(allListings(l => l.toJSON()))
+  response.json(allListings.map(l => l.toJSON()))
 })
 
 module.exports = listingsRouter
