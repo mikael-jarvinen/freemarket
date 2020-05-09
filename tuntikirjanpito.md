@@ -6,3 +6,4 @@
 | 7.5.2020 | 4 | alustava express backend |
 | 8.5.2020 | 2 | alustavat, testaamaatomat routet |
 || 3 | testiympäristön alustus, routen lisäys |
+| 9.5.2020 | 3 | backendin hakuominaisuuden toteutus |
