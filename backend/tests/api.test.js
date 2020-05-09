@@ -64,6 +64,22 @@ describe('api', () => {
       expect(response.body).toHaveLength(initialValues.users.length)
     })
 
+    test('user can be searched', async () => {
+      const response = await api
+        .get(`/api/users/search?search=${initialValues.users[0].displayName}`)
+        .expect(200)
+      
+      expect(response.body).toEqual([initialValues.users[0].toJSON()])
+    })
+
+    test('users can be searched', async () => {
+      const response = await api
+        .get('/api/users/search?search=tester')
+        .expect(200)
+      
+      expect(response.body).toEqual(initialValues.users.map(u => u.toJSON()))
+    })
+
     test('users can be posted', async () => {
       const newUser1 = {
         displayName: 'postedUser1',
@@ -129,6 +145,22 @@ describe('api', () => {
       const response = await api.get('/api/listings')
 
       expect(response.body).toHaveLength(initialValues.listings.length)
+    })
+
+    test('listing can be searched', async () => {
+      const response = await api
+        .get(`/api/listings/search?search=${initialValues.listings[0].title}`)
+        .expect(200)
+      
+      expect(response.body).toEqual([initialValues.listings[0].toJSON()])
+    })
+
+    test('listings can be searched', async () => {
+      const response = await api
+        .get('/api/listings/search?search=Listing')
+        .expect(200)
+      
+      expect(response.body).toEqual(initialValues.listings.map(l => l.toJSON()))
     })
 
     test('listings can be posted', async () => {

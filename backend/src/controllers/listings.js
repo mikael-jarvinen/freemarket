@@ -23,6 +23,16 @@ listingsRouter.post('/', async (request, response, next) => {
   }
 })
 
+listingsRouter.get('/search', async (request, response) => {
+  const search = request.query.search
+  const searchResult = await Listing.find({
+    'title': {
+      '$regex': search, '$options': 'i'
+    }
+  })
+  response.json(searchResult)
+})
+
 listingsRouter.get('/:id', async (request, response, next) => {
   const id = request.params.id
 

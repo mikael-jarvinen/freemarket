@@ -39,6 +39,16 @@ usersRouter.post('/', async (request, response, next) => {
   }
 })
 
+usersRouter.get('/search', async (request, response) => {
+  const search = request.query.search
+  const searchResult = await User.find({
+    'displayName': {
+      '$regex': search, '$options': 'i'
+    }
+  })
+  response.json(searchResult)
+})
+
 usersRouter.get('/:id', async (request, response, next) => {
   const id = request.params.id
 

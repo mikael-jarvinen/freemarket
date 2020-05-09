@@ -26,6 +26,7 @@ listingSchema.plugin((uniqueValidator))
 listingSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
+    returnedObject.author = returnedObject.author.toString()
     delete returnedObject._id
     delete returnedObject.__v
   }
