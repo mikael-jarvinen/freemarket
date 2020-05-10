@@ -8,3 +8,4 @@
 || 3 | testiympäristön alustus, routen lisäys |
 | 9.5.2020 | 3 | backendin hakuominaisuuden toteutus |
 | 10.5.2020 | 4 | Django dokumentaatio |
+| 11.5.2020 | 4 | Mallien ja serialisoijien luonti ja debuggaaminen |

@@ -2,7 +2,7 @@ from rest_framework import serializers
 from listings.models import Listing, User, Review, Question, FEEDBACK_CHOICES
 
 class ListingSerializer(serializers.ModelSerializer):
-  questions = serializers.PrimaryKeyRelatedField(many=True)
+  questions = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
   class Meta:
     model = Listing
@@ -18,8 +18,8 @@ class ListingSerializer(serializers.ModelSerializer):
     ]
 
 class UserSerializer(serializers.ModelSerializer):
-  reviews = serializers.PrimaryKeyRelatedField(many=True)
-  given_reviews = serializers.PrimaryKeyRelatedField(many=True)
+  reviews = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+  given_reviews = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
   
   class Meta:
     model = User
@@ -37,8 +37,8 @@ class UserSerializer(serializers.ModelSerializer):
     ]
 
 class ReviewSerializer(serializers.ModelSerializer):
-  target = serializers.PrimaryKeyRelatedField()
-  author = serializers.PrimaryKeyRelatedField()
+  target = serializers.PrimaryKeyRelatedField(read_only=True)
+  author = serializers.PrimaryKeyRelatedField(read_only=True)
 
   class Meta:
     model = Review
@@ -52,8 +52,8 @@ class ReviewSerializer(serializers.ModelSerializer):
     ]
 
 class QuestionSerializer(serializers.ModelSerializer):
-  listing = serializers.PrimaryKeyRelatedField()
-  author = serializers.PrimaryKeyRelatedField()
+  listing = serializers.PrimaryKeyRelatedField(read_only=True)
+  author = serializers.PrimaryKeyRelatedField(read_only=True)
 
   class Meta:
     model = Question
