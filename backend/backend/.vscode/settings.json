@@ -1,0 +1,9 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.banditEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.pythonPath": "C:\\Users\\mikko\\.virtualenvs\\backend-T5v9FmU6\\Scripts\\python.exe",
+    "python.linting.mypyEnabled": false,
+    "python.linting.pylamaEnabled": false
+}
