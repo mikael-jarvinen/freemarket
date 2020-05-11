@@ -18,6 +18,7 @@ class ListingSerializer(serializers.ModelSerializer):
     ]
 
 class UserSerializer(serializers.ModelSerializer):
+  listings = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
   reviews = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
   given_reviews = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
   
