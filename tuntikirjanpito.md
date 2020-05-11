@@ -9,3 +9,4 @@
 | 9.5.2020 | 3 | backendin hakuominaisuuden toteutus |
 | 10.5.2020 | 4 | Django dokumentaatio |
 | 11.5.2020 | 4 | Mallien ja serialisoijien luonti ja debuggaaminen |
+| 11.5.2020 | 1 | Mallien debuggaaminen ja korjaus |
