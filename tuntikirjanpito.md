@@ -11,3 +11,4 @@
 | 11.5.2020 | 4 | Mallien ja serialisoijien luonti ja debuggaaminen |
 | 11.5.2020 | 1 | Mallien debuggaaminen ja korjaus |
 | 11.5.2020 | 1 | Tutustuminen djangon "näkymiin" ja eka view |
+| 12.5.2020 | 2 | Luokkapohjaiset näkymät kaikille malleille |
