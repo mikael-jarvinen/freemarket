@@ -1,5 +1,11 @@
+from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User as BaseUser
+from django.core.mail import send_mail
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser
+
+
+from .managers import UserManager
 
 
 class Listing(models.Model):
@@ -9,7 +15,7 @@ class Listing(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     postal_code = models.IntegerField()
     author = models.ForeignKey(
-        'User',
+        settings.AUTH_USER_MODEL,
         related_name='listings',
         on_delete=models.CASCADE
     )
@@ -18,13 +24,32 @@ class Listing(models.Model):
         ordering = ['created']
 
 
-class User(BaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True)
+    full_name = models.CharField(max_length=60, blank=True)
+    display_name = models.CharField(max_length=30, unique=True)
     created = models.DateTimeField(auto_now_add=True)
-    display_name = models.CharField(max_length=25, unique=True)
-    full_name = models.CharField(max_length=25)
-    email = models.EmailField()
-    description = models.TextField(max_length=1000, null=True)
-    website = models.URLField(null=True)
+    biography = models.TextField(max_length=1000, blank=True)
+    website = models.URLField(blank=True)
+    is_active = models.BooleanField(default=True)
+
+    objects = UserManager
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['display name']
+
+    class Meta:
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
+
+    def get_full_name(self):
+        return f'{self.display_name}: {self.full_name}'
+
+    def get_short_name(self):
+        return self.display_name
+
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
 class Review(models.Model):
@@ -41,12 +66,12 @@ class Review(models.Model):
     )
     review = models.TextField(max_length=200)
     target = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name='reviews',
         on_delete=models.CASCADE
     )
     author = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name='given_reviews',
         on_delete=models.CASCADE
     )
@@ -66,7 +91,7 @@ class Question(models.Model):
     question = models.CharField(max_length=200)
     reply = models.TextField(max_length=1000, null=True)
     author = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         null=True,
         on_delete=models.CASCADE
     )
