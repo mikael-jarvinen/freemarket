@@ -1,10 +1,5 @@
 from django.db import models
-
-FEEDBACK_CHOICES = [
-  ('POSITIVE', 'positive'),
-  ('NEUTRAL', 'neutral'),
-  ('NEGATIVE', 'negative')
-]
+from django.contrib.auth.models import User as BaseUser
 
 
 class Listing(models.Model):
@@ -23,7 +18,7 @@ class Listing(models.Model):
         ordering = ['created']
 
 
-class User(models.Model):
+class User(BaseUser):
     created = models.DateTimeField(auto_now_add=True)
     display_name = models.CharField(max_length=25, unique=True)
     full_name = models.CharField(max_length=25)
@@ -33,6 +28,12 @@ class User(models.Model):
 
 
 class Review(models.Model):
+    FEEDBACK_CHOICES = [
+        ('POSITIVE', 'positive'),
+        ('NEUTRAL', 'neutral'),
+        ('NEGATIVE', 'negative')
+    ]
+
     feedback = models.CharField(
         max_length=8,
         choices=FEEDBACK_CHOICES,
