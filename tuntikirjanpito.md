@@ -13,3 +13,4 @@
 | 11.5.2020 | 1 | Tutustuminen djangon "näkymiin" ja eka view |
 | 12.5.2020 | 2 | Luokkapohjaiset näkymät kaikille malleille |
 | 13.5.2020 | 2 | autentikaation rakentamista |
+| 13.5.2020 | 3 | autentikaation debuggaamista ja rakentamista |
