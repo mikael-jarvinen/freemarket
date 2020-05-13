@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from listings.models import Listing, User, Review, Question
 from listings.serializers import (
     ListingSerializer,
@@ -12,10 +12,17 @@ class ListingList(generics.ListCreateAPIView):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
 
+    permissions_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_Create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class ListingDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
+
+    permissions_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class UserList(generics.ListCreateAPIView):

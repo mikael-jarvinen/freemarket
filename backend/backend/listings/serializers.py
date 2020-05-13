@@ -17,7 +17,7 @@ class ListingSerializer(serializers.ModelSerializer):
             'description',
             'created',
             'postal_code',
-            'author',
+            'owner',
             'questions'
         ]
 
@@ -44,7 +44,7 @@ class UserSerializer(serializers.ModelSerializer):
             'display_name',
             'full_name',
             'email',
-            'description',
+            'biography',
             'website',
             'listings',
             'reviews',

@@ -14,7 +14,7 @@ class Listing(models.Model):
     description = models.TextField(max_length=1000)
     created = models.DateTimeField(auto_now_add=True)
     postal_code = models.IntegerField()
-    author = models.ForeignKey(
+    owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='listings',
         on_delete=models.CASCADE
@@ -33,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     website = models.URLField(blank=True)
     is_active = models.BooleanField(default=True)
 
-    objects = UserManager
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['display name']
