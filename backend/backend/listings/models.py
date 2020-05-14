@@ -54,16 +54,40 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Order(models.Model):
+    STATUS_CHOICES = [
+        ('FINISHED', 'finished'),
+        ('SHIPPED', 'shipped'),
+        ('PROCESSED', 'processed'),
+        ('WAITING', 'waiting for processing')
+    ]
     buyer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name='orders',
+        related_name='purchases',
         on_delete=models.DO_NOTHING
+    )
+    seller = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='orders',
+        on_delete=models.CASCADE
     )
     product = models.ForeignKey(
         Listing,
         related_name='orders',
         on_delete=models.DO_NOTHING
     )
+    quantity = models.IntegerField(default=True)
+    status = models.CharField(choices=STATUS_CHOICES, default='WAITING')
+    order_date = models.DateTimeField(auto_now_add=True)
+
+
+class PostalInfo(models.Model):
+    street_address = models.CharField(max_length=60)
+    country = models.CharField(max_length=30)
+    city = models.CharField(max_length=30)
+    postal_code = models.IntegerField()
+    full_name = models.CharField(max_length=60)
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=15, blank=True)
 
 
 class Review(models.Model):
