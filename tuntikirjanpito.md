@@ -15,3 +15,4 @@
 | 13.5.2020 | 2 | autentikaation rakentamista |
 | 13.5.2020 | 3 | autentikaation debuggaamista ja rakentamista |
 | 14.5.2020 | 2 | kirjautumisen ja listausten postauksen debuggaamista |
+| 14.5.2020 | 2 | mallien ja näkymien rakentamista ja debuggausta |
