@@ -14,6 +14,7 @@ class Listing(models.Model):
     description = models.TextField(max_length=1000)
     created = models.DateTimeField(auto_now_add=True)
     postal_code = models.IntegerField()
+    is_active = models.BooleanField(default=True)
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='listings',
@@ -50,6 +51,19 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+class Order(models.Model):
+    buyer = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='orders',
+        on_delete=models.DO_NOTHING
+    )
+    product = models.ForeignKey(
+        Listing,
+        related_name='orders',
+        on_delete=models.DO_NOTHING
+    )
 
 
 class Review(models.Model):

@@ -7,6 +7,7 @@ class ListingSerializer(serializers.ModelSerializer):
         many=True,
         queryset=Question.objects.all()
     )
+    owner = serializers.ReadOnlyField(source='owner.id')
 
     class Meta:
         model = Listing
