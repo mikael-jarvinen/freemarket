@@ -56,3 +56,34 @@ class UserTest(APITestCase):
             response.data,
             UserSerializer(self.INITIAL_USERS[0]).data
         )
+
+    def test_api_posting_users(self):
+        client = APIClient()
+        response = client.post(
+            '/users/',
+            {
+                'email': 'tester3@gmail.com',
+                'display_name': 'tester3',
+            },
+            format='json'
+        )
+        self.assertEqual(
+            response.data,
+            UserSerializer(User.objects.get(id=3)).data
+        )
+        response = client.post(
+            '/users/',
+            {
+                'email': 'tester4@gmail.com',
+                'display_name': 'tester4',
+                'full_name': 'tester 4',
+                'biography': 'tester number 4',
+                'website': 'http://testers.com',
+                'password': 'secret'
+            },
+            format='json'
+        )
+        self.assertEqual(
+            response.data,
+            UserSerializer(User.objects.get(id=4)).data
+        )
