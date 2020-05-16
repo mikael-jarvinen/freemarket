@@ -30,6 +30,12 @@ ALLOWED_HOSTS = []
 # Custom user model
 AUTH_USER_MODEL = 'listings.User'
 
+# REST framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 20
+}
+
 # Application definition
 
 INSTALLED_APPS = [
