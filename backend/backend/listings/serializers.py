@@ -27,12 +27,20 @@ class UserSerializer(serializers.ModelSerializer):
     listings = ListingSerializer(many=True, read_only=True)
     reviews = serializers.PrimaryKeyRelatedField(
         many=True,
-        queryset=Review.objects.all()
+        read_only=True
     )
     given_reviews = serializers.PrimaryKeyRelatedField(
         many=True,
-        queryset=Review.objects.all()
+        read_only=True
     )
+    password = serializers.HiddenField(default='password')
+
+    def create(self, validated_data):
+        user = User.objects.create(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+
+        return user
 
     class Meta:
         model = User
@@ -46,7 +54,8 @@ class UserSerializer(serializers.ModelSerializer):
             'website',
             'listings',
             'reviews',
-            'given_reviews'
+            'given_reviews',
+            "password"
         ]
 
 
