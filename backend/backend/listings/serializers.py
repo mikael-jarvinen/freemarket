@@ -23,12 +23,8 @@ class ListingSerializer(serializers.ModelSerializer):
         ]
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    listings = serializers.HyperlinkedRelatedField(
-        many=True,
-        view_name='listing-detail',
-        read_only=True
-    )
+class UserSerializer(serializers.ModelSerializer):
+    listings = ListingSerializer(many=True, read_only=True)
     reviews = serializers.PrimaryKeyRelatedField(
         many=True,
         queryset=Review.objects.all()
