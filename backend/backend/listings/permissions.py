@@ -12,3 +12,18 @@ class IsOwnerReadOnly(permissions.BasePermission):
             return True
 
         return obj.owner == request.user
+
+
+class IsUserReadOnly(permissions.BasePermission):
+    """
+    Allow write permissions only if object is the user
+    """
+
+    def has_object_permission(self, request, view, obj):
+        # Read permissions are allowed to any request and POST request
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        elif request.method == 'POST':
+            return True
+
+        return obj == request.user

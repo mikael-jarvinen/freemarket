@@ -19,7 +19,7 @@ class ListingSerializer(serializers.ModelSerializer):
             'created',
             'postal_code',
             'owner',
-            'questions'
+            'questions',
         ]
 
 
