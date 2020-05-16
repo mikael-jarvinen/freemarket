@@ -19,3 +19,4 @@
 | 15.5.2020 | 1 | koodin refaktorointia |
 | 16.5.2020 | 1 | koodin refaktorointia |
 || 4 | koodin refaktorointia, käyttäjän lisäyksen rakentamista, testien rakennusta |
+|| 1 | koodin debuggausta ja testien rakennusta |
