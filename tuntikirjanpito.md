@@ -18,3 +18,4 @@
 || 2 | mallien ja näkymien rakentamista ja debuggausta |
 | 15.5.2020 | 1 | koodin refaktorointia |
 | 16.5.2020 | 1 | koodin refaktorointia |
+|| 4 | koodin refaktorointia, käyttäjän lisäyksen rakentamista, testien rakennusta |
