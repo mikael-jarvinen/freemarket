@@ -35,7 +35,7 @@ class UserTest(APITestCase):
     def test_api_returns_users(self):
         """Test that the API returns users"""
         client = APIClient()
-        response = client.get('/users/', format='json')
+        response = client.get('/api/users/', format='json')
         tester1 = response.data['results'][0]
         tester2 = response.data['results'][1]
         self.assertEqual(
@@ -51,7 +51,7 @@ class UserTest(APITestCase):
         """Test that the api returns single user"""
         client = APIClient()
         user_id = self.INITIAL_USERS[0].id
-        response = client.get(f'/users/{user_id}/', format='json')
+        response = client.get(f'/api/users/{user_id}/', format='json')
         self.assertEqual(
             response.data,
             UserSerializer(self.INITIAL_USERS[0]).data
@@ -60,7 +60,7 @@ class UserTest(APITestCase):
     def test_api_posting_users(self):
         client = APIClient()
         response = client.post(
-            '/users/',
+            '/api/users/',
             {
                 'email': 'tester3@gmail.com',
                 'display_name': 'tester3',
@@ -72,7 +72,7 @@ class UserTest(APITestCase):
             UserSerializer(User.objects.get(id=3)).data
         )
         response = client.post(
-            '/users/',
+            '/api/users/',
             {
                 'email': 'tester4@gmail.com',
                 'display_name': 'tester4',
