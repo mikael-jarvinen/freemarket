@@ -5,7 +5,7 @@ from listings.models import Listing, User, Review, Question
 class ListingSerializer(serializers.ModelSerializer):
     questions = serializers.PrimaryKeyRelatedField(
         many=True,
-        queryset=Question.objects.all()
+        read_only=True
     )
     owner = serializers.ReadOnlyField(source='owner.id')
 
@@ -83,9 +83,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     listing = serializers.PrimaryKeyRelatedField(
         queryset=Listing.objects.all()
     )
-    author = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all()
-    )
+    author = serializers.ReadOnlyField(source='author.id')
 
     class Meta:
         model = Question

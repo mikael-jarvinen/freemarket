@@ -1,4 +1,4 @@
-from rest_framework import viewsets, generics, permissions
+from rest_framework import viewsets, permissions
 from .permissions import IsOwnerReadOnly, IsUserReadOnly
 from listings.models import Listing, User, Review, Question
 from listings.serializers import (
@@ -31,21 +31,14 @@ class UserViewSet(viewsets.ModelViewSet):
     ]
 
 
-class ReviewList(generics.ListCreateAPIView):
+class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
 
-class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
-
-
-class QuestionList(generics.ListCreateAPIView):
+class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
-
-class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Question.objects.all()
-    serializer_class = QuestionSerializer
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
