@@ -6,6 +6,7 @@ from rest_framework_simplejwt import views as jwt_views
 router = DefaultRouter()
 router.register(r'listings', views.ListingViewSet)
 router.register(r'users', views.UserViewSet)
+router.register(r'questions', views.QuestionViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),

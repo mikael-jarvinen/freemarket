@@ -100,7 +100,7 @@ class Question(models.Model):
     @property
     def seller(self):
         """returns the author of the listing"""
-        return Listing.objects.get(id=self.listing).author
+        return self.listing.owner
 
     class Meta:
         ordering = ['created']

@@ -84,6 +84,9 @@ class QuestionSerializer(serializers.ModelSerializer):
         queryset=Listing.objects.all()
     )
     author = serializers.ReadOnlyField(source='author.id')
+    seller = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all()
+    )
 
     class Meta:
         model = Question
@@ -93,5 +96,6 @@ class QuestionSerializer(serializers.ModelSerializer):
             'created',
             'question',
             'reply',
-            'author'
+            'author',
+            'seller'
         ]
