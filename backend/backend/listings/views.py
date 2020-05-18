@@ -1,5 +1,5 @@
 from rest_framework import viewsets, permissions
-from .permissions import IsOwnerReadOnly, IsUserReadOnly
+from .permissions import IsOwnerReadOnly, IsUserReadOnly, QuestionPermissions
 from listings.models import Listing, User, Review, Question
 from listings.serializers import (
     ListingSerializer,
@@ -39,6 +39,10 @@ class ReviewViewSet(viewsets.ModelViewSet):
 class QuestionViewSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+
+    permission_classes = [
+        QuestionPermissions
+    ]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
