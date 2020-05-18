@@ -97,10 +97,5 @@ class Question(models.Model):
         on_delete=models.CASCADE
     )
 
-    @property
-    def seller(self):
-        """returns the author of the listing"""
-        return self.listing.owner
-
     class Meta:
         ordering = ['created']

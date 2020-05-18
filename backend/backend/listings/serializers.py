@@ -84,9 +84,7 @@ class QuestionSerializer(serializers.ModelSerializer):
         queryset=Listing.objects.all()
     )
     author = serializers.ReadOnlyField(source='author.id')
-    seller = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all()
-    )
+    seller = serializers.SerializerMethodField()
 
     class Meta:
         model = Question
@@ -99,3 +97,6 @@ class QuestionSerializer(serializers.ModelSerializer):
             'author',
             'seller'
         ]
+
+    def get_seller(self, instance):
+        return UserSerializer(instance.listing.owner).data

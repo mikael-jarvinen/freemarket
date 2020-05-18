@@ -50,16 +50,16 @@ class QuestionTest(APITestCase):
         """Test that the derived field seller returns correct user"""
         question = QuestionSerializer(self.question).data
         seller = question['seller']
+        print(seller)
         self.assertEqual(
             UserSerializer(self.user).data,
-            UserSerializer(seller).data
+            seller
         )
 
     def test_api_returns_questions(self):
         """Test that the api returns questions"""
         client = APIClient()
         response = client.get('/api/questions/')
-        print(response.data)
         question = response.data['results'][0]
         self.assertEqual(
             question,
