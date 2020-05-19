@@ -1,5 +1,4 @@
 from rest_framework import permissions
-from django.conf import settings
 
 
 class IsOwnerReadOnly(permissions.BasePermission):
@@ -34,15 +33,17 @@ class QuestionPermissions(permissions.BasePermission):
     """
     Allow read permissions to everyone
     Allow post permissions to logged on users
+    Allow patch permissions to seller
     """
 
-    def has_object_permission(self, request, view, obj):
-        print(request)
+    def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
             return True
-        elif request.method == 'POST':
+        return request.user.is_authenticated
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
             return True
-        elif request.user in settings.AUTH_USER_MODEL.objects.all():
-            if request.method == 'PATCH':
-                return True
+        elif request.method == 'PATCH' and request.user == obj.seller:
+            return True
         return False

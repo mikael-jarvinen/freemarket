@@ -83,6 +83,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     listing = serializers.PrimaryKeyRelatedField(
         queryset=Listing.objects.all()
     )
+    question = serializers.ReadOnlyField()
     author = serializers.ReadOnlyField(source='author.id')
     seller = serializers.SerializerMethodField()
 
