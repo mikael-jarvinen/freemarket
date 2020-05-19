@@ -101,3 +101,16 @@ class ListingTest(APITestCase):
             UserSerializer(User.objects.get(id=owner_id)).data,
             UserSerializer(self.user).data
         )
+
+    def test_api_listing_posting_unauthorized(self):
+        client = APIClient()
+        response = response = client.post(
+            '/api/listings/',
+            {
+                'price': 4.5,
+                'title': 'listing',
+                'description': 'posted listing',
+                'postal_code': 26500
+            }
+        )
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
