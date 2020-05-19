@@ -7,6 +7,7 @@ router = DefaultRouter()
 router.register(r'listings', views.ListingViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'questions', views.QuestionViewSet)
+router.register(r'reviews', views.ReviewViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),

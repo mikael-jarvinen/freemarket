@@ -63,9 +63,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     target = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all()
     )
-    author = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all()
-    )
+    author = serializers.ReadOnlyField(source='author.id')
 
     class Meta:
         model = Review

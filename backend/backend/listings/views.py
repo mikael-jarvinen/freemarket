@@ -1,5 +1,12 @@
-from rest_framework import viewsets, permissions
-from .permissions import IsOwnerReadOnly, IsUserReadOnly, QuestionPermissions
+from rest_framework import viewsets, permissions, status
+from rest_framework.response import Response
+from django.db.utils import IntegrityError
+from .permissions import (
+    IsOwnerReadOnly,
+    IsUserReadOnly,
+    QuestionPermissions,
+    ReviewPermissions
+)
 from listings.models import Listing, User, Review, Question
 from listings.serializers import (
     ListingSerializer,
@@ -34,6 +41,27 @@ class UserViewSet(viewsets.ModelViewSet):
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+    permission_classes = [
+        ReviewPermissions
+    ]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+    def handle_exception(self, exc):
+        if isinstance(exc, IntegrityError):
+            data = {
+                'success': 'false',
+                'code': 'INTEGRITY_UNIQUE_ERROR',
+                'message': str(exc)
+            }
+            return Response(
+                data=data,
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        else:
+            return super().handle_exception(exc)
 
 
 class QuestionViewSet(viewsets.ModelViewSet):

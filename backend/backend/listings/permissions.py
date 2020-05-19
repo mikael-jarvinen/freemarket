@@ -47,3 +47,21 @@ class QuestionPermissions(permissions.BasePermission):
         elif request.method == 'PATCH' and request.user == obj.seller:
             return True
         return False
+
+
+class ReviewPermissions(permissions.BasePermission):
+    """
+    Allow read permissions to everyone
+    Allow post permissions to logged on users
+    Allow write permissions to author
+    """
+
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user.is_authenticated
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user == obj.author
