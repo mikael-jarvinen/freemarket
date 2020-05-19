@@ -20,5 +20,6 @@
 | 16.5.2020 | 1 | koodin refaktorointia |
 || 4 | koodin refaktorointia, käyttäjän lisäyksen rakentamista, testien rakennusta |
 || 1 | koodin debuggausta ja testien rakennusta |
-| 17.5 | 3 | JWT autentikaatioon vaihtaminen ja siihen liittyvien testien rakennusta |
-| 18.5-19.5 | 5 | Testien rakennusta ja debuggausta listingeille ja questioneille |
+| 17.5.2020 | 3 | JWT autentikaatioon vaihtaminen ja siihen liittyvien testien rakennusta |
+| 18-19.5.2020 | 5 | Testien rakennusta ja debuggausta listingeille ja questioneille |
+| 19.5.2020 | 3 | Review mallin näkymän rakentamista ja testien rakentamista |
