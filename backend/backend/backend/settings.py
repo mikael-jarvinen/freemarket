@@ -9,23 +9,31 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+from dotenv import load_dotenv
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# loading .env variables to environment variables
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')s7pmq^(++*7)xiao6xcu0@#73s+aj2-d6o5xk%yuct7wzu=45'
+# if PRODUCTION env variable is true load secret key from env variables
+# and set DEBUG variable accordingly
+if os.environ.get('PRODUCTION'):
+    DEBUG = False
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    print('Running in production mode')
+else:
+    DEBUG = True
+    SECRET_KEY = ')s7pmq^(++*7)xiao6xcu0@#73s+aj2-d6o5xk%yuct7wzu=45'
+    print('running in development mode')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Custom user model
 AUTH_USER_MODEL = 'listings.User'
@@ -37,7 +45,10 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
+    ],
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
 }
 
 # Application definition

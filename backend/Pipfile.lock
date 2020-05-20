@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d92ffc0cffda50c4c3390c650c6811f58ecfaaf1c26a32b182c02a31d6aef51f"
+            "sha256": "6ac75834956d0b3489b1c6728db6ca2203d96e51b22263d5fa76fa18c494e3f9"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -133,6 +133,14 @@
             "index": "pypi",
             "version": "==2.5.2"
         },
+        "python-dotenv": {
+            "hashes": [
+                "sha256:25c0ff1a3e12f4bde8d592cc254ab075cfe734fc5dd989036716fd17ee7e5ec7",
+                "sha256:3b9909bc96b0edc6b01586e1eed05e71174ef4e04c71da5786370cebea53ad74"
+            ],
+            "index": "pypi",
+            "version": "==0.13.0"
+        },
         "six": {
             "hashes": [
                 "sha256:236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a",
@@ -173,6 +181,14 @@
             ],
             "markers": "implementation_name == 'cpython' and python_version < '3.8'",
             "version": "==1.4.1"
+        },
+        "v": {
+            "hashes": [
+                "sha256:2d5a8f79a36aaebe62ef2c7068e3ec7f86656078202edabfdbf74715dc822d36",
+                "sha256:cd6b6b20b4a611f209c88bcdfb7211321f85662efb2bdd53a7b40314d0a84618"
+            ],
+            "index": "pypi",
+            "version": "==0.0.0"
         },
         "wrapt": {
             "hashes": [

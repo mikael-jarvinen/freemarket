@@ -5,6 +5,8 @@ verify_ssl = true
 
 [dev-packages]
 pylint = "*"
+python-dotenv = "*"
+v = {editable = true,version = "*"}
 
 [packages]
 django = "*"
