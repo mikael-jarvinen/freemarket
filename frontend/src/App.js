@@ -4,6 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom'
+import LoginDialog from './components/LoginDialog'
 import ControlBar from './components/ControlBar'
 import Footer from './components/footer'
 
@@ -11,6 +12,7 @@ const App = () => {
   return (
     <Router>
       <ControlBar/>
+      <LoginDialog/>
       <Switch>
         <Route path='/login'>
           This is the login page

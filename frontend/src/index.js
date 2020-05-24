@@ -6,11 +6,16 @@ import store from './store/'
 import App from './App'
 import { theme } from './theme'
 
-ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </ThemeProvider>,
-  document.getElementById('root')
-)
+const render = () => {
+  ReactDOM.render(
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>,
+    document.getElementById('root')
+  )
+}
+
+render()
+store.subscribe(render)

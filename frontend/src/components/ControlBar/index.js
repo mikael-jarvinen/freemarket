@@ -1,9 +1,13 @@
 import React from 'react'
-import { Box } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
+import { openDialog } from '../../store/loginDialogReducer'
+import { Box, Typography, Button } from '@material-ui/core'
 import LogoButton from './LogoButton'
 import SearchBar from './SearchBar'
 
 const ControlBar = () => {
+  const dispatch = useDispatch()
+
   return (
     <Box>
       <Box
@@ -24,7 +28,14 @@ const ControlBar = () => {
           flexGrow={1}
           flexDirection='row-reverse'
         >
-          Controls
+          <Button
+            padding={1}
+            onClick={() => dispatch(openDialog())}
+            color='inherit'
+            variant='text'
+          >
+            Login
+          </Button>
         </Box>
       </Box>
       <Box display='flex' paddingTop={2} justifyContent='center'>
