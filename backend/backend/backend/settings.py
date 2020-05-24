@@ -51,6 +51,10 @@ REST_FRAMEWORK = {
     )
 }
 
+# Directory and url where media will be stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
+MEDIA_URL = '/media/'
+
 # Application definition
 
 INSTALLED_APPS = [
