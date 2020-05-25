@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { openDialog } from '../../store/loginDialogReducer'
-import { Box, Typography, Button } from '@material-ui/core'
+import { Box, Button } from '@material-ui/core'
 import LogoButton from './LogoButton'
 import SearchBar from './SearchBar'
 

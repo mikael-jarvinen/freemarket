@@ -1,15 +1,16 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Dialog, DialogTitle, Box, Typography } from '@material-ui/core'
+import { Dialog, Box, Typography, Button } from '@material-ui/core'
 import { Form, Text } from 'informed'
 import { closeDialog } from '../store/loginDialogReducer'
+import { login } from '../store/authReducer'
 
 const LoginDialog = () => {
   const dispatch = useDispatch()
   const state = useSelector(state => state.loginDialog)
 
-  const handleSubmit = () => {
-
+  const handleSubmit = ({ email, password}) => {
+    dispatch(login(email, password))
   }
 
   return (
@@ -20,11 +21,11 @@ const LoginDialog = () => {
         padding={3}
       >
         <Typography color='textSecondary'>
-          Login
+          Login to Freemarket
         </Typography>
       </Box>
-      <Box padding={2} paddingLeft={4} paddingRight={4}>
-        <Form>
+      <Box padding={2} paddingLeft={8} paddingRight={8}>
+        <Form onSubmit={handleSubmit}>
           <label>
             <Typography>
               email
@@ -37,6 +38,11 @@ const LoginDialog = () => {
             </Typography>
             <Text field='password'/>
           </label>
+          <Box marginTop={1}>
+            <Button variant='outlined' type='submit'>
+              login
+            </Button>
+          </Box>
         </Form>
       </Box>
     </Dialog>

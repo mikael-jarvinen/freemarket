@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-let accessToken = localStorage.getItem('access')
-let refreshToken = localStorage.getItem('refresh')
+const baseUrl = '/api/users/'
 
+//Returns an access and refresh token if email and password are valid
 export const login = async (email, password) => {
   const response = await axios.post(
     '/api/token/',
@@ -11,7 +11,16 @@ export const login = async (email, password) => {
       password
     }
   )
+  
+  if (response.status === 401) {
+    throw Error('Invalid Credentials')
+  } else {
+    return response.data
+  }
+}
 
-  accessToken = response.data.access
-  refreshToken = response.data.refresh
+//Returns a list of all users that match the search parameter
+export const search = async search => {
+  const response = await axios.get(`${baseUrl}/?search=${search}`)
+  return response.data.results
 }
