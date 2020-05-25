@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, permissions, status, filters
 from rest_framework.response import Response
 from django.db.utils import IntegrityError
 from .permissions import (
@@ -32,6 +32,8 @@ class ListingViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    search_fields = ['email']
+    filter_backends = (filters.SearchFilter,)
 
     permission_classes = [
         IsUserReadOnly

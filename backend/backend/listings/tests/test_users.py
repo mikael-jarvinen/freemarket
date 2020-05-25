@@ -87,3 +87,16 @@ class UserTest(APITestCase):
             response.data,
             UserSerializer(User.objects.get(id=4)).data
         )
+
+    def test_api_search_user(self):
+        client = APIClient()
+        user_email = self.INITIAL_USERS[0].email
+        response = client.get(f'/api/users/?search={user_email}')
+        self.assertEqual(
+            len(response.data['results']),
+            1
+        )
+        self.assertEqual(
+            response.data['results'][0],
+            UserSerializer(self.INITIAL_USERS[0]).data
+        )
