@@ -23,3 +23,4 @@
 | 17.5.2020 | 3 | JWT autentikaatioon vaihtaminen ja siihen liittyvien testien rakennusta |
 | 18-19.5.2020 | 5 | Testien rakennusta ja debuggausta listingeille ja questioneille |
 | 19.5.2020 | 3 | Review mallin näkymän rakentamista ja testien rakentamista |
+| 24.5.2020 | 4 | Frontendin päivitystä. Reduxin lisäys ja reduserien rakennusta. Kirjautumisen rakentamista |
