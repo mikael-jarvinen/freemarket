@@ -11,12 +11,7 @@ export const login = async (email, password) => {
       password
     }
   )
-  
-  if (response.status === 401) {
-    throw Error('Invalid Credentials')
-  } else {
-    return response.data
-  }
+  return response.data
 }
 
 //Returns a list of all users that match the search parameter

@@ -4,6 +4,7 @@ import { Dialog, Box, Typography, Button } from '@material-ui/core'
 import { Form, Text } from 'informed'
 import { closeDialog } from '../store/loginDialogReducer'
 import { login } from '../store/authReducer'
+import Alert from './Alert'
 
 const LoginDialog = () => {
   const dispatch = useDispatch()
@@ -14,7 +15,7 @@ const LoginDialog = () => {
   }
 
   return (
-    <Dialog open={state} onClose={() => dispatch(closeDialog())}>
+    <Dialog open={state.open} onClose={() => dispatch(closeDialog())}>
       <Box
         bgcolor='primary.main'
         flexGrow={1}
@@ -24,6 +25,7 @@ const LoginDialog = () => {
           Login to Freemarket
         </Typography>
       </Box>
+      <Alert alert={state.message}/>
       <Box padding={2} paddingLeft={8} paddingRight={8}>
         <Form onSubmit={handleSubmit}>
           <label>

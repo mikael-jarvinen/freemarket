@@ -1,7 +1,8 @@
 // This reducer is responsible for holding information
 // about current authentication tokens and logged on user
+
 import { login as loginAPI, search } from '../backendAPI/userService'
-import { closeDialog } from '../store/loginDialogReducer'
+import { closeDialog, showMessage } from '../store/loginDialogReducer'
 
 const initialState = {
   access: null,
@@ -32,8 +33,8 @@ export const login = (email, password) => {
       localStorage.setItem('refresh', refresh)
       localStorage.setItem('user', user)
     } catch (e) {
-      if (e.message === 'Invalid Credentials') {
-        console.log('wrong credentials')
+      if (e.message.includes('401')) {
+        dispatch(showMessage('Invalid credentials'))
       }
     }
   }
