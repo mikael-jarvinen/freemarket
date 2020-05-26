@@ -1,12 +1,14 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { openDialog } from '../../store/loginDialogReducer'
 import { Box, Button } from '@material-ui/core'
 import LogoButton from './LogoButton'
 import SearchBar from './SearchBar'
+import AccountControl from './AccountControl'
 
 const ControlBar = () => {
   const dispatch = useDispatch()
+  const { user } = useSelector(state => state.auth)
 
   return (
     <Box>
@@ -28,6 +30,10 @@ const ControlBar = () => {
           flexGrow={1}
           flexDirection='row-reverse'
         >
+          {user &&
+            <AccountControl user={user}/>
+          }
+          {!user && 
           <Button
             padding={1}
             onClick={() => dispatch(openDialog())}
@@ -36,6 +42,7 @@ const ControlBar = () => {
           >
             Login
           </Button>
+          }
         </Box>
       </Box>
       <Box display='flex' paddingTop={2} justifyContent='center'>

@@ -5,9 +5,9 @@ import { login as loginAPI, search } from '../backendAPI/userService'
 import { closeDialog, showMessage } from '../store/loginDialogReducer'
 
 const initialState = {
-  access: null,
-  refresh: null,
-  user: null
+  access: localStorage.getItem('access'),
+  refresh: localStorage.getItem('refresh'),
+  user: JSON.parse(localStorage.getItem('user'))
 }
 
 export const login = (email, password) => {
@@ -31,7 +31,7 @@ export const login = (email, password) => {
 
       localStorage.setItem('access', access)
       localStorage.setItem('refresh', refresh)
-      localStorage.setItem('user', user)
+      localStorage.setItem('user', JSON.stringify(user))
     } catch (e) {
       if (e.message.includes('401')) {
         dispatch(showMessage('Invalid credentials'))
@@ -41,6 +41,9 @@ export const login = (email, password) => {
 }
 
 export const logout = () => {
+  localStorage.setItem('access', null)
+  localStorage.setItem('refresh', null)
+  localStorage.setItem('user', null)
   return {
     type: 'LOGOUT'
   }
