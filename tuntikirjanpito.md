@@ -25,3 +25,4 @@
 | 19.5.2020 | 3 | Review mallin näkymän rakentamista ja testien rakentamista |
 | 24.5.2020 | 4 | Frontendin päivitystä. Reduxin lisäys ja reduserien rakennusta. Kirjautumisen rakentamista |
 | 25.5.2020 | 5 | Kirjautumisen rakennusta, storen rakentamista, backendin hakuominaisuuden suunnittelua ja rakennusta |
+| 26.5.2020 | 4 | kirjautumisen ja reskisteröinnin rakennusta ja komponenttien refaktorointia |
