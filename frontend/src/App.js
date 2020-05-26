@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom'
-import LoginDialog from './components/LoginDialog'
+import LoginDialog from './components/LoginDialog/'
 import ControlBar from './components/ControlBar'
 import Footer from './components/footer'
 
