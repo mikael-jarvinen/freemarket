@@ -1,3 +1,5 @@
+// This component is a Logo that acts also as a button redirecting to /
+
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { 

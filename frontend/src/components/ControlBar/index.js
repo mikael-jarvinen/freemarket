@@ -1,3 +1,6 @@
+// This component shows a grey bar at the top of the application and 
+// a searchbar
+
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { openDialog } from '../../store/loginDialogReducer'

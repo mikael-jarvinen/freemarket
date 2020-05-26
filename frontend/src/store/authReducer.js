@@ -1,7 +1,7 @@
 // This reducer is responsible for holding information
 // about current authentication tokens and logged on user
 
-import { login as loginAPI, search } from '../backendAPI/userService'
+import { login as loginAPI, search } from '../services/userService'
 import { closeDialog, showMessage } from '../store/loginDialogReducer'
 
 const initialState = {
