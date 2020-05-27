@@ -2,15 +2,15 @@
 // a searchbar
 
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { openDialog } from '../../store/loginDialogReducer'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Box, Button } from '@material-ui/core'
 import LogoButton from './LogoButton'
 import SearchBar from './SearchBar'
 import AccountControl from './AccountControl'
 
 const ControlBar = () => {
-  const dispatch = useDispatch()
+  const history = useHistory()
   const { user } = useSelector(state => state.auth)
 
   return (
@@ -39,7 +39,7 @@ const ControlBar = () => {
           {!user && 
           <Button
             padding={1}
-            onClick={() => dispatch(openDialog())}
+            onClick={() => history.replace('/login')}
             color='inherit'
             variant='text'
           >

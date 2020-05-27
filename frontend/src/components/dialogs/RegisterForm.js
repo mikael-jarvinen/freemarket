@@ -1,14 +1,16 @@
+// unmodular registerform component to be used in the logindialog
+
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Box, Typography, Button} from '@material-ui/core'
 import { Form, Text, TextArea } from 'informed'
 import { register } from '../../services/userService'
-import { showLogin } from '../../store/loginDialogReducer'
 import Alert from '../Alert'
 import TextButton from '../TextButton'
 
 const RegisterForm = () => {
-  const dispatch = useDispatch()
+  const history = useHistory()
   const message = useSelector(state => state.loginDialog.message)
 
   const handleSubmit = ({
@@ -101,7 +103,7 @@ const RegisterForm = () => {
             </Box>
             <Box display='flex' justifyContent='flex-end' flexGrow={1}>
               <TextButton
-                onClick={() => dispatch(showLogin())}
+                onClick={() => history.replace('/login')}
                 text='Already have an account?'
               />
             </Box>

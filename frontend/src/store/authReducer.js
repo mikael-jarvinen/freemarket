@@ -5,7 +5,7 @@ import {
   login as loginAPI,
   search,
 } from '../services/userService'
-import { closeDialog, showMessage } from '../store/loginDialogReducer'
+import { showMessage } from '../store/loginDialogReducer'
 
 const initialState = {
   access: localStorage.getItem('access'),
@@ -30,7 +30,6 @@ export const login = (email, password) => {
           user
         }
       })
-      dispatch(closeDialog())
 
       localStorage.setItem('access', access)
       localStorage.setItem('refresh', refresh)

@@ -1,18 +1,27 @@
+// unmodular loginform component to be used in the logindialog
+
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Redirect, useHistory } from 'react-router-dom'
 import { Box, Typography, Button } from '@material-ui/core'
 import { Form, Text } from 'informed'
 import { login } from '../../store/authReducer'
-import { showRegister } from '../../store/loginDialogReducer'
 import Alert from '../Alert'
 import TextButton from '../TextButton'
 
 const LoginForm = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const message = useSelector(state => state.loginDialog.message)
+  const user = useSelector(state => state.auth.user)
 
   const handleSubmit = ({ email, password}) => {
     dispatch(login(email, password))
+
+    // if login successfull redirect to '/'
+    if (user) {
+      return <Redirect to='/'/>
+    }
   }
 
   return (
@@ -49,7 +58,7 @@ const LoginForm = () => {
             </Box>
             <Box display='flex' justifyContent='flex-end' flexGrow={1}>
               <TextButton
-                onClick={() => dispatch(showRegister())}
+                onClick={() => history.replace('/register')}
                 text={'Don\'t have an account?'}
               />
             </Box>
