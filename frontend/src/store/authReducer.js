@@ -7,10 +7,12 @@ import {
 } from '../services/userService'
 import { showMessage } from '../store/loginDialogReducer'
 
-const initialState = {
-  access: localStorage.getItem('access'),
-  refresh: localStorage.getItem('refresh'),
-  user: JSON.parse(localStorage.getItem('user'))
+const initialState = () => {
+  return {
+    access: localStorage.getItem('access'),
+    refresh: localStorage.getItem('refresh'),
+    user: JSON.parse(localStorage.getItem('user'))
+  }
 }
 
 export const login = (email, password) => {
