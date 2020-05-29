@@ -14,7 +14,7 @@ const ControlBar = () => {
   const { user } = useSelector(state => state.auth)
 
   return (
-    <Box>
+    <Box borderBottom={1} marginBottom={5}>
       <Box
         marginTop='-8px'
         marginLeft='-8px'
@@ -54,6 +54,7 @@ const ControlBar = () => {
           onSearch={value => console.log(value)}
         />
       </Box>
+      <Box marginBottom={10}/>
     </Box>
   )
 }

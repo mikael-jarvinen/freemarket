@@ -1,6 +1,9 @@
+// This component is a searchbar made with material-ui/core
+
 import React from 'react'
 import { TextField, Box } from '@material-ui/core'
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@material-ui/icons/Search'
+import PropTypes from 'prop-types'
 
 const SearchBar = ({ onSearch, placeholder }) => {
   const handleSubmit = event => {
@@ -32,6 +35,11 @@ const SearchBar = ({ onSearch, placeholder }) => {
       </form>
     </Box>
   )
+}
+
+SearchBar.propTypes = {
+  onSearch: PropTypes.func,
+  placeholder: PropTypes.string
 }
 
 export default SearchBar

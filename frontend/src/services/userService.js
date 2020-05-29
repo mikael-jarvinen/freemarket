@@ -14,6 +14,7 @@ export const login = async (email, password) => {
   return response.data
 }
 
+// posts a new user
 export const register = async (
   email,
   password,
@@ -22,7 +23,7 @@ export const register = async (
   biography,
   website
 ) => {
-  await axios.post(`${baseUrl}`, {
+  await axios.post(baseUrl, {
     email,
     password,
     display_name,

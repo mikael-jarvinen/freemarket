@@ -8,17 +8,21 @@ import LoginDialog from './components/dialogs/LoginDialog'
 import RegisterDialog from './components/dialogs/RegisterDialog'
 import ControlBar from './components/ControlBar'
 import Footer from './components/footer'
+import AccountPage from './components/AccountPage'
 
 const App = () => {
   return (
     <Router>
       <ControlBar/>
       <Switch>
-        <Route path={'/login'}>
+        <Route path='/login'>
           <LoginDialog/>
         </Route>
-        <Route path={'/register'}>
+        <Route path='/register'>
           <RegisterDialog/>
+        </Route>
+        <Route path='/account'>
+          <AccountPage/>
         </Route>
         <Route path='/listings'>
           Here you can view listings

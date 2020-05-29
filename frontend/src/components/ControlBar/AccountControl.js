@@ -7,9 +7,11 @@ import { Box, Typography, Fade } from '@material-ui/core'
 import { IconButton, Menu, MenuItem } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { logout } from '../../store/authReducer'
 
 const AccountControl = ({ user }) => {
+  const history = useHistory()
   const [anchorEl, setAnchorEl] = useState(null)
   const dispatch = useDispatch()
 
@@ -23,7 +25,7 @@ const AccountControl = ({ user }) => {
 
   return (
     <Box display='flex' justifyContent='flex-end'>
-      <Box overflow='hidden'>
+      <Box>
         <Typography variant='h6'>
           {user.display_name}
         </Typography>
@@ -40,7 +42,11 @@ const AccountControl = ({ user }) => {
         anchorEl={anchorEl}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose}>Nothing</MenuItem>
+        <MenuItem
+          onClick={() => history.replace('/account')}
+        >
+          my account
+        </MenuItem>
         <MenuItem onClick={() => dispatch(logout())}>Logout</MenuItem>
       </Menu>
     </Box>
