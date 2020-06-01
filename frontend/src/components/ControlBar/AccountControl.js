@@ -44,7 +44,7 @@ const AccountControl = ({ user }) => {
         TransitionComponent={Fade}
       >
         <MenuItem
-          onClick={() => history.replace('/account')}
+          onClick={() => history.push({ search: '?dialog=account' })}
         >
           my account
         </MenuItem>

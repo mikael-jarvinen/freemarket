@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom'
 import ControlBar from './components/ControlBar'
 import Footer from './components/footer'
-import AccountPage from './components/AccountPage'
 import DialogView from './components/DialogView'
 
 const App = () => {
@@ -15,9 +14,6 @@ const App = () => {
       <ControlBar/>
       <DialogView/>
       <Switch>
-        <Route path='/account'>
-          <AccountPage/>
-        </Route>
         <Route path='/listings'>
           Here you can view listings
         </Route>
