@@ -9,7 +9,7 @@ const LoginDialog = () => {
   const history = useHistory()
 
   return (
-    <Dialog open={true} onClose={() => history.replace('/')}>
+    <Dialog open={true} onClose={() => history.push({ search: null })}>
       <RegisterForm />
     </Dialog>
   )

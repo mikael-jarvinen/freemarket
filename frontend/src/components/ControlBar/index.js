@@ -8,6 +8,7 @@ import { Box, Button } from '@material-ui/core'
 import LogoButton from './LogoButton'
 import SearchBar from './SearchBar'
 import AccountControl from './AccountControl'
+import AddListingButton from './AddListingButton'
 
 const ControlBar = () => {
   const history = useHistory()
@@ -39,7 +40,7 @@ const ControlBar = () => {
           {!user && 
           <Button
             padding={1}
-            onClick={() => history.replace('/login')}
+            onClick={() => history.push({ search: '?dialog=login' })}
             color='inherit'
             variant='text'
           >
@@ -48,11 +49,16 @@ const ControlBar = () => {
           }
         </Box>
       </Box>
-      <Box display='flex' paddingTop={2} justifyContent='center'>
-        <SearchBar
-          placeholder='search...'
-          onSearch={value => console.log(value)}
-        />
+      <Box display='flex' paddingTop={2}>
+        <Box display='flex' flexGrow={1} justifyContent='center'>
+          <SearchBar
+            placeholder='search...'
+            onSearch={value => console.log(value)}
+          />
+        </Box>
+        <Box>
+          <AddListingButton/>
+        </Box>
       </Box>
       <Box marginBottom={5}/>
     </Box>

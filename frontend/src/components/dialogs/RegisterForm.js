@@ -169,7 +169,7 @@ const RegisterForm = () => {
             </Box>
             <Box display='flex' justifyContent='flex-end' flexGrow={1}>
               <TextButton
-                onClick={() => history.replace('/login')}
+                onClick={() => history.push({ search: '?dialog=login' })}
                 text='Already have an account?'
               />
             </Box>

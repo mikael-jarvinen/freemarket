@@ -58,7 +58,7 @@ const LoginForm = () => {
             </Box>
             <Box display='flex' justifyContent='flex-end' flexGrow={1}>
               <TextButton
-                onClick={() => history.replace('/register')}
+                onClick={() => history.push({ search: '?dialog=register' })}
                 text={'Don\'t have an account?'}
               />
             </Box>
