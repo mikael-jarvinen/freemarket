@@ -28,3 +28,4 @@
 | 26.5.2020 | 4 | kirjautumisen ja reskisteröinnin rakennusta ja komponenttien refaktorointia |
 | 27.5.2020 | 2 | koodin refaktorointia |
 | 1.6.2020 | 3 | rekisteröinnin täydellinen parannus ja kirjautumisen ja rekisteröinnin tilojen parantamista |
+|| 2 | Rekisteröinnin error viestien korjaus ja parannus. Salasanan postaaminen korjattu frotnendin ja backendin puolelta |
