@@ -27,3 +27,4 @@
 | 25.5.2020 | 5 | Kirjautumisen rakennusta, storen rakentamista, backendin hakuominaisuuden suunnittelua ja rakennusta |
 | 26.5.2020 | 4 | kirjautumisen ja reskisteröinnin rakennusta ja komponenttien refaktorointia |
 | 27.5.2020 | 2 | koodin refaktorointia |
+| 1.6.2020 | 3 | rekisteröinnin täydellinen parannus ja kirjautumisen ja rekisteröinnin tilojen parantamista |
