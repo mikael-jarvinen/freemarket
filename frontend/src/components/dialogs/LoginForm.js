@@ -12,7 +12,7 @@ import TextButton from '../TextButton'
 const LoginForm = () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const message = useSelector(state => state.loginDialog.message)
+  const message = useSelector(state => state.loginForm.message)
   const user = useSelector(state => state.auth.user)
 
   const handleSubmit = ({ email, password}) => {

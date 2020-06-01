@@ -1,17 +1,23 @@
 // unmodular registerform component to be used in the logindialog
 
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Box, Typography, Button} from '@material-ui/core'
 import { Form, Text, TextArea } from 'informed'
 import { register } from '../../services/userService'
+import {
+  emailAlert,
+  passwordAlert,
+  displayNameAlert
+} from '../../store/registerFormReducer'
 import Alert from '../Alert'
 import TextButton from '../TextButton'
 
 const RegisterForm = () => {
+  const dispatch = useDispatch()
   const history = useHistory()
-  const message = useSelector(state => state.loginDialog.message)
+  const messages = useSelector(state => state.registerForm)
 
   const handleSubmit = ({
     email,
@@ -31,6 +37,37 @@ const RegisterForm = () => {
     )
   }
 
+  const emailValidate = value => {
+    if (!value || !value.includes('@')) {
+      dispatch(emailAlert('invalid email'))
+      return 'Field must be an email'
+    }
+
+    // if validation succesfull we have to clear the alert
+    dispatch(emailAlert(null))
+  }
+
+  const passwordValidate = (value, values) => {
+    console.log('validating')
+    if (values.password1 !== values.password2) {
+      dispatch(passwordAlert('Passwords do not match'))
+      return 'Passwords must be equal'
+    }
+
+    // if validation succesfull we have to clear the alert
+    dispatch(passwordAlert(null))
+  }
+
+  const displayNameValidate = value => {
+    if (!value || value.length < 5) {
+      dispatch(displayNameAlert('Too short displayname'))
+      return 'Too short displayname'
+    }
+
+    // if validation succesfull we have to clear the alert
+    dispatch(displayNameAlert(null))
+  }
+
   return (
     <Box>
       <Box
@@ -42,7 +79,6 @@ const RegisterForm = () => {
           Register to Freemarket
         </Typography>
       </Box>
-      <Alert alert={message}/>
       <Box padding={2}>
         <Form onSubmit={handleSubmit}>
           <Box display='flex' flexWrap='wrap'>
@@ -51,19 +87,36 @@ const RegisterForm = () => {
                 <Typography>
                   email
                 </Typography>
-                <Text field='email'/>
+                <Alert severity='error' alert={messages.email}/>
+                <Text
+                  field='email'
+                  validate={emailValidate}
+                  validateOnBlur
+                />
               </label>
               <label>
                 <Typography>
                   password
                 </Typography>
-                <Text field='password1'/>
+                <Alert severity='error' alert={messages.password}/>
+                <Text
+                  type='password'
+                  field='password1'
+                  validate={passwordValidate}
+                  validateOnBlur
+                />
               </label>
               <label>
                 <Typography>
                   retype password
                 </Typography>
-                <Text field='password2'/>
+                <Alert severity='error' alert={messages.password}/>
+                <Text
+                  type='password'
+                  field='password2'
+                  validate={passwordValidate}
+                  validateOnBlur
+                />
               </label>
             </Box>
             <Box margin={3}>
@@ -71,17 +124,22 @@ const RegisterForm = () => {
                 <Typography>
                   display name
                 </Typography>
-                <Text field='display_name'/>
+                <Alert severity='error' alert={messages.display_name}/>
+                <Text
+                  field='display_name'
+                  validate={displayNameValidate}
+                  validateOnBlur
+                />
               </label>
               <label>
                 <Typography>
-                  first and last name
+                  first and last name (optional)
                 </Typography>
                 <Text field='full_name'/>
               </label>
               <label>
                 <Typography>
-                  website
+                  website (optional)
                 </Typography>
                 <Text field='website'/>
               </label>
@@ -90,7 +148,7 @@ const RegisterForm = () => {
           <Box marginLeft={3}>
             <label>
               <Typography>
-                biography
+                biography (optional)
               </Typography>
               <TextArea field='biography'/>
             </label>

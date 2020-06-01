@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { logout } from '../../store/authReducer'
+import PropTypes from 'prop-types'
 
 const AccountControl = ({ user }) => {
   const history = useHistory()
@@ -24,7 +25,7 @@ const AccountControl = ({ user }) => {
   }
 
   return (
-    <Box display='flex' justifyContent='flex-end'>
+    <Box display='flex' justifyContent='flex-end' alignItems='center'>
       <Box>
         <Typography variant='h6'>
           {user.display_name}
@@ -51,6 +52,21 @@ const AccountControl = ({ user }) => {
       </Menu>
     </Box>
   )
+}
+
+AccountControl.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    created: PropTypes.string.isRequired,
+    display_name: PropTypes.string.isRequired,
+    full_name: PropTypes.string,
+    email: PropTypes.string.isRequired,
+    biography: PropTypes.string,
+    website: PropTypes.string,
+    listings: PropTypes.array,
+    reviews: PropTypes.array,
+    given_reviews: PropTypes.array
+  })
 }
 
 export default AccountControl

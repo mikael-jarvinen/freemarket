@@ -1,11 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import authReducer from './authReducer'
-import loginDialogReducer from './loginDialogReducer'
+import loginFormReducer from './loginFormReducer'
+import registerFormReducer from './registerFormReducer'
 
 const reducer = combineReducers({
   auth: authReducer,
-  loginDialog: loginDialogReducer
+  loginForm: loginFormReducer,
+  registerForm: registerFormReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

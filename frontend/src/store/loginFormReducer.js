@@ -1,8 +1,4 @@
-// reducer responsible for the login dialog state
-
-const initialState = {
-  form: 'login'
-}
+// reducer responsible for the loginfrom alert state
 
 export const showMessage = message => {
   return {
@@ -13,7 +9,7 @@ export const showMessage = message => {
   }
 }
 
-const loginDialogReducer = (state = initialState, action) => {
+const loginFormReducer = (state = { message: null }, action) => {
   switch(action.type) {
   case 'MESSAGE':
     return {
@@ -25,4 +21,4 @@ const loginDialogReducer = (state = initialState, action) => {
   }
 }
 
-export default loginDialogReducer
+export default loginFormReducer

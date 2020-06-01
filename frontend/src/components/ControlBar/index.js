@@ -54,7 +54,7 @@ const ControlBar = () => {
           onSearch={value => console.log(value)}
         />
       </Box>
-      <Box marginBottom={10}/>
+      <Box marginBottom={5}/>
     </Box>
   )
 }

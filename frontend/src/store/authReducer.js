@@ -5,7 +5,7 @@ import {
   login as loginAPI,
   search,
 } from '../services/userService'
-import { showMessage } from '../store/loginDialogReducer'
+import { showMessage } from './loginFormReducer'
 
 const initialState = () => {
   return {
@@ -53,7 +53,7 @@ export const logout = () => {
   }
 }
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState(), action) => {
   switch(action.type) {
   case 'LOGIN':
     return {
