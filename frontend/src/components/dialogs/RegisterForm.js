@@ -22,7 +22,7 @@ const RegisterForm = () => {
 
   const handleSubmit = ({
     email,
-    password,
+    password1,
     display_name,
     full_name,
     biography,
@@ -30,16 +30,18 @@ const RegisterForm = () => {
   }) => {
     register(
       email,
-      password,
+      password1,
       display_name,
       full_name,
       biography,
       website
     )
-      .catch(() => {
-        dispatch(responseAlert('email and display name must be unique'))
+      .then(() => {
+        history.replace('/login')
       })
-    history.replace('/login')
+      .catch(error => {
+        dispatch(responseAlert(Object.values(error.response.data).join()))
+      })
   }
 
   const emailValidate = value => {
