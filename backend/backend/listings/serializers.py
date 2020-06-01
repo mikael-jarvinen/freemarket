@@ -33,7 +33,6 @@ class UserSerializer(serializers.ModelSerializer):
         many=True,
         read_only=True
     )
-    password = serializers.HiddenField(default='password')
 
     def create(self, validated_data):
         user = User.objects.create(**validated_data)

@@ -70,3 +70,29 @@ class AuthorizationTest(APITestCase):
             response.data['display_name'],
             'changed'
         )
+
+    def test_posted_user_login(self):
+        """Test that can login to posted user"""
+        client = APIClient()
+        response = client.post(
+            '/api/users/',
+            {
+                'email': 'tester1@gmail.com',
+                'display_name': 'tester1',
+                'password': 'password2000'
+            }
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_201_CREATED
+        )
+
+        response = client.post(
+            '/api/token/',
+            {
+                'email': 'tester1@gmail.com',
+                'password': 'password2000'
+            }
+        )
+        self.assertIsNotNone(response.data['refresh'])
+        self.assertIsNotNone(response.data['access'])

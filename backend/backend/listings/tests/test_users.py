@@ -64,6 +64,7 @@ class UserTest(APITestCase):
             {
                 'email': 'tester3@gmail.com',
                 'display_name': 'tester3',
+                'password': 'default'
             },
             format='json'
         )
