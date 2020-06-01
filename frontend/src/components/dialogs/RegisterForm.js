@@ -39,6 +39,7 @@ const RegisterForm = () => {
       .catch(() => {
         dispatch(responseAlert('email and display name must be unique'))
       })
+    history.replace('/login')
   }
 
   const emailValidate = value => {
