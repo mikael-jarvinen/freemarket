@@ -29,3 +29,4 @@
 | 27.5.2020 | 2 | koodin refaktorointia |
 | 1.6.2020 | 3 | rekisteröinnin täydellinen parannus ja kirjautumisen ja rekisteröinnin tilojen parantamista |
 || 2 | Rekisteröinnin error viestien korjaus ja parannus. Salasanan postaaminen korjattu frotnendin ja backendin puolelta |
+|| 1 | Dialogien renderöimisen muokkaus. Render ehdot riippuu nyt query stringeistä |
