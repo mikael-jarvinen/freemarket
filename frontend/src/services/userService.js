@@ -23,7 +23,7 @@ export const register = async (
   biography,
   website
 ) => {
-  await axios.post(baseUrl, {
+  const response = await axios.post(baseUrl, {
     email,
     password,
     display_name,
@@ -31,6 +31,7 @@ export const register = async (
     biography,
     website
   })
+  return response
 }
 
 //Returns a list of all users that match the search parameter

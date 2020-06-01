@@ -9,7 +9,8 @@ import { register } from '../../services/userService'
 import {
   emailAlert,
   passwordAlert,
-  displayNameAlert
+  displayNameAlert,
+  responseAlert
 } from '../../store/registerFormReducer'
 import Alert from '../Alert'
 import TextButton from '../TextButton'
@@ -35,6 +36,9 @@ const RegisterForm = () => {
       biography,
       website
     )
+      .catch(() => {
+        dispatch(responseAlert('email and display name must be unique'))
+      })
   }
 
   const emailValidate = value => {
@@ -80,6 +84,7 @@ const RegisterForm = () => {
         </Typography>
       </Box>
       <Box padding={2}>
+        <Alert severity='error' alert={messages.response}/>
         <Form onSubmit={handleSubmit}>
           <Box display='flex' flexWrap='wrap'>
             <Box margin={3}>

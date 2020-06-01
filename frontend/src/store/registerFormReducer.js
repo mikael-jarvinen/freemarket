@@ -4,6 +4,16 @@ const initialState = {
   email: null,
   display_name: null,
   password: null,
+  response: null
+}
+
+export const responseAlert = message => {
+  return {
+    type: 'RESPONSE_ALERT',
+    data: {
+      message
+    }
+  }
 }
 
 export const emailAlert = message => {
@@ -49,6 +59,11 @@ const registerFormReducer = (state = initialState, action) => {
     return {
       ...state,
       display_name: action.data.message
+    }
+  case 'RESPONSE_ALERT':
+    return {
+      ...state,
+      response: action.data.message
     }
   default:
     return state
