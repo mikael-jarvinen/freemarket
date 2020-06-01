@@ -4,7 +4,7 @@ frontend
 - listing viewing
 - individual listing viewing
 - listing posting
-- user login
+- user login and user register, done
 - user pages
 - styling all of the above
 
