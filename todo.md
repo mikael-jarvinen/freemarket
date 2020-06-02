@@ -9,4 +9,5 @@ frontend
 - styling all of the above
 
 backend
-- migrate to django
+- add imagefield to listing and user models
+- add email confirmation when registering user
