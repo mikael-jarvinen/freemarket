@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 import LoginDialog from './dialogs/LoginDialog'
 import RegisterDialog from './dialogs/RegisterDialog'
 import AccountDialog from './dialogs/AccountDialog'
+import AddListingDialog from './dialogs/AddListingDialog'
 import queryString from 'query-string'
 
 const DialogView = () => {
@@ -22,6 +23,10 @@ const DialogView = () => {
 
   if (dialog === 'account') {
     return <AccountDialog/>
+  }
+
+  if (dialog === 'addlisting') {
+    return <AddListingDialog/>
   }
 
   return null

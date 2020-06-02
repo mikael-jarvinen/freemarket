@@ -3,11 +3,19 @@
 
 import React from 'react'
 import { Box, Typography } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 
 const AddListingButton = () => {
+  const history = useHistory()
+
   return (
-    <Box padding={2} display='flex' style={{ cursor: 'pointer' }}>
+    <Box
+      padding={2}
+      display='flex'
+      style={{ cursor: 'pointer' }}
+      onClick={() => history.push({ search: '?dialog=addlisting' })}
+    >
       <Typography>Add listing</Typography>
       <AddBoxIcon/>
     </Box>
