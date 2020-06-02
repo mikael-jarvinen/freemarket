@@ -4,6 +4,7 @@
 import {
   login as loginAPI,
   search,
+  put
 } from '../services/userService'
 import { showMessage } from './loginFormReducer'
 
@@ -44,12 +45,52 @@ export const login = (email, password) => {
   }
 }
 
+export const editAccount = ({
+  display_name,
+  full_name,
+  website,
+  biography
+}) => {
+  return async (dispatch, getState) => {
+    const { access, refresh, user} = getState().auth
+    const response = await put(
+      user.id,
+      {
+        email: user.email,
+        display_name,
+        full_name,
+        website,
+        biography
+      }
+    )
+
+    return {
+      type: 'LOGIN',
+      data: {
+        access,
+        refresh,
+        user: response.data
+      }
+    }
+  }
+}
+
 export const logout = () => {
   localStorage.setItem('access', null)
   localStorage.setItem('refresh', null)
   localStorage.setItem('user', null)
   return {
     type: 'LOGOUT'
+  }
+}
+
+export const update = access => {
+  localStorage.setItem('access', access)
+  return {
+    type: 'UPDATE',
+    data: {
+      access
+    }
   }
 }
 
@@ -64,6 +105,11 @@ const authReducer = (state = initialState(), action) => {
     }
   case 'LOGOUT':
     return initialState
+  case 'UPDATE':
+    return {
+      ...state,
+      access: action.data.access
+    }
   default:
     return state
   }

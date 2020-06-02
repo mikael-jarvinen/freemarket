@@ -5,18 +5,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Form, Text, TextArea } from 'informed'
 import SaveIcon from '@material-ui/icons/Save'
 import { Box, Typography, IconButton } from '@material-ui/core'
+import { editAccount } from '../../store/authReducer'
 
 const AccountForm = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.auth.user)
 
-  const handleSubmit = values => {
-    console.log(values)
-  }
-
   return (
     <Box flexGrow={1} padding={2}>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={values => dispatch(editAccount(values))}>
         <Box display='flex' flexWrap='wrap'>
           <Box padding={2}>
             <label>
