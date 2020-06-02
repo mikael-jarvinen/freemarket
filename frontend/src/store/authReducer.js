@@ -8,6 +8,7 @@ import {
 } from '../services/userService'
 import { post } from '../services/listingService'
 import { showMessage } from './loginFormReducer'
+import { showMessage as alertListing } from './addListingDialogReducer'
 
 // fetches possible login information from localstorage
 const initialState = () => {
@@ -20,15 +21,20 @@ const initialState = () => {
 
 // Posts a new listing then updates logged in users field by adding a
 // new listing
+// if posting fails dispatch action to show error message to AddListingDialog
 export const addListing = listing => {
   return async dispatch => {
-    const newListing = await post(listing)
-    dispatch({
-      type: 'NEW_LISTING',
-      data: {
-        newListing
-      }
-    })
+    try {
+      const newListing = await post(listing)
+      dispatch({
+        type: 'NEW_LISTING',
+        data: {
+          newListing
+        }
+      })
+    } catch (e) {
+      dispatch(alertListing(Object.values(e.response.data).join()))
+    }
   }
 }
 

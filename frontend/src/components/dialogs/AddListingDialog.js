@@ -1,7 +1,7 @@
 // renders a dialog which contains a form for posting a new listing
 
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addListing } from '../../store/authReducer'
 import { useHistory } from 'react-router-dom'
 import {
@@ -12,13 +12,17 @@ import {
   Button
 } from '@material-ui/core'
 import { Form, Text, TextArea } from 'informed'
+import Alert from '../Alert'
 
 const AddListingDialog = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
+  const message = useSelector(state => state.addListingDialog.message)
+
   const handleSubmit = values => {
     dispatch(addListing(values))
+    history.push({ search: null })
   }
 
   return (
@@ -28,6 +32,7 @@ const AddListingDialog = () => {
           Add Listing
         </Typography>
       </Box>
+      <Alert severity='error' alert={message}/>
       <Form onSubmit={handleSubmit}>
         <Box padding={2}>
           <Container>
