@@ -5,7 +5,7 @@ frontend
 - individual listing viewing
 - listing posting
 - user login and user register, done
-- user pages
+- user pages, done
 - styling all of the above
 
 backend
