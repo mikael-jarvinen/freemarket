@@ -2,17 +2,56 @@
 
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
   Dialog,
   Box,
   Typography,
-  Container
+  Container,
+  IconButton
 } from '@material-ui/core'
+import EditIcon from '@material-ui/icons/Edit'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+import queryString from 'query-string'
+import AccountForm from './AccountForm'
 
 const AccountDialog = () => {
   const history = useHistory()
+  const { search } = useLocation()
+  const { accountform } = queryString.parse(search)
   const user = useSelector(state => state.auth.user)
+
+  if (accountform) {
+    return (
+      <Dialog open={true} onClose={() => history.push({ search: null })}>
+        <Box
+          padding={2}
+          bgcolor='primary.main'
+          flexGrow={1}
+          display='flex'
+          alignItems='center'
+        >
+          <Typography color='textSecondary'>
+            My Account
+          </Typography>
+          <Box
+            display='flex'
+            justifyContent='flex-end'
+            flexGrow={1}
+          >
+            <IconButton
+              onClick={() => history.push({
+                search: '?dialog=account'
+              })}
+            >
+              <ArrowBackIcon/>
+            </IconButton>
+          </Box>
+        </Box>
+        <AccountForm/>
+      </Dialog>
+    )
+  }
 
   return (
     <Dialog open={true} onClose={() => history.push({ search: null })}>
@@ -20,10 +59,25 @@ const AccountDialog = () => {
         padding={2}
         bgcolor='primary.main'
         flexGrow={1}
+        display='flex'
+        alignItems='center'
       >
         <Typography color='textSecondary'>
           My Account
         </Typography>
+        <Box
+          display='flex'
+          justifyContent='flex-end'
+          flexGrow={1}
+        >
+          <IconButton
+            onClick={() => history.push({
+              search: '?dialog=account&accountform=true'
+            })}
+          >
+            <EditIcon/>
+          </IconButton>
+        </Box>
       </Box>
       <Box flexGrow={1} padding={2}>
         <Container>
