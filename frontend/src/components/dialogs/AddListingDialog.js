@@ -2,7 +2,13 @@
 
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Dialog, Box, Typography, Container } from '@material-ui/core'
+import {
+  Dialog,
+  Box,
+  Typography,
+  Container,
+  Button
+} from '@material-ui/core'
 import { Form, Text, TextArea } from 'informed'
 
 const AddListingDialog = () => {
@@ -48,13 +54,24 @@ const AddListingDialog = () => {
                 <Text field='postal_code'/>
               </label>
             </Box>
-            <Box padding={2}>
-              <label>
-                <Typography>
-                  Description:
-                </Typography>
-                <TextArea field='description' rows={3} cols={25}/>
-              </label>
+            <Box padding={2} display='flex' flexWrap='wrap'>
+              <Box>
+                <label>
+                  <Typography>
+                    Description:
+                  </Typography>
+                  <TextArea field='description' rows={3} cols={25}/>
+                </label>
+              </Box>
+              <Box
+                display='flex'
+                flexDirection='row-reverse'
+                padding={2}
+                flexGrow={1}
+                alignItems='center'
+              >
+                <Button variant='contained' type='submit'>Post</Button>
+              </Box>
             </Box>
           </Container>
         </Box>
