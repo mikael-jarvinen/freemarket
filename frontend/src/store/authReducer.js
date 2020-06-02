@@ -6,8 +6,10 @@ import {
   search,
   put
 } from '../services/userService'
+import { post } from '../services/listingService'
 import { showMessage } from './loginFormReducer'
 
+// fetches possible login information from localstorage
 const initialState = () => {
   return {
     access: localStorage.getItem('access'),
@@ -16,6 +18,22 @@ const initialState = () => {
   }
 }
 
+// Posts a new listing then updates logged in users field by adding a
+// new listing
+export const addListing = listing => {
+  return async dispatch => {
+    const newListing = await post(listing)
+    dispatch({
+      type: 'NEW_LISTING',
+      data: {
+        newListing
+      }
+    })
+  }
+}
+
+// requests access and refresh tokens from backend then fetches the user
+// the given email belongs to
 export const login = (email, password) => {
   return async dispatch => {
     try {
@@ -45,6 +63,7 @@ export const login = (email, password) => {
   }
 }
 
+// Edits a user with a PUT method than updates state with new edited user
 export const editAccount = ({
   display_name,
   full_name,
@@ -75,6 +94,7 @@ export const editAccount = ({
   }
 }
 
+// clears localstorage and state from any login information
 export const logout = () => {
   localStorage.setItem('access', null)
   localStorage.setItem('refresh', null)
@@ -84,6 +104,7 @@ export const logout = () => {
   }
 }
 
+// updates localstorage and state with new access token
 export const update = access => {
   localStorage.setItem('access', access)
   return {
@@ -109,6 +130,14 @@ const authReducer = (state = initialState(), action) => {
     return {
       ...state,
       access: action.data.access
+    }
+  case 'NEW_LISTING':
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        listings: state.user.listings.concat(action.data.newListing)
+      }
     }
   default:
     return state

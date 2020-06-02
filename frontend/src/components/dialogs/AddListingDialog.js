@@ -1,6 +1,8 @@
 // renders a dialog which contains a form for posting a new listing
 
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { addListing } from '../../store/authReducer'
 import { useHistory } from 'react-router-dom'
 import {
   Dialog,
@@ -13,9 +15,10 @@ import { Form, Text, TextArea } from 'informed'
 
 const AddListingDialog = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const handleSubmit = values => {
-    console.log(values)
+    dispatch(addListing(values))
   }
 
   return (
