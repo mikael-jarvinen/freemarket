@@ -20,11 +20,6 @@ const AddListingDialog = () => {
 
   const message = useSelector(state => state.addListingDialog.message)
 
-  const handleSubmit = values => {
-    dispatch(addListing(values))
-    history.push({ search: null })
-  }
-
   return (
     <Dialog open={true} onClose={() => history.push({ search: null })}>
       <Box padding={2} bgcolor='primary.main'>
@@ -33,7 +28,7 @@ const AddListingDialog = () => {
         </Typography>
       </Box>
       <Alert severity='error' alert={message}/>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={values => dispatch(addListing(values))}>
         <Box padding={2}>
           <Container>
             <Box display='flex' flexWrap='wrap'>

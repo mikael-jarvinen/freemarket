@@ -9,6 +9,7 @@ import {
 import { post } from '../services/listingService'
 import { showMessage } from './loginFormReducer'
 import { showMessage as alertListing } from './addListingDialogReducer'
+import { push } from 'connected-react-router'
 
 // fetches possible login information from localstorage
 const initialState = () => {
@@ -32,6 +33,9 @@ export const addListing = listing => {
           newListing
         }
       })
+
+      // if succesfull close AddListingDialog
+      dispatch(push({ search: null }))
     } catch (e) {
       dispatch(alertListing(Object.values(e.response.data).join()))
     }
