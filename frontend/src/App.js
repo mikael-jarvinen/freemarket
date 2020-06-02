@@ -1,16 +1,17 @@
 import React from 'react'
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
 import ControlBar from './components/ControlBar'
 import Footer from './components/footer'
 import DialogView from './components/DialogView'
+import { history } from './store'
 
 const App = () => {
   return (
-    <Router>
+    <ConnectedRouter history={history}>
       <ControlBar/>
       <DialogView/>
       <Switch>
@@ -22,7 +23,7 @@ const App = () => {
         </Route>
       </Switch>
       <Footer/>
-    </Router>
+    </ConnectedRouter>
   )
 }
 
