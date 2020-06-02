@@ -31,4 +31,5 @@
 || 2 | Rekisteröinnin error viestien korjaus ja parannus. Salasanan postaaminen korjattu frotnendin ja backendin puolelta |
 || 1 | Dialogien renderöimisen muokkaus. Render ehdot riippuu nyt query stringeistä |
 || 2 | Oman käyttäjän sivun muokkaaminen dialogiksi |
-|| 2 | Account dialogin ja formin rakentamista |
+| 2.6.2020 | 2 | Account dialogin ja formin rakentamista |
+| 2.6.2020 | 4 | backendin bugien korjausta, accountformin rakennusta, axios pyyntöjen autentikaation rakentamista |
