@@ -35,6 +35,9 @@ class UserViewSet(viewsets.ModelViewSet):
     search_fields = ['email']
     filter_backends = (filters.SearchFilter,)
 
+    def perform_create(self, serializer):
+        serializer.save(password=self.request.data['password'])
+
     permission_classes = [
         IsUserReadOnly
     ]

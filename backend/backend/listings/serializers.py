@@ -35,7 +35,7 @@ class UserSerializer(serializers.ModelSerializer):
     )
 
     def create(self, validated_data):
-        user = User.objects.create(**validated_data)
+        user = User.objects.create_user(**validated_data)
         user.set_password(validated_data['password'])
         user.save()
 
@@ -53,8 +53,7 @@ class UserSerializer(serializers.ModelSerializer):
             'website',
             'listings',
             'reviews',
-            'given_reviews',
-            "password"
+            'given_reviews'
         ]
 
 
