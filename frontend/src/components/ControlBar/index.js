@@ -15,7 +15,7 @@ const ControlBar = () => {
   const { user } = useSelector(state => state.auth)
 
   return (
-    <Box borderBottom={1} marginBottom={5}>
+    <Box borderBottom={1}>
       <Box
         marginTop='-8px'
         marginLeft='-8px'

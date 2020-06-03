@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import ControlBar from './components/ControlBar'
-import Footer from './components/footer'
 import DialogView from './components/DialogView'
 import ListingsPage from './components/ListingsPage'
 import { history } from './store'
@@ -23,7 +22,6 @@ const App = () => {
           This is the starting page
         </Route>
       </Switch>
-      <Footer/>
     </ConnectedRouter>
   )
 }
