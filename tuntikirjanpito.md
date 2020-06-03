@@ -35,3 +35,4 @@
 || 4 | backendin bugien korjausta, accountformin rakennusta, axios pyyntöjen autentikaation rakentamista |
 || 1 | Listauksen postaus dialogin rakennusta |
 | 3.6.2020 | 3 | Listauksen postaus dialogin ja toiminnallisuuden rakennusta |
+|| 1 | Listauksen postaus dialogin kenttien validointi |
