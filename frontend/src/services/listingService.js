@@ -12,7 +12,7 @@ export const post = async listing => {
 }
 
 // gets listings
-export const get = async () => {
-  const response = await axios.get(baseUrl)
+export const get = async offset => {
+  const response = await axios.get(`${baseUrl}?offset=${offset}`)
   return response.data
 }
