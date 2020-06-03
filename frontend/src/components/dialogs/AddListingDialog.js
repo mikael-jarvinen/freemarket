@@ -3,6 +3,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addListing } from '../../store/authReducer'
+import {
+  titleAlert,
+  priceAlert,
+  postalCodeAlert,
+  descriptionAlert
+} from '../../store/addListingDialogReducer'
 import { useHistory } from 'react-router-dom'
 import {
   Dialog,
@@ -18,7 +24,51 @@ const AddListingDialog = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const message = useSelector(state => state.addListingDialog.message)
+  const messages = useSelector(state => state.addListingDialog)
+
+  const titleValidate = value => {
+    if (!value || value.length < 10) {
+      dispatch(titleAlert('Title should contain atleast 10 characters'))
+      return 'Title should contain atleast 10 characters'
+    }
+
+    // if validation succesfull clear alert
+    dispatch(titleAlert(null))
+  }
+
+  const priceValidate = value => {
+    if (!value || value < 0.1 || value > 9999999.99) {
+      dispatch(priceAlert('Price should be in range of 0.1-9999999.99'))
+      return 'Price should be in range of 0.1-9999999.99'
+    }
+
+    // if validation succesfull clear alert
+    dispatch(priceAlert(null))
+  }
+
+  const postalCodeValidate = value => {
+    if (!value) {
+      dispatch(postalCodeAlert('Invalid postal code'))
+      return 'Invalid postal code'
+    }
+
+    // if validation succesfull clear alert
+    dispatch(postalCodeAlert(null))
+  }
+
+  const descriptionValidate = value => {
+    if (!value || value.length < 10 || value.length > 1000) {
+      dispatch(
+        descriptionAlert(
+          'Description should contain atleast 10 characters and max 1000'
+        )
+      )
+      return 'Description should contain atleast 10 characters and max 1000'
+    }
+
+    // if validation succesfull clear alert
+    dispatch(descriptionAlert(null))
+  }
 
   return (
     <Dialog open={true} onClose={() => history.push({ search: null })}>
@@ -27,43 +77,66 @@ const AddListingDialog = () => {
           Add Listing
         </Typography>
       </Box>
-      <Alert severity='error' alert={message}/>
+      <Alert severity='error' alert={messages.message}/>
       <Form onSubmit={values => dispatch(addListing(values))}>
         <Box padding={2}>
           <Container>
             <Box display='flex' flexWrap='wrap'>
               <Box padding={2} marginRight={2}>
+                <Alert severity='error' alert={messages.titleAlert}/>
                 <label>
                   <Typography>
                     Title:
                   </Typography>
-                  <Text field='title'/>
+                  <Text
+                    field='title'
+                    validate={titleValidate}
+                    validateOnBlur
+                  />
                 </label>
               </Box>
               <Box padding={2} marginRight={2}>
+                <Alert severity='error' alert={messages.priceAlert}/>
                 <label>
                   <Typography>
                     Price:
                   </Typography>
-                  <Text field='price' type='number'/>
+                  <Text
+                    field='price'
+                    type='number'
+                    validate={priceValidate}
+                    validateOnBlur
+                  />
                 </label>
               </Box>
             </Box>
             <Box padding={2}>
+              <Alert severity='error' alert={messages.postalCodeAlert}/>
               <label>
                 <Typography>
                   Postal code:
                 </Typography>
-                <Text field='postal_code'/>
+                <Text
+                  field='postal_code'
+                  validate={postalCodeValidate}
+                  validateOnBlur
+                />
               </label>
             </Box>
             <Box padding={2} display='flex' flexWrap='wrap'>
               <Box>
+                <Alert severity='error' alert={messages.descriptionAlert}/>
                 <label>
                   <Typography>
                     Description:
                   </Typography>
-                  <TextArea field='description' rows={3} cols={25}/>
+                  <TextArea
+                    field='description'
+                    rows={3}
+                    cols={25}
+                    validate={descriptionValidate}
+                    validateOnBlur
+                  />
                 </label>
               </Box>
               <Box
