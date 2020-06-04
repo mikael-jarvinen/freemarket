@@ -37,3 +37,4 @@
 | 3.6.2020 | 3 | Listauksen postaus dialogin ja toiminnallisuuden rakennusta |
 || 1 | Listauksen postaus dialogin kenttien validointi |
 || 6 | Listauksien selauksen rakentamista, MUI dokumentaatio |
+|| 6 | Selauksen rakentamista ja suunnittelua |
