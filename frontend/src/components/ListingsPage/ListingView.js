@@ -3,16 +3,19 @@
 
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import {
   Box,
   Typography,
-  Paper
+  Paper,
+  Button
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import { loadOwner } from '../../store/listingsReducer'
 
 const ListingView = ({ listing }) => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   // useEffect used to populate the owner field
   useEffect(() => {
@@ -32,7 +35,6 @@ const ListingView = ({ listing }) => {
     <Box
       borderLeft={1}
       borderColor='primary.light'
-      flexGrow={1}
       padding={2}
     >
       <Paper elevation={3}>
@@ -67,6 +69,14 @@ const ListingView = ({ listing }) => {
           </Typography>
         </Box>
       </Paper>
+      <Box flexGrow={1}>
+        <Button
+          variant='outlined'
+          onClick={() => history.push({ search: null })}
+        >
+          Close
+        </Button>
+      </Box>
     </Box>
   )
 }

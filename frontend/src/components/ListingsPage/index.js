@@ -14,6 +14,7 @@ import {
   Typography,
   useMediaQuery
 } from '@material-ui/core'
+import { Pagination } from '@material-ui/lab'
 import queryString from 'query-string'
 import ListingView from './ListingView'
 
@@ -22,9 +23,17 @@ const ListingsPage = () => {
   const { listing } = queryString.parse(search)
   const dispatch = useDispatch()
   const history = useHistory()
-  const { currentPage } = useSelector(state => state.listings)
+  const { currentPage, pageCount } = useSelector(state => state.listings)
 
-  const matches = useMediaQuery(theme => theme.breakpoints.up('sm'))
+  // determining the gridlist columns amount depending on screensize
+  // and if a valid 'listing' query string has been provided to URL, when
+  // a listingview is rendered
+  let cols = 4 // default cols value
+  if (!useMediaQuery(theme => theme.breakpoints.up('sm'))) {
+    cols = 1 // for small screens 1 column is enough
+  } else if (listing) {
+    cols = 3 // when a listing querystring has been provided
+  }
 
   if (!currentPage.page) {
     dispatch(loadPage(1))
@@ -32,36 +41,50 @@ const ListingsPage = () => {
   }
 
   return (
-    <Box display='flex'>
-      <Container>
-        <Box>
-          <Box maxHeight='70vh' overflow='auto' padding={2}>
-            <GridList cols={matches ? 4 : 1} cellHeight={200}>
-              {
-                currentPage.listings.map(listing => 
-                  <GridListTile
-                    key={listing.id}
-                    onClick={() => history.push({
-                      search: `?listing=${listing.id}`
-                    })}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <GridListTileBar
-                      title={listing.title}
-                    />
-                  </GridListTile>
-                )
-              }
-            </GridList>
+    <Container>
+      <Box display='flex'>
+        <Box
+          maxHeight='70vh'
+          overflow='auto'
+          padding={2}
+          flexGrow={1}
+          minWidth='30vw'
+        >
+          <Box
+            padding={2}
+            flexGrow={1}
+            display='flex'
+            justifyContent='center'
+          >
+            <Pagination count={pageCount} color='secondary'>
+
+            </Pagination>
           </Box>
+          <GridList cols={cols} cellHeight={200}>
+            {
+              currentPage.listings.map(listing => 
+                <GridListTile
+                  key={listing.id}
+                  onClick={() => history.push({
+                    search: `?listing=${listing.id}`
+                  })}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <GridListTileBar
+                    title={listing.title}
+                  />
+                </GridListTile>
+              )
+            }
+          </GridList>
         </Box>
-      </Container>
-      <ListingView
-        listing={currentPage.listings.find(({ id }) => 
-          id === Number(listing)
-        )}
-      />
-    </Box>
+        <ListingView
+          listing={currentPage.listings.find(({ id }) => 
+            id === Number(listing)
+          )}
+        />
+      </Box>
+    </Container>
   )
 }
 

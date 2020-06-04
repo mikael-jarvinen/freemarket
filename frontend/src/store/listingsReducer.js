@@ -10,6 +10,7 @@ const initialState = {
     page: null,
     listings: null
   },
+  pageCount: null,
   recents: []
 }
 
@@ -18,11 +19,20 @@ export const loadPage = page => {
   const offset = (page - 1) * 20
   return async dispatch => {
     const response = await get(offset)
+    const listingCount = response.count
+    const pageCount = Math.floor(listingCount / 21) + 1
+
     dispatch({
       type: 'LOAD_PAGE',
       data: {
         page,
         listings: response.results
+      }
+    })
+    dispatch({
+      type: 'SET_PAGE_COUNT',
+      data: {
+        pageCount
       }
     })
   }
@@ -69,6 +79,11 @@ const listingsReducer = (state = initialState, action) => {
           }
         })
       }
+    }
+  case 'SET_PAGE_COUNT':
+    return {
+      ...state,
+      pageCount: action.data.pageCount
     }
   default:
     return state
