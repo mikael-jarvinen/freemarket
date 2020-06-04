@@ -36,7 +36,7 @@ const ListingsPage = () => {
       <Container>
         <Box>
           <Box maxHeight='70vh' overflow='auto' padding={2}>
-            <GridList cols={matches ? 3 : 1} cellHeight={200}>
+            <GridList cols={matches ? 4 : 1} cellHeight={200}>
               {
                 currentPage.listings.map(listing => 
                   <GridListTile

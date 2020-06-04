@@ -58,6 +58,12 @@ export const register = async (
   return response
 }
 
+// returns a single user by id
+export const getById = async id => {
+  const response = await axios.get(`${baseUrl}${id}/`)
+  return response.data
+}
+
 //Returns a list of all users that match the search parameter
 export const search = async search => {
   const response = await axios.get(`${baseUrl}?search=${search}`)

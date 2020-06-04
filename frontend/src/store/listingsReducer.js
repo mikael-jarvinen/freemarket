@@ -3,6 +3,7 @@
 // and 2 recently viewed pages of listings
 
 import { get } from '../services/listingService'
+import { getById } from '../services/userService'
 
 const initialState = {
   currentPage: {
@@ -27,6 +28,23 @@ export const loadPage = page => {
   }
 }
 
+// populates the owner field by listing id
+export const loadOwner = listingId => {
+  return async (dispatch, getState) => {
+    const listings = getState().listings.currentPage.listings
+    const userId = listings.find(({ id }) => id === listingId).owner
+    const owner = await getById(userId)
+
+    dispatch({
+      type: 'POPULATE_OWNER',
+      data: {
+        listing: listingId,
+        owner
+      }
+    })
+  }
+}
+
 const listingsReducer = (state = initialState, action) => {
   switch (action.type) {
   case 'LOAD_PAGE':
@@ -34,6 +52,23 @@ const listingsReducer = (state = initialState, action) => {
       ...state,
       recents: state.recents.concat(state.currentPage),
       currentPage: action.data
+    }
+  case 'POPULATE_OWNER':
+    return {
+      ...state,
+      currentPage: {
+        ...state.currentPage,
+        listings: state.currentPage.listings.map(l => {
+          if (l.id === action.data.listing) {
+            return {
+              ...l,
+              owner: action.data.owner
+            }
+          } else {
+            return l
+          }
+        })
+      }
     }
   default:
     return state

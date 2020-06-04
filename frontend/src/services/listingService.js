@@ -13,18 +13,6 @@ export const post = async listing => {
 
 // gets listings and parses the price field to type Number
 export const get = async offset => {
-  let response = await axios.get(`${baseUrl}?limit=21&offset=${offset}`)
-  response = {
-    ...response,
-    data: {
-      ...response.data,
-      results: response.data.results.map(l => {
-        return {
-          ...l,
-          price: Number(l.price)
-        }
-      })
-    }
-  }
+  const response = await axios.get(`${baseUrl}?limit=21&offset=${offset}`)
   return response.data
 }
