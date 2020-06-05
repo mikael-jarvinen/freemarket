@@ -90,7 +90,8 @@ const ListingsPage = () => {
             }
           </GridList>
         </Box>
-        <ListingView listing={pages[page].listings[listing]}/>
+        <ListingView listing={pages[page].listings.find(({ id }) =>
+          id === Number(listing))}/>
       </Box>
     </Container>
   )
