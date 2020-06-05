@@ -1,7 +1,7 @@
 // this is the root component for rendering the page responsible for
 // showing a listings page where you can browse listings
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
 import { loadPage } from '../../store/listingsReducer'
@@ -20,10 +20,10 @@ import ListingView from './ListingView'
 
 const ListingsPage = () => {
   const { search } = useLocation()
-  const { listing } = queryString.parse(search)
+  const { listing, page } = queryString.parse(search)
   const dispatch = useDispatch()
   const history = useHistory()
-  const { currentPage, pageCount } = useSelector(state => state.listings)
+  const { pages, pageCount } = useSelector(state => state.listings)
 
   // determining the gridlist columns amount depending on screensize
   // and if a valid 'listing' query string has been provided to URL, when
@@ -35,8 +35,15 @@ const ListingsPage = () => {
     cols = 3 // when a listing querystring has been provided
   }
 
-  if (!currentPage.page) {
-    dispatch(loadPage(1))
+  useEffect(() => {
+    if (!page) {
+      history.push({ search: '?page=1' })
+    } else if (!pages[page]) {
+      dispatch(loadPage(page))
+    }
+  }, [dispatch, page])
+
+  if (!pages[page]) {
     return <Typography>Loading</Typography>
   }
 
@@ -56,13 +63,16 @@ const ListingsPage = () => {
             display='flex'
             justifyContent='center'
           >
-            <Pagination count={pageCount} color='secondary'>
-
-            </Pagination>
+            <Pagination
+              count={pageCount}
+              color='secondary'
+              page={Number(page)}
+              onChange={(event, page) => history.push({ search: `?page=${page}` })}
+            />
           </Box>
           <GridList cols={cols} cellHeight={200}>
             {
-              currentPage.listings.map(listing => 
+              pages[page].listings.map(listing => 
                 <GridListTile
                   key={listing.id}
                   onClick={() => history.push({
@@ -79,7 +89,7 @@ const ListingsPage = () => {
           </GridList>
         </Box>
         <ListingView
-          listing={currentPage.listings.find(({ id }) => 
+          listing={pages[page].listings.find(({ id }) => 
             id === Number(listing)
           )}
         />

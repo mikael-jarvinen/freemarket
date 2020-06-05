@@ -6,12 +6,8 @@ import { get } from '../services/listingService'
 import { getById } from '../services/userService'
 
 const initialState = {
-  currentPage: {
-    page: null,
-    listings: null
-  },
   pageCount: null,
-  recents: []
+  pages: {}
 }
 
 // Returns an action creator that loads a new page
@@ -60,7 +56,10 @@ const listingsReducer = (state = initialState, action) => {
   case 'LOAD_PAGE':
     return {
       ...state,
-      recents: state.recents.concat(state.currentPage),
+      pages: {
+        ...state.pages,
+        [`${action.data.page}`]: action.data
+      },
       currentPage: action.data
     }
   case 'POPULATE_OWNER':
