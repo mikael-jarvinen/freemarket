@@ -41,7 +41,7 @@ const ListingsPage = () => {
     } else if (!pages[page]) {
       dispatch(loadPage(page))
     }
-  }, [dispatch, page])
+  }, [dispatch, page, history, pages])
 
   if (!pages[page]) {
     return <Typography>Loading</Typography>
@@ -67,7 +67,9 @@ const ListingsPage = () => {
               count={pageCount}
               color='secondary'
               page={Number(page)}
-              onChange={(event, page) => history.push({ search: `?page=${page}` })}
+              onChange={(event, page) => history.push({
+                search: `?page=${page}&listing=${listing}` 
+              })}
             />
           </Box>
           <GridList cols={cols} cellHeight={200}>
@@ -76,7 +78,7 @@ const ListingsPage = () => {
                 <GridListTile
                   key={listing.id}
                   onClick={() => history.push({
-                    search: `?listing=${listing.id}`
+                    search: `?page=${page}&listing=${listing.id}`
                   })}
                   style={{ cursor: 'pointer' }}
                 >
@@ -88,11 +90,7 @@ const ListingsPage = () => {
             }
           </GridList>
         </Box>
-        <ListingView
-          listing={pages[page].listings.find(({ id }) => 
-            id === Number(listing)
-          )}
-        />
+        <ListingView listing={pages[page].listings[listing]}/>
       </Box>
     </Container>
   )

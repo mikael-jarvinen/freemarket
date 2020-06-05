@@ -37,13 +37,24 @@ export const loadPage = page => {
 // populates the owner field by listing id
 export const loadOwner = listingId => {
   return async (dispatch, getState) => {
-    const listings = getState().listings.currentPage.listings
+    const pages = getState().listings.pages
+    let pageKey = null
+    for (const key in pages) {
+      const page = pages[key]
+      if (page.listings.find(({ id }) => id === listingId)) {
+        pageKey = key
+        break
+      }
+    }
+
+    const listings = pages[pageKey].listings
     const userId = listings.find(({ id }) => id === listingId).owner
     const owner = await getById(userId)
 
     dispatch({
       type: 'POPULATE_OWNER',
       data: {
+        page: pageKey,
         listing: listingId,
         owner
       }
@@ -59,24 +70,26 @@ const listingsReducer = (state = initialState, action) => {
       pages: {
         ...state.pages,
         [`${action.data.page}`]: action.data
-      },
-      currentPage: action.data
+      }
     }
   case 'POPULATE_OWNER':
     return {
       ...state,
-      currentPage: {
-        ...state.currentPage,
-        listings: state.currentPage.listings.map(l => {
-          if (l.id === action.data.listing) {
-            return {
-              ...l,
-              owner: action.data.owner
+      pages: {
+        ...state.pages,
+        [action.data.page]: {
+          ...action.data.page,
+          listings: state.pages[action.data.page].listings.map(l => {
+            if (l.id === action.data.listing) {
+              return {
+                ...l,
+                owner: action.data.owner
+              }
+            } else {
+              return l
             }
-          } else {
-            return l
-          }
-        })
+          })
+        }
       }
     }
   case 'SET_PAGE_COUNT':
