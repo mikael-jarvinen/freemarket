@@ -68,7 +68,7 @@ const ListingsPage = () => {
               color='secondary'
               page={Number(page)}
               onChange={(event, page) => history.push({
-                search: `?page=${page}&listing=${listing}` 
+                search: `?page=${page}` 
               })}
             />
           </Box>
