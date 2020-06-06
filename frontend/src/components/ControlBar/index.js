@@ -4,7 +4,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Box, Button } from '@material-ui/core'
+import { Box, Button, useTheme } from '@material-ui/core'
 import LogoButton from './LogoButton'
 import SearchBar from './SearchBar'
 import AccountControl from './AccountControl'
@@ -13,6 +13,7 @@ import AddListingButton from './AddListingButton'
 const ControlBar = () => {
   const history = useHistory()
   const { user } = useSelector(state => state.auth)
+  const theme = useTheme()
 
   return (
     <Box borderBottom={1}>
@@ -27,6 +28,9 @@ const ControlBar = () => {
         flexGrow={1}
         padding={2}
         alignItems='center'
+        position='fixed'
+        width='100%'
+        zIndex={theme.zIndex.drawer + 1}
       >
         <LogoButton />
         <Box
