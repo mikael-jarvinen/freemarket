@@ -19,6 +19,9 @@ from listings.serializers import (
 class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ['title', 'description']
+    ordering_fields = ['title', 'price', 'created']
 
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
