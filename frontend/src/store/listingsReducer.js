@@ -7,17 +7,29 @@ import { getById } from '../services/userService'
 
 const initialState = {
   pageCount: null,
-  pages: {}
+  pages: {},
+  filters: {}
 }
 
-// Returns an action creator that loads a new page
-export const loadPage = page => {
+// Returns action creators that load a new page, set count of pages
+// and if filters are unequal to current filters set new filters and
+// clear current cached filters
+export const loadPage = (page, filters) => {
   const offset = (page - 1) * 20
-  return async dispatch => {
-    const response = await get(offset)
+  return async (dispatch, getState) => {
+    const filtersState = getState().listings.filters
+    const response = await get(offset, filters)
     const listingCount = response.count
     const pageCount = Math.floor(listingCount / 21) + 1
 
+    if (filtersState !== filters) {
+      dispatch({
+        type: 'SET_FILTERS',
+        data: {
+          filters
+        }
+      })
+    }
     dispatch({
       type: 'LOAD_PAGE',
       data: {
@@ -96,6 +108,12 @@ const listingsReducer = (state = initialState, action) => {
     return {
       ...state,
       pageCount: action.data.pageCount
+    }
+  case 'SET_FILTERS':
+    return {
+      ...state,
+      filters: action.data.filters,
+      pages: {}
     }
   default:
     return state

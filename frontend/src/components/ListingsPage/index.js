@@ -42,7 +42,7 @@ const ListingsPage = () => {
     } else if (!pages[page]) {
       dispatch(loadPage(page))
     }
-  }, [dispatch, page, history, pages])
+  }, [dispatch, page, history])
 
   if (!pages[page]) {
     return <Typography>Loading</Typography>
