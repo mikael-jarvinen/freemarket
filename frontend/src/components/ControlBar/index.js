@@ -16,7 +16,7 @@ const ControlBar = () => {
   const theme = useTheme()
 
   return (
-    <Box borderBottom={1}>
+    <Box borderBottom={1} display='flex' flexDirection='column'>
       <Box
         marginTop='-8px'
         marginLeft='-8px'
@@ -53,8 +53,12 @@ const ControlBar = () => {
           }
         </Box>
       </Box>
-      <Box display='flex' paddingTop={2}>
-        <Box display='flex' flexGrow={1} justifyContent='center'>
+      <Box display='flex' paddingTop={2} marginTop={10} marginLeft='13vw'>
+        <Box
+          display='flex'
+          flexGrow={1}
+          justifyContent='center'
+        >
           <SearchBar
             placeholder='search...'
             onSearch={value => console.log(value)}
