@@ -16,7 +16,11 @@ const ControlBar = () => {
   const theme = useTheme()
 
   return (
-    <Box borderBottom={1} display='flex' flexDirection='column'>
+    <Box
+      borderBottom='1px solid lightgrey'
+      display='flex'
+      flexDirection='column'
+    >
       <Box
         marginTop='-8px'
         marginLeft='-8px'
@@ -68,7 +72,6 @@ const ControlBar = () => {
           <AddListingButton/>
         </Box>
       </Box>
-      <Box marginBottom={5}/>
     </Box>
   )
 }

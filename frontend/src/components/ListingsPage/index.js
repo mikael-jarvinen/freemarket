@@ -17,10 +17,11 @@ import {
 import { Pagination } from '@material-ui/lab'
 import queryString from 'query-string'
 import ListingView from './ListingView'
+import FilterPanel from './FilterPanel'
 
 const ListingsPage = () => {
-  const { search } = useLocation()
-  const { listing, page } = queryString.parse(search)
+  const location = useLocation()
+  const { listing, page, search, ordering } = queryString.parse(location.search)
   const dispatch = useDispatch()
   const history = useHistory()
   const { pages, pageCount } = useSelector(state => state.listings)
@@ -36,8 +37,8 @@ const ListingsPage = () => {
   }
 
   useEffect(() => {
-    if (!page) {
-      history.push({ search: '?page=1' })
+    if (!page || !ordering) {
+      history.push({ search: '?page=1&ordering=created' })
     } else if (!pages[page]) {
       dispatch(loadPage(page))
     }
@@ -63,14 +64,19 @@ const ListingsPage = () => {
             display='flex'
             justifyContent='center'
           >
-            <Pagination
-              count={pageCount}
-              color='secondary'
-              page={Number(page)}
-              onChange={(event, page) => history.push({
-                search: `?page=${page}` 
-              })}
-            />
+            <Box display='flex' flexDirection='column'>
+              <FilterPanel/>
+              <Box display='flex' justifyContent='center'>
+                <Pagination
+                  count={pageCount}
+                  color='secondary'
+                  page={Number(page)}
+                  onChange={(event, page) => history.push({
+                    search: `?page=${page}&ordering=${ordering}` 
+                  })}
+                />
+              </Box>
+            </Box>
           </Box>
           <GridList cols={cols} cellHeight={200}>
             {
@@ -78,7 +84,7 @@ const ListingsPage = () => {
                 <GridListTile
                   key={listing.id}
                   onClick={() => history.push({
-                    search: `?page=${page}&listing=${listing.id}`
+                    search: `?page=${page}&listing=${listing.id}&ordering=${ordering}`
                   })}
                   style={{ cursor: 'pointer' }}
                 >
