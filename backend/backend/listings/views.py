@@ -1,6 +1,7 @@
 from rest_framework import viewsets, permissions, status, filters
 from rest_framework.response import Response
 from django.db.utils import IntegrityError
+from django_filters.rest_framework import DjangoFilterBackend
 from .permissions import (
     IsOwnerReadOnly,
     IsUserReadOnly,
@@ -14,12 +15,18 @@ from listings.serializers import (
     ReviewSerializer,
     QuestionSerializer
 )
+from .filters import ListingFilter
 
 
 class ListingViewSet(viewsets.ModelViewSet):
     queryset = Listing.objects.all()
     serializer_class = ListingSerializer
-    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    filter_backends = (
+        filters.SearchFilter,
+        filters.OrderingFilter,
+        DjangoFilterBackend
+    )
+    filterset_class = ListingFilter
     search_fields = ['title', 'description']
     ordering_fields = ['title', 'price', 'created']
 

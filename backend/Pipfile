@@ -12,6 +12,7 @@ v = {editable = true,version = "*"}
 django = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.6"

@@ -9,12 +9,41 @@ from .managers import UserManager
 
 
 class Listing(models.Model):
+    CATEGORY_CHOICES = [
+        ('VEHICLES', 'vehicles'),
+        ('CARS', 'cars'),
+        ('MOTORCYCLES', 'motorcycles'),
+        ('BICYCLES', 'bicycles'),
+        ('EECTRONICS', 'electronics'),
+        ('COMPUTERS', 'computers'),
+        ('SMARTPHONES', 'smartphones'),
+        ('SMART_DEVICES', 'smartdevices'),
+        ('PERIPHERALS', 'peripherals'),
+        ('TELEVISIONS', 'televisions'),
+        ('HOME', 'home'),
+        ('APPLIANCES', 'appliances'),
+        ('FURNITURE', 'furniture'),
+        ('KITCHEN', 'kitchen'),
+        ('CLOTHES', 'clothes'),
+        ('SHOES', 'shoes'),
+        ('PANTS', 'pants'),
+        ('SHIRTS', 'shirts'),
+        ('JACKETS', 'jackets'),
+        ('HATS', 'hats'),
+        ('FURNITURE', 'furniture')
+    ]
+
     price = models.DecimalField(decimal_places=2, max_digits=9)
     title = models.CharField(max_length=25, unique=True)
     description = models.TextField(max_length=1000)
     created = models.DateTimeField(auto_now_add=True)
     postal_code = models.IntegerField()
     is_active = models.BooleanField(default=True)
+    category = models.CharField(
+        max_length=13,
+        choices=CATEGORY_CHOICES,
+        blank=True
+    )
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='listings',

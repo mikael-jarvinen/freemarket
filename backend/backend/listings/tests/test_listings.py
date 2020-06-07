@@ -34,7 +34,8 @@ class ListingTest(APITestCase):
             title='testing1',
             description='very good listing for testing',
             postal_code=42000,
-            owner=self.user
+            owner=self.user,
+            category='HOME'
         )
 
         self.listing2 = Listing.objects.create(
@@ -42,7 +43,8 @@ class ListingTest(APITestCase):
             title='testing2',
             description='testing',
             postal_code=54000,
-            owner=self.user
+            owner=self.user,
+            category='KITCHEN'
         )
 
     def test_database_returns_listings(self):
@@ -78,6 +80,7 @@ class ListingTest(APITestCase):
         )
 
     def test_api_listing_posting(self):
+        """Test that can post to api with correct credentials"""
         client = APIClient()
         client.credentials(
             HTTP_AUTHORIZATION='Bearer ' + self.access_token
@@ -103,8 +106,9 @@ class ListingTest(APITestCase):
         )
 
     def test_api_listing_posting_unauthorized(self):
+        """Test that can't post to api with incorrect credentials"""
         client = APIClient()
-        response = response = client.post(
+        response = client.post(
             '/api/listings/',
             {
                 'price': 4.5,
@@ -114,3 +118,30 @@ class ListingTest(APITestCase):
             }
         )
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_api_listing_price_filtering_exact(self):
+        """Test that api returns price filtered listings"""
+        client = APIClient()
+        response = client.get('/api/listings/?price=15.50')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data['results'][0],
+            ListingSerializer(self.listing1).data
+        )
+
+    def test_api_listing_filtering_gt_lt(self):
+        """Test that api returns listings with gt and lt price filters"""
+        client = APIClient()
+        response = client.get('/api/listings/?price__gt=15.50')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data['results'][0],
+            ListingSerializer(self.listing2).data
+        )
+
+        response = client.get('/api/listings/?price__lt=66.9')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data['results'][0],
+            ListingSerializer(self.listing1).data
+        )
