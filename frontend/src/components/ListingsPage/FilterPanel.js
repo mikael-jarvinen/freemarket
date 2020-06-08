@@ -60,7 +60,7 @@ const FilterPanel = () => {
           alignItems='center'
         >
           <Form onSubmit={handleSubmit}>
-            <Box display='flex'>
+            <Box display='flex' alignItems='center'>
               <Box marginRight={1} maxWidth={45}>
                 <TextInput
                   field='price_min'
@@ -77,7 +77,7 @@ const FilterPanel = () => {
                 />
               </Box>
               <Box marginLeft={2} alignItems='center'>
-                <Button variant='outlined' type='submit'>apply</Button>
+                <Button size='small' variant='outlined' type='submit'>apply</Button>
               </Box>
             </Box>
           </Form>

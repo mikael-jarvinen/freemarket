@@ -61,7 +61,7 @@ const ControlBar = () => {
           }
         </Box>
       </Box>
-      <Box display='flex' paddingTop={2} marginTop={10} marginLeft='13vw'>
+      <Box display='flex' paddingTop={2} marginTop={9} marginLeft='13vw'>
         <Box
           display='flex'
           flexGrow={1}

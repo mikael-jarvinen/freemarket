@@ -4,6 +4,7 @@
 
 import { get } from '../services/listingService'
 import { getById } from '../services/userService'
+import _ from 'lodash'
 
 const initialState = {
   pageCount: null,
@@ -22,21 +23,32 @@ export const loadPage = (page, filters) => {
     const listingCount = response.count
     const pageCount = Math.floor(listingCount / 21) + 1
 
-    if (filtersState !== filters) {
+    if (_.isEqual(filtersState, { ...filters, page: null })) {
       dispatch({
         type: 'SET_FILTERS',
         data: {
-          filters
+          filters: {
+            ...filters,
+            page: null
+          }
+        }
+      })
+      dispatch({
+        type: 'LOAD_PAGE',
+        data: {
+          page,
+          listings: response.results
+        }
+      })
+    } else {
+      dispatch({
+        type: 'LOAD_PAGE',
+        data: {
+          page,
+          listings: response.results
         }
       })
     }
-    dispatch({
-      type: 'LOAD_PAGE',
-      data: {
-        page,
-        listings: response.results
-      }
-    })
     dispatch({
       type: 'SET_PAGE_COUNT',
       data: {

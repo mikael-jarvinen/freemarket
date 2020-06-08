@@ -39,9 +39,9 @@ const ListingsPage = () => {
     if (!search.page || !search.ordering) {
       history.push({ search: '?page=1&ordering=created' })
     } else if (!pages[search.page]) {
-      dispatch(loadPage(search.page))
+      dispatch(loadPage(search.page, search))
     }
-  }, [dispatch, search, history])
+  }, [dispatch, history.location.search, history, pages, search])
 
   if (!pages[search.page]) {
     return <Typography>Loading</Typography>
