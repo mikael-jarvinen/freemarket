@@ -33,7 +33,7 @@ const DrawerComponent = () => {
           </Box>
           <Box marginTop={2}>
             <TextButton
-              onClick={() => history.push('/listings?page=1')}
+              onClick={() => history.push('/listings?page=1&ordering=created')}
               text='browse listings'
             />
           </Box>

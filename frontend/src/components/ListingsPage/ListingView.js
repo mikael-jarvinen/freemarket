@@ -12,10 +12,13 @@ import {
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import { loadOwner } from '../../store/listingsReducer'
+import queryString from 'query-string'
 
 const ListingView = ({ listing }) => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const search = queryString.parse(history.location.search)
+
 
   // useEffect used to populate the owner field
   useEffect(() => {
@@ -72,7 +75,9 @@ const ListingView = ({ listing }) => {
       <Box flexGrow={1}>
         <Button
           variant='outlined'
-          onClick={() => history.push({ search: null })}
+          onClick={() => history.push({
+            search: queryString.stringify({ ...search, listing: null })
+          })}
         >
           Close
         </Button>

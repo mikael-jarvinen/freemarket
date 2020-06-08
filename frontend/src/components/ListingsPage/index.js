@@ -3,7 +3,7 @@
 
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { loadPage } from '../../store/listingsReducer'
 import {
   Box,
@@ -20,10 +20,9 @@ import ListingView from './ListingView'
 import FilterPanel from './FilterPanel'
 
 const ListingsPage = () => {
-  const location = useLocation()
-  const { listing, page, search, ordering } = queryString.parse(location.search)
-  const dispatch = useDispatch()
   const history = useHistory()
+  const search = queryString.parse(history.location.search)
+  const dispatch = useDispatch()
   const { pages, pageCount } = useSelector(state => state.listings)
 
   // determining the gridlist columns amount depending on screensize
@@ -32,19 +31,19 @@ const ListingsPage = () => {
   let cols = 4 // default cols value
   if (!useMediaQuery(theme => theme.breakpoints.up('sm'))) {
     cols = 1 // for small screens 1 column is enough
-  } else if (listing) {
+  } else if (search.listing) {
     cols = 3 // when a listing querystring has been provided
   }
 
   useEffect(() => {
-    if (!page || !ordering) {
+    if (!search.page || !search.ordering) {
       history.push({ search: '?page=1&ordering=created' })
-    } else if (!pages[page]) {
-      dispatch(loadPage(page))
+    } else if (!pages[search.page]) {
+      dispatch(loadPage(search.page))
     }
-  }, [dispatch, page, history])
+  }, [dispatch, search.page, history])
 
-  if (!pages[page]) {
+  if (!pages[search.page]) {
     return <Typography>Loading</Typography>
   }
 
@@ -70,9 +69,9 @@ const ListingsPage = () => {
                 <Pagination
                   count={pageCount}
                   color='secondary'
-                  page={Number(page)}
+                  page={Number(search.page)}
                   onChange={(event, page) => history.push({
-                    search: `?page=${page}&ordering=${ordering}` 
+                    search: queryString.stringify({ ...search, page })
                   })}
                 />
               </Box>
@@ -80,11 +79,11 @@ const ListingsPage = () => {
           </Box>
           <GridList cols={cols} cellHeight={200}>
             {
-              pages[page].listings.map(listing => 
+              pages[search.page].listings.map(listing => 
                 <GridListTile
                   key={listing.id}
                   onClick={() => history.push({
-                    search: `?page=${page}&listing=${listing.id}&ordering=${ordering}`
+                    search: queryString.stringify({ ...search, listing: listing.id })
                   })}
                   style={{ cursor: 'pointer' }}
                 >
@@ -96,8 +95,8 @@ const ListingsPage = () => {
             }
           </GridList>
         </Box>
-        <ListingView listing={pages[page].listings.find(({ id }) =>
-          id === Number(listing))}/>
+        <ListingView listing={pages[search.page].listings.find(({ id }) =>
+          id === Number(search.listing))}/>
       </Box>
     </Container>
   )
