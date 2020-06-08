@@ -18,12 +18,13 @@ import { Pagination } from '@material-ui/lab'
 import queryString from 'query-string'
 import ListingView from './ListingView'
 import FilterPanel from './FilterPanel'
+import _ from 'lodash'
 
 const ListingsPage = () => {
   const history = useHistory()
   const search = queryString.parse(history.location.search)
   const dispatch = useDispatch()
-  const { pages, pageCount } = useSelector(state => state.listings)
+  const { pages, pageCount, filters, resolving } = useSelector(state => state.listings)
 
   // determining the gridlist columns amount depending on screensize
   // and if a valid 'listing' query string has been provided to URL, when
@@ -38,10 +39,10 @@ const ListingsPage = () => {
   useEffect(() => {
     if (!search.page || !search.ordering) {
       history.push({ search: '?page=1&ordering=created' })
-    } else if (!pages[search.page]) {
+    } else if (!pages[search.page] && !resolving) {
       dispatch(loadPage(search.page, search))
     }
-  }, [dispatch, history.location.search, history, pages, search])
+  }, [dispatch, history.location.search, pages, history])
 
   if (!pages[search.page]) {
     return <Typography>Loading</Typography>

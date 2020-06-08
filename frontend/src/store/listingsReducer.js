@@ -9,7 +9,8 @@ import _ from 'lodash'
 const initialState = {
   pageCount: null,
   pages: {},
-  filters: {}
+  filters: {},
+  resolving: false
 }
 
 // Returns action creators that load a new page, set count of pages
@@ -23,7 +24,9 @@ export const loadPage = (page, filters) => {
     const listingCount = response.count
     const pageCount = Math.floor(listingCount / 21) + 1
 
-    if (_.isEqual(filtersState, { ...filters, page: null })) {
+    // update filter change to store
+    if (!_.isEqual(filtersState, { ...filters, page: null })) {
+      dispatch({ type: 'TOGGLE_RESOLVING' })
       dispatch({
         type: 'SET_FILTERS',
         data: {
@@ -41,6 +44,7 @@ export const loadPage = (page, filters) => {
         }
       })
     } else {
+      dispatch({ type: 'TOGGLE_RESOLVING' })
       dispatch({
         type: 'LOAD_PAGE',
         data: {
@@ -55,6 +59,7 @@ export const loadPage = (page, filters) => {
         pageCount
       }
     })
+    dispatch({ type: 'TOGGLE_RESOLVING' })
   }
 }
 
@@ -126,6 +131,11 @@ const listingsReducer = (state = initialState, action) => {
       ...state,
       filters: action.data.filters,
       pages: {}
+    }
+  case 'TOGGLE_RESOLVING':
+    return {
+      ...state,
+      resolving: !state.resolving
     }
   default:
     return state

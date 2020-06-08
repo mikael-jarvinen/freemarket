@@ -33,20 +33,21 @@ const FilterPanel = () => {
       paddingTop={0}
       display='flex'
       flexGrow={1}
-      alignItems='center'
     >
-      <Typography>Sort By:</Typography>
-      <Select
-        onChange={event => history.push({ search: `?page=1&ordering=${event.target.value}` })}
-        value={sortFilters}
-        multiple
-      >
-        <MenuItem value='price'>price asc.</MenuItem>
-        <MenuItem value='-price'>price desc.</MenuItem>
-        <MenuItem value='title'>title</MenuItem>
-        <MenuItem value='created'>recent</MenuItem>
-        <MenuItem value='-created'>oldest</MenuItem>
-      </Select>
+      <Box display='flex' alignItems='center'>
+        <Typography>Sort By:</Typography>
+        <Select
+          onChange={event => history.push({ search: `?page=1&ordering=${event.target.value}` })}
+          value={sortFilters}
+          multiple
+        >
+          <MenuItem value='price'>price asc.</MenuItem>
+          <MenuItem value='-price'>price desc.</MenuItem>
+          <MenuItem value='title'>title</MenuItem>
+          <MenuItem value='created'>recent</MenuItem>
+          <MenuItem value='-created'>oldest</MenuItem>
+        </Select>
+      </Box>
       <Box
         display='flex'
         flexGrow={1}
