@@ -61,9 +61,8 @@ const ListingsPage = () => {
             padding={2}
             flexGrow={1}
             display='flex'
-            justifyContent='center'
           >
-            <Box display='flex' flexDirection='column'>
+            <Box display='flex' flexDirection='column' flexGrow={1}>
               <FilterPanel/>
               <Box display='flex' justifyContent='center'>
                 <Pagination

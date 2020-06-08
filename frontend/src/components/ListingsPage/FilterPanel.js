@@ -3,20 +3,36 @@
 
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { Box, Select, MenuItem, Typography } from '@material-ui/core'
+import {
+  Box,
+  Select,
+  MenuItem,
+  Typography,
+  Button
+} from '@material-ui/core'
+import { Form } from 'informed'
 import queryString from 'query-string'
+import TextInput from '../TextInput'
 
 const FilterPanel = () => {
   const history = useHistory()
-  const { ordering } = queryString.parse(history.location.search)
-  const sortFilters = ordering.split(',')
+  const search = queryString.parse(history.location.search)
+  const sortFilters = search.ordering.split(',')
+
+  const handleSubmit = values => {
+    history.push({ search: queryString.stringify({
+      ...search,
+      price__gte: values.price_min,
+      price__lte: values.price_max
+    }) })
+  }
 
   return (
     <Box
       padding={2}
       paddingTop={0}
       display='flex'
-      flexDirection='row'
+      flexGrow={1}
       alignItems='center'
     >
       <Typography>Sort By:</Typography>
@@ -31,6 +47,42 @@ const FilterPanel = () => {
         <MenuItem value='created'>recent</MenuItem>
         <MenuItem value='-created'>oldest</MenuItem>
       </Select>
+      <Box
+        display='flex'
+        flexGrow={1}
+        justifyContent='center'
+        alignItems='center'
+      >
+        <Typography>price range:</Typography>
+        <Box
+          marginLeft={1}
+          display='flex'
+          alignItems='center'
+        >
+          <Form onSubmit={handleSubmit}>
+            <Box display='flex'>
+              <Box marginRight={1} maxWidth={45}>
+                <TextInput
+                  field='price_min'
+                  placeholder='min'
+                  type='number'
+                />
+              </Box>
+              -
+              <Box marginLeft={1} maxWidth={45}>
+                <TextInput
+                  field='price_max'
+                  placeholder='max'
+                  type='number'
+                />
+              </Box>
+              <Box marginLeft={2} alignItems='center'>
+                <Button variant='outlined' type='submit'>apply</Button>
+              </Box>
+            </Box>
+          </Form>
+        </Box>
+      </Box>
     </Box>
   )
 }
