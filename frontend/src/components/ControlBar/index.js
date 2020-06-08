@@ -9,11 +9,13 @@ import LogoButton from './LogoButton'
 import SearchBar from './SearchBar'
 import AccountControl from './AccountControl'
 import AddListingButton from './AddListingButton'
+import queryString from 'query-string'
 
 const ControlBar = () => {
   const history = useHistory()
   const { user } = useSelector(state => state.auth)
   const theme = useTheme()
+  const search = queryString.parse(history.location.search)
 
   return (
     <Box
@@ -48,7 +50,9 @@ const ControlBar = () => {
           {!user && 
           <Button
             padding={1}
-            onClick={() => history.push({ search: '?dialog=login' })}
+            onClick={() => history.push({
+              search: queryString.stringify({ ...search, dialog: 'login' })
+            })}
             color='inherit'
             variant='text'
           >
@@ -65,7 +69,13 @@ const ControlBar = () => {
         >
           <SearchBar
             placeholder='search...'
-            onSearch={value => console.log(value)}
+            onSearch={value => history.push({
+              search: queryString.stringify({
+                ...search,
+                listing: null,
+                search: value
+              })
+            })}
           />
         </Box>
         <Box>

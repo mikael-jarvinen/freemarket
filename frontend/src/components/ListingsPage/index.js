@@ -41,7 +41,7 @@ const ListingsPage = () => {
     } else if (!pages[search.page]) {
       dispatch(loadPage(search.page))
     }
-  }, [dispatch, search.page, history])
+  }, [dispatch, search, history])
 
   if (!pages[search.page]) {
     return <Typography>Loading</Typography>
