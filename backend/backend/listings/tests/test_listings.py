@@ -130,16 +130,16 @@ class ListingTest(APITestCase):
         )
 
     def test_api_listing_filtering_gt_lt(self):
-        """Test that api returns listings with gt and lt price filters"""
+        """Test that api returns listings with gte and lte price filters"""
         client = APIClient()
-        response = client.get('/api/listings/?price__gt=15.50')
+        response = client.get('/api/listings/?price__gte=15.6')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
             response.data['results'][0],
             ListingSerializer(self.listing2).data
         )
 
-        response = client.get('/api/listings/?price__lt=66.9')
+        response = client.get('/api/listings/?price__lte=66.8')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
             response.data['results'][0],

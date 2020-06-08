@@ -3,8 +3,8 @@ from .models import Listing
 
 
 class ListingFilter(filters.FilterSet):
-    price__gt = filters.NumberFilter(field_name='price', lookup_expr='gt')
-    price__lt = filters.NumberFilter(field_name='price', lookup_expr='lt')
+    price__gte = filters.NumberFilter(field_name='price', lookup_expr='gte')
+    price__lte = filters.NumberFilter(field_name='price', lookup_expr='lte')
 
     class Meta:
         model = Listing
