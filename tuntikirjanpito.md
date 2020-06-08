@@ -41,3 +41,4 @@
 | 5.6.2020 | 5 | Selauksen viimeistelyä ja suunnittelua |
 | 6.6.2020 | 3 | Drawerin rakennusta |
 | 7.6.2020 | 2 | filtteröinnin rakennusta |
+| 8.6.2020 | 4 | filtteröinnin rakentamista backendin ja frontendin puolella |
