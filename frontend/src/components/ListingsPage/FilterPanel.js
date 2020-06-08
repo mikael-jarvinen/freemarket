@@ -67,6 +67,7 @@ const FilterPanel = () => {
                   field='price_min'
                   placeholder='min'
                   type='number'
+                  initialValue={search.price__gte}
                 />
               </Box>
               -
@@ -75,6 +76,7 @@ const FilterPanel = () => {
                   field='price_max'
                   placeholder='max'
                   type='number'
+                  initialValue={search.price__lte}
                 />
               </Box>
               <Box marginLeft={2} alignItems='center'>
