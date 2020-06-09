@@ -1,13 +1,14 @@
 // this component renders a button that is responsible for opening
 // the addlisting dialog
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import AddBoxIcon from '@material-ui/icons/AddBox'
 import queryString from 'query-string'
 
 const AddListingButton = () => {
+  const [hover, setHover] = useState(false)
   const history = useHistory()
   const search = queryString.parse(history.location.search)
 
@@ -20,8 +21,15 @@ const AddListingButton = () => {
         ...search,
         dialog: 'addListing'
       }) })}
+      onMouseOver={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
-      <Typography>Add listing</Typography>
+      <Typography
+        style={{ textDecoration: !hover || 'underline' }}
+        color={hover ? 'secondary' : 'textPrimary'}
+      >
+        Add listing
+      </Typography>
       <AddBoxIcon/>
     </Box>
   )
