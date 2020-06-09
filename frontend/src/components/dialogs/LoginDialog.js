@@ -9,6 +9,7 @@ import Alert from '../Alert'
 import TextButton from '../TextButton'
 import { login } from '../../store/authReducer'
 import queryString from 'query-string'
+import { removeDialogFilter } from '../../utils'
 
 const LoginDialog = () => {
   const history = useHistory()
@@ -29,10 +30,9 @@ const LoginDialog = () => {
   }
 
   return (
-    <Dialog open={true} onClose={() => history.push({ search: queryString.stringify({
-      ...search,
-      dialog: null
-    }) })}>
+    <Dialog open={true} onClose={() => history.push({ search: queryString.stringify(
+      removeDialogFilter(search)
+    ) })}>
       <Box>
         <Box
           bgcolor='primary.main'

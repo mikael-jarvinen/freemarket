@@ -4,9 +4,11 @@
 
 import { get } from '../services/listingService'
 import _ from 'lodash'
+import { removeFrontFilters } from '../utils'
 
 const initialState = {
   pageCount: null,
+  results: null,
   pages: {},
   filters: {},
   resolving: false
@@ -24,16 +26,12 @@ export const loadPage = (page, filters) => {
     const pageCount = Math.floor(listingCount / 21) + 1
 
     // update filter change to store
-    if (!_.isEqual(filtersState, { ...filters, page: null, listing: null })) {
+    if (!_.isEqual(filtersState, removeFrontFilters(filters))) {
       dispatch({ type: 'TOGGLE_RESOLVING' })
       dispatch({
         type: 'SET_FILTERS',
         data: {
-          filters: {
-            ...filters,
-            page: null,
-            listing: null
-          }
+          filters: removeFrontFilters(filters)
         }
       })
       dispatch({
@@ -59,6 +57,10 @@ export const loadPage = (page, filters) => {
         pageCount
       }
     })
+    dispatch({
+      type: 'SET_RESULTS_COUNT',
+      data: response.count
+    })
     dispatch({ type: 'TOGGLE_RESOLVING' })
   }
 }
@@ -77,6 +79,11 @@ const listingsReducer = (state = initialState, action) => {
     return {
       ...state,
       pageCount: action.data.pageCount
+    }
+  case 'SET_RESULTS_COUNT':
+    return {
+      ...state,
+      results: action.data
     }
   case 'SET_FILTERS':
     return {

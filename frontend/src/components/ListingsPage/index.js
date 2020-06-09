@@ -19,6 +19,7 @@ import queryString from 'query-string'
 import ListingView from './ListingView'
 import FilterPanel from './FilterPanel'
 import _ from 'lodash'
+import { removeFrontFilters } from '../../utils'
 
 const ListingsPage = () => {
   const history = useHistory()
@@ -41,7 +42,7 @@ const ListingsPage = () => {
       history.push({ search: '?page=1&ordering=created' })
     } else if (!pages[search.page] && !resolving) {
       dispatch(loadPage(search.page, search))
-    } else if (!_.isEqual(filters, { ...search, page: null, listing: null })) {
+    } else if (!_.isEqual(filters, removeFrontFilters(search))) {
       dispatch(loadPage(search.page, search))
     }
   }, [dispatch, history.location.search, pages, history])

@@ -20,6 +20,7 @@ import {
 import { Form, Text, TextArea } from 'informed'
 import Alert from '../Alert'
 import queryString from 'query-string'
+import { removeDialogFilter } from '../../utils'
 
 const AddListingDialog = () => {
   const history = useHistory()
@@ -73,10 +74,9 @@ const AddListingDialog = () => {
   }
 
   return (
-    <Dialog open={true} onClose={() => history.push({ search: queryString.stringify({
-      ...search,
-      dialog: null
-    }) })}>
+    <Dialog open={true} onClose={() => history.push({ search: queryString.stringify(
+      removeDialogFilter(search)
+    )})}>
       <Box padding={2} bgcolor='primary.main'>
         <Typography>
           Add Listing

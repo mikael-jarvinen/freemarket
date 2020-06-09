@@ -13,6 +13,7 @@ import {
 import PropTypes from 'prop-types'
 import { loadUser } from '../../store/usersReducer'
 import queryString from 'query-string'
+import { removeListingFilter } from '../../utils'
 
 const ListingView = ({ listing }) => {
   const dispatch = useDispatch()
@@ -77,7 +78,7 @@ const ListingView = ({ listing }) => {
         <Button
           variant='outlined'
           onClick={() => history.push({
-            search: queryString.stringify({ ...search, listing: null })
+            search: queryString.stringify(removeListingFilter(search))
           })}
         >
           Close

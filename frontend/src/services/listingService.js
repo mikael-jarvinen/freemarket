@@ -1,5 +1,6 @@
 import axios from 'axios'
 import queryString from 'query-string'
+import { removeFrontFilters } from '../utils'
 
 const baseUrl = '/api/listings/'
 
@@ -15,7 +16,7 @@ export const post = async listing => {
 // gets listings and parses the price field to type Number
 export const get = async (offset, filters) => {
   const response = await axios.get(`${baseUrl}?${queryString.stringify({
-    ...filters,
+    ...removeFrontFilters(filters),
     offset
   })}`)
   return response.data

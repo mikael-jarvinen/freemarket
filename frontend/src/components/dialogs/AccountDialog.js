@@ -14,6 +14,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import queryString from 'query-string'
 import AccountForm from './AccountForm'
+import { removeDialogFilter } from '../../utils'
 
 const AccountDialog = () => {
   const history = useHistory()
@@ -22,11 +23,9 @@ const AccountDialog = () => {
 
   if (search.accountform) {
     return (
-      <Dialog open={true} onClose={() => history.push({ search: queryString.stringify({
-        ...search,
-        dialog: null,
-        accountform: null
-      }) })}>
+      <Dialog open={true} onClose={() => history.push({ search: queryString.stringify(
+        removeDialogFilter(search)
+      )})}>
         <Box
           padding={2}
           bgcolor='primary.main'
