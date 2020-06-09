@@ -8,10 +8,12 @@ import { Form, Text } from 'informed'
 import Alert from '../Alert'
 import TextButton from '../TextButton'
 import { login } from '../../store/authReducer'
+import queryString from 'query-string'
 
 const LoginDialog = () => {
   const history = useHistory()
   const dispatch = useDispatch()
+  const search = queryString.parse(history.location.search)
 
   const user = useSelector(state => state.auth.user)
   const message = useSelector(state => state.loginForm.message)
@@ -27,7 +29,10 @@ const LoginDialog = () => {
   }
 
   return (
-    <Dialog open={true} onClose={() => history.push({ search: null })}>
+    <Dialog open={true} onClose={() => history.push({ search: queryString.stringify({
+      ...search,
+      dialog: null
+    }) })}>
       <Box>
         <Box
           bgcolor='primary.main'
@@ -61,7 +66,10 @@ const LoginDialog = () => {
               </Box>
               <Box display='flex' justifyContent='flex-end' flexGrow={1}>
                 <TextButton
-                  onClick={() => history.push({ search: '?dialog=register' })}
+                  onClick={() => history.push({ search: queryString.stringify({
+                    ...search,
+                    dialog: 'register'
+                  }) })}
                   text={'Don\'t have an account?'}
                 />
               </Box>

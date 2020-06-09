@@ -43,6 +43,7 @@ const ControlBar = () => {
           display='flex'
           flexGrow={1}
           flexDirection='row-reverse'
+          marginRight={3}
         >
           {user &&
             <AccountControl user={user}/>

@@ -14,10 +14,12 @@ import {
 } from '../../store/registerFormReducer'
 import Alert from '../Alert'
 import TextButton from '../TextButton'
+import queryString from 'query-string'
 
 const RegisterForm = () => {
   const dispatch = useDispatch()
   const history = useHistory()
+  const search = queryString.parse(history.location.search)
   const messages = useSelector(state => state.registerForm)
 
   const handleSubmit = ({
@@ -169,7 +171,10 @@ const RegisterForm = () => {
             </Box>
             <Box display='flex' justifyContent='flex-end' flexGrow={1}>
               <TextButton
-                onClick={() => history.push({ search: '?dialog=login' })}
+                onClick={() => history.push({ search: queryString.stringify({
+                  ...search,
+                  dialog: 'login'
+                }) })}
                 text='Already have an account?'
               />
             </Box>

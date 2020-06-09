@@ -10,9 +10,11 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { logout } from '../../store/authReducer'
 import PropTypes from 'prop-types'
+import queryString from 'query-string'
 
 const AccountControl = ({ user }) => {
   const history = useHistory()
+  const search = queryString.parse(history.location.search)
   const [anchorEl, setAnchorEl] = useState(null)
   const dispatch = useDispatch()
 
@@ -44,7 +46,10 @@ const AccountControl = ({ user }) => {
         TransitionComponent={Fade}
       >
         <MenuItem
-          onClick={() => history.push({ search: '?dialog=account' })}
+          onClick={() => history.push({ search: queryString.stringify({
+            ...search,
+            dialog: null
+          }) })}
         >
           my account
         </MenuItem>

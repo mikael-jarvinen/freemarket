@@ -19,10 +19,12 @@ import {
 } from '@material-ui/core'
 import { Form, Text, TextArea } from 'informed'
 import Alert from '../Alert'
+import queryString from 'query-string'
 
 const AddListingDialog = () => {
   const history = useHistory()
   const dispatch = useDispatch()
+  const search = queryString.parse(history.location.search)
 
   const messages = useSelector(state => state.addListingDialog)
 
@@ -71,7 +73,10 @@ const AddListingDialog = () => {
   }
 
   return (
-    <Dialog open={true} onClose={() => history.push({ search: null })}>
+    <Dialog open={true} onClose={() => history.push({ search: queryString.stringify({
+      ...search,
+      dialog: null
+    }) })}>
       <Box padding={2} bgcolor='primary.main'>
         <Typography>
           Add Listing

@@ -25,7 +25,7 @@ const DialogView = () => {
     return <AccountDialog/>
   }
 
-  if (dialog === 'addlisting') {
+  if (dialog === 'addListing') {
     return <AddListingDialog/>
   }
 

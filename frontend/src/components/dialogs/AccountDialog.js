@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import {
   Dialog,
   Box,
@@ -17,13 +17,16 @@ import AccountForm from './AccountForm'
 
 const AccountDialog = () => {
   const history = useHistory()
-  const { search } = useLocation()
-  const { accountform } = queryString.parse(search)
+  const search = queryString.parse(history.location.search)
   const user = useSelector(state => state.auth.user)
 
-  if (accountform) {
+  if (search.accountform) {
     return (
-      <Dialog open={true} onClose={() => history.push({ search: null })}>
+      <Dialog open={true} onClose={() => history.push({ search: queryString.stringify({
+        ...search,
+        dialog: null,
+        accountform: null
+      }) })}>
         <Box
           padding={2}
           bgcolor='primary.main'
@@ -54,7 +57,10 @@ const AccountDialog = () => {
   }
 
   return (
-    <Dialog open={true} onClose={() => history.push({ search: null })}>
+    <Dialog open={true} onClose={() => history.push({ search: queryString.stringify({
+      ...search,
+      dialog: null
+    }) })}>
       <Box
         padding={2}
         bgcolor='primary.main'
