@@ -45,3 +45,4 @@
 | 8.6.2020 | 5 | filtteröinnin ja cachen rakentamista |
 | 9.6.2020 | 3 | filtteröinnin rakentamista ja debuggausta |
 | 9.6. 2020 | 4 | debuggausta ja user cachen rakentaminen ja käyttöönotto |
+|| 3 | refaktorointia, debuggausta |
