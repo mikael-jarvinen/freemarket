@@ -25,14 +25,15 @@ export const loadPage = (page, filters) => {
     const pageCount = Math.floor(listingCount / 21) + 1
 
     // update filter change to store
-    if (!_.isEqual(filtersState, { ...filters, page: null })) {
+    if (!_.isEqual(filtersState, { ...filters, page: null, listing: null })) {
       dispatch({ type: 'TOGGLE_RESOLVING' })
       dispatch({
         type: 'SET_FILTERS',
         data: {
           filters: {
             ...filters,
-            page: null
+            page: null,
+            listing: null
           }
         }
       })

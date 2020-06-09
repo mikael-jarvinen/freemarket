@@ -6,6 +6,7 @@ import loginFormReducer from './loginFormReducer'
 import registerFormReducer from './registerFormReducer'
 import addListingDialogReducer from './addListingDialogReducer'
 import listingsReducer from './listingsReducer'
+import usersReducer from './usersReducer'
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
@@ -16,7 +17,8 @@ const createReducer = history =>
     loginForm: loginFormReducer,
     registerForm: registerFormReducer,
     addListingDialog: addListingDialogReducer,
-    listings: listingsReducer
+    listings: listingsReducer,
+    users: usersReducer
   })
 
 export const history = createBrowserHistory()

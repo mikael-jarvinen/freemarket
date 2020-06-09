@@ -41,7 +41,7 @@ const ListingsPage = () => {
       history.push({ search: '?page=1&ordering=created' })
     } else if (!pages[search.page] && !resolving) {
       dispatch(loadPage(search.page, search))
-    } else if (!_.isEqual(filters, { ...search, page: null })) {
+    } else if (!_.isEqual(filters, { ...search, page: null, listing: null })) {
       dispatch(loadPage(search.page, search))
     }
   }, [dispatch, history.location.search, pages, history])

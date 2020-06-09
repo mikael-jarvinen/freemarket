@@ -2,7 +2,7 @@
 // Also dispatches an action that populates the owner field of the listing
 
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import {
   Box,
@@ -11,26 +11,27 @@ import {
   Button
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
-import { loadOwner } from '../../store/listingsReducer'
+import { loadUser } from '../../store/usersReducer'
 import queryString from 'query-string'
 
 const ListingView = ({ listing }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const search = queryString.parse(history.location.search)
+  const { users } = useSelector(state => state.users)
 
-
-  // useEffect used to populate the owner field
   useEffect(() => {
-    if (listing && typeof listing.owner === 'number') {
-      dispatch(loadOwner(listing.id))
+    if (listing && !users.find(({ id }) => id === listing.owner)) {
+      dispatch(loadUser(listing.owner))
     }
   }, [dispatch, listing])
 
   if (!listing) {
     return null
   }
-  if (typeof listing.owner === 'number') {
+
+  const owner = users.find(({ id }) => id === listing.owner)
+  if (!owner) {
     return <Typography>Loading</Typography>
   }
 
@@ -65,10 +66,10 @@ const ListingView = ({ listing }) => {
       <Paper elevation={3}>
         <Box padding={3} margin={2}>
           <Typography variant='h6'>
-            seller {listing.owner.display_name}
+            seller {owner.display_name}
           </Typography>
           <Typography variant='caption'>
-            {listing.owner.email}
+            {owner.email}
           </Typography>
         </Box>
       </Paper>
