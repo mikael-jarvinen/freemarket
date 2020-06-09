@@ -14,10 +14,10 @@ class Listing(models.Model):
         ('CARS', 'cars'),
         ('MOTORCYCLES', 'motorcycles'),
         ('BICYCLES', 'bicycles'),
-        ('EECTRONICS', 'electronics'),
+        ('ELECTRONICS', 'electronics'),
         ('COMPUTERS', 'computers'),
         ('SMARTPHONES', 'smartphones'),
-        ('SMART_DEVICES', 'smartdevices'),
+        ('SMARTDEVICES', 'smartdevices'),
         ('PERIPHERALS', 'peripherals'),
         ('TELEVISIONS', 'televisions'),
         ('HOME', 'home'),
@@ -30,7 +30,7 @@ class Listing(models.Model):
         ('SHIRTS', 'shirts'),
         ('JACKETS', 'jackets'),
         ('HATS', 'hats'),
-        ('FURNITURE', 'furniture')
+        ('OTHER', 'other')
     ]
 
     price = models.DecimalField(decimal_places=2, max_digits=9)
@@ -42,7 +42,7 @@ class Listing(models.Model):
     category = models.CharField(
         max_length=13,
         choices=CATEGORY_CHOICES,
-        blank=True
+        default='OTHER'
     )
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
