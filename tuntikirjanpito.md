@@ -43,3 +43,4 @@
 | 7.6.2020 | 2 | filtteröinnin rakennusta |
 | 8.6.2020 | 4 | filtteröinnin rakentamista backendin ja frontendin puolella |
 | 8.6.2020 | 5 | filtteröinnin ja cachen rakentamista |
+| 9.6.2020 | 3 | filtteröinnin rakentamista ja debuggausta |
