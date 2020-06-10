@@ -9,11 +9,11 @@ from .permissions import (
     ReviewPermissions
 )
 from listings.models import Listing, User, Review, Question
-from listings.serializers import (
+from .serializers import (
     ListingSerializer,
     UserSerializer,
     ReviewSerializer,
-    QuestionSerializer
+    QuestionSerializer,
 )
 from .filters import ListingFilter
 

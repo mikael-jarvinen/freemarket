@@ -32,7 +32,7 @@ class Listing(models.Model):
         ('HATS', 'hats'),
         ('OTHER', 'other')
     ]
-
+    picture = models.ImageField(blank=True)
     price = models.DecimalField(decimal_places=2, max_digits=9)
     title = models.CharField(max_length=25, unique=True)
     description = models.TextField(max_length=1000)

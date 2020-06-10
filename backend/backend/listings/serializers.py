@@ -11,17 +11,7 @@ class ListingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Listing
-        fields = [
-            'id',
-            'price',
-            'title',
-            'description',
-            'created',
-            'postal_code',
-            'owner',
-            'questions',
-            'category'
-        ]
+        fields = '__all__'
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -66,14 +56,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        fields = [
-            'id',
-            'feedback',
-            'review',
-            'target',
-            'author',
-            'created'
-        ]
+        fields = '__all__'
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -86,15 +69,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = [
-            'id',
-            'listing',
-            'created',
-            'question',
-            'reply',
-            'author',
-            'seller'
-        ]
+        fields = '__all__'
 
     def get_seller(self, instance):
         return UserSerializer(instance.listing.owner).data

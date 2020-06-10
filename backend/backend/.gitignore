@@ -1,3 +1,6 @@
 # dev dependencies
 .mypy_cache/
-.vscode/
+.vscode
+
+# media files
+MEDIA/
