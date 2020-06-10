@@ -48,3 +48,4 @@
 || 3 | refaktorointia, debuggausta |
 | 10.6.2020 | 3 | kategoria filltteröinnin korjausta, käyttöönottoa ja stylausta |
 || 4 | stylausta ja debuggausta |
+|| 4 | Kuvan lisääminen listaukseen ja kuvanhostauksen rakentamista. Debuggausta |
