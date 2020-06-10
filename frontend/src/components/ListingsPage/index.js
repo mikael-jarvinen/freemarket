@@ -55,8 +55,6 @@ const ListingsPage = () => {
     <Container>
       <Box display='flex'>
         <Box
-          maxHeight='70vh'
-          overflow='auto'
           padding={2}
           flexGrow={1}
           minWidth='30vw'
@@ -80,23 +78,25 @@ const ListingsPage = () => {
               </Box>
             </Box>
           </Box>
-          <GridList cols={cols} cellHeight={200}>
-            {
-              pages[search.page].listings.map(listing => 
-                <GridListTile
-                  key={listing.id}
-                  onClick={() => history.push({
-                    search: queryString.stringify({ ...search, listing: listing.id })
-                  })}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <GridListTileBar
-                    title={listing.title}
-                  />
-                </GridListTile>
-              )
-            }
-          </GridList>
+          <Box overflow='auto' maxHeight='60vh' padding={2}>
+            <GridList cols={cols} cellHeight={200}>
+              {
+                pages[search.page].listings.map(listing => 
+                  <GridListTile
+                    key={listing.id}
+                    onClick={() => history.push({
+                      search: queryString.stringify({ ...search, listing: listing.id })
+                    })}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <GridListTileBar
+                      title={listing.title}
+                    />
+                  </GridListTile>
+                )
+              }
+            </GridList>
+          </Box>
         </Box>
         <ListingView listing={pages[search.page].listings.find(({ id }) =>
           id === Number(search.listing))}/>
