@@ -4,12 +4,13 @@ import React from 'react'
 import { useHistory, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Dialog, Box, Typography, Button } from '@material-ui/core'
-import { Form, Text } from 'informed'
+import { Form } from 'informed'
 import Alert from '../Alert'
 import TextButton from '../TextButton'
 import { login } from '../../store/authReducer'
 import queryString from 'query-string'
 import { removeDialogFilter } from '../../utils'
+import TextInput from '../TextInput'
 
 const LoginDialog = () => {
   const history = useHistory()
@@ -50,13 +51,13 @@ const LoginDialog = () => {
               <Typography>
                 email
               </Typography>
-              <Text field='email'/>
+              <TextInput field='email'/>
             </label>
             <label>
               <Typography>
                 password
               </Typography>
-              <Text field='password'/>
+              <TextInput field='password'/>
             </label>
             <Box marginTop={1} flexGrow={1} display='flex'>
               <Box justifyContent='left' flexGrow={1}>

@@ -17,10 +17,11 @@ import {
   Container,
   Button
 } from '@material-ui/core'
-import { Form, Text, TextArea } from 'informed'
+import { Form } from 'informed'
 import Alert from '../Alert'
 import queryString from 'query-string'
 import { removeDialogFilter } from '../../utils'
+import TextInput from '../TextInput'
 
 const AddListingDialog = () => {
   const history = useHistory()
@@ -88,12 +89,11 @@ const AddListingDialog = () => {
           <Container>
             <Box display='flex' flexWrap='wrap'>
               <Box padding={2} marginRight={2}>
-                <Alert severity='error' alert={messages.titleAlert}/>
                 <label>
                   <Typography>
                     Title:
                   </Typography>
-                  <Text
+                  <TextInput
                     field='title'
                     validate={titleValidate}
                     validateOnBlur
@@ -101,12 +101,11 @@ const AddListingDialog = () => {
                 </label>
               </Box>
               <Box padding={2} marginRight={2}>
-                <Alert severity='error' alert={messages.priceAlert}/>
                 <label>
                   <Typography>
                     Price:
                   </Typography>
-                  <Text
+                  <TextInput
                     field='price'
                     type='number'
                     validate={priceValidate}
@@ -116,12 +115,11 @@ const AddListingDialog = () => {
               </Box>
             </Box>
             <Box padding={2}>
-              <Alert severity='error' alert={messages.postalCodeAlert}/>
               <label>
                 <Typography>
                   Postal code:
                 </Typography>
-                <Text
+                <TextInput
                   field='postal_code'
                   validate={postalCodeValidate}
                   validateOnBlur
@@ -130,17 +128,17 @@ const AddListingDialog = () => {
             </Box>
             <Box padding={2} display='flex' flexWrap='wrap'>
               <Box>
-                <Alert severity='error' alert={messages.descriptionAlert}/>
                 <label>
                   <Typography>
                     Description:
                   </Typography>
-                  <TextArea
+                  <TextInput
                     field='description'
                     rows={3}
                     cols={25}
                     validate={descriptionValidate}
                     validateOnBlur
+                    multiline
                   />
                 </label>
               </Box>

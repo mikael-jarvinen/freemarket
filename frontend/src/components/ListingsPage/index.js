@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom'
 import { loadPage } from '../../store/listingsReducer'
 import {
   Box,
-  Container,
   GridList,
   GridListTile,
   GridListTileBar,
@@ -30,11 +29,11 @@ const ListingsPage = () => {
   // determining the gridlist columns amount depending on screensize
   // and if a valid 'listing' query string has been provided to URL, when
   // a listingview is rendered
-  let cols = 4 // default cols value
+  let cols = 5 // default cols value
   if (!useMediaQuery(theme => theme.breakpoints.up('sm'))) {
     cols = 1 // for small screens 1 column is enough
   } else if (search.listing) {
-    cols = 3 // when a listing querystring has been provided
+    cols = 4 // when a listing querystring has been provided
   }
 
   useEffect(() => {
@@ -52,56 +51,55 @@ const ListingsPage = () => {
   }
 
   return (
-    <Container>
-      <Box display='flex'>
+    <Box display='flex'>
+      <Box
+        padding={2}
+        flexGrow={1}
+        minWidth='30vw'
+      >
         <Box
           padding={2}
           flexGrow={1}
-          minWidth='30vw'
+          display='flex'
+          borderBottom='1px solid lightgrey'
         >
-          <Box
-            padding={2}
-            flexGrow={1}
-            display='flex'
-          >
-            <Box display='flex' flexDirection='column' flexGrow={1}>
-              <FilterPanel/>
-              <Box display='flex' justifyContent='center'>
-                <Pagination
-                  count={pageCount}
-                  color='secondary'
-                  page={Number(search.page)}
-                  onChange={(event, page) => history.push({
-                    search: queryString.stringify({ ...search, page })
-                  })}
-                />
-              </Box>
+          <Box display='flex' flexDirection='column' flexGrow={1}>
+            <FilterPanel/>
+            <Box display='flex' justifyContent='center'>
+              <Pagination
+                count={pageCount}
+                color='secondary'
+                page={Number(search.page)}
+                onChange={(event, page) => history.push({
+                  search: queryString.stringify({ ...search, page })
+                })}
+              />
             </Box>
           </Box>
-          <Box overflow='auto' maxHeight='60vh' padding={2}>
-            <GridList cols={cols} cellHeight={200}>
-              {
-                pages[search.page].listings.map(listing => 
-                  <GridListTile
-                    key={listing.id}
-                    onClick={() => history.push({
-                      search: queryString.stringify({ ...search, listing: listing.id })
-                    })}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <GridListTileBar
-                      title={listing.title}
-                    />
-                  </GridListTile>
-                )
-              }
-            </GridList>
-          </Box>
         </Box>
-        <ListingView listing={pages[search.page].listings.find(({ id }) =>
-          id === Number(search.listing))}/>
+        <Box overflow='auto' maxHeight='60vh' padding={2}>
+          <GridList cols={cols} cellHeight={200}>
+            {
+              pages[search.page].listings.map(listing => 
+                <GridListTile
+                  key={listing.id}
+                  onClick={() => history.push({
+                    search: queryString.stringify({ ...search, listing: listing.id })
+                  })}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <GridListTileBar
+                    title={listing.title}
+                  />
+                </GridListTile>
+              )
+            }
+          </GridList>
+        </Box>
       </Box>
-    </Container>
+      <ListingView listing={pages[search.page].listings.find(({ id }) =>
+        id === Number(search.listing))}/>
+    </Box>
   )
 }
 

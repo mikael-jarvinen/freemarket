@@ -4,17 +4,13 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Box, Typography, Button} from '@material-ui/core'
-import { Form, Text, TextArea } from 'informed'
+import { Form } from 'informed'
 import { register } from '../../services/userService'
-import {
-  emailAlert,
-  passwordAlert,
-  displayNameAlert,
-  responseAlert
-} from '../../store/registerFormReducer'
+import { responseAlert } from '../../store/registerFormReducer'
 import Alert from '../Alert'
 import TextButton from '../TextButton'
 import queryString from 'query-string'
+import TextInput from '../TextInput'
 
 const RegisterForm = () => {
   const dispatch = useDispatch()
@@ -48,33 +44,22 @@ const RegisterForm = () => {
 
   const emailValidate = value => {
     if (!value || !value.includes('@')) {
-      dispatch(emailAlert('invalid email'))
       return 'Field must be an email'
     }
-
-    // if validation succesfull we have to clear the alert
-    dispatch(emailAlert(null))
   }
 
   const passwordValidate = (value, values) => {
-    console.log('validating')
     if (values.password1 !== values.password2) {
-      dispatch(passwordAlert('Passwords do not match'))
       return 'Passwords must be equal'
+    } else if (values.password1 < 8) {
+      return 'Password must be atleast 8 characters long'
     }
-
-    // if validation succesfull we have to clear the alert
-    dispatch(passwordAlert(null))
   }
 
   const displayNameValidate = value => {
     if (!value || value.length < 5) {
-      dispatch(displayNameAlert('Too short displayname'))
       return 'Too short displayname'
     }
-
-    // if validation succesfull we have to clear the alert
-    dispatch(displayNameAlert(null))
   }
 
   return (
@@ -97,8 +82,7 @@ const RegisterForm = () => {
                 <Typography>
                   email
                 </Typography>
-                <Alert severity='error' alert={messages.email}/>
-                <Text
+                <TextInput
                   field='email'
                   validate={emailValidate}
                   validateOnBlur
@@ -108,8 +92,7 @@ const RegisterForm = () => {
                 <Typography>
                   password
                 </Typography>
-                <Alert severity='error' alert={messages.password}/>
-                <Text
+                <TextInput
                   type='password'
                   field='password1'
                   validate={passwordValidate}
@@ -120,8 +103,7 @@ const RegisterForm = () => {
                 <Typography>
                   retype password
                 </Typography>
-                <Alert severity='error' alert={messages.password}/>
-                <Text
+                <TextInput
                   type='password'
                   field='password2'
                   validate={passwordValidate}
@@ -134,8 +116,7 @@ const RegisterForm = () => {
                 <Typography>
                   display name
                 </Typography>
-                <Alert severity='error' alert={messages.display_name}/>
-                <Text
+                <TextInput
                   field='display_name'
                   validate={displayNameValidate}
                   validateOnBlur
@@ -145,13 +126,13 @@ const RegisterForm = () => {
                 <Typography>
                   first and last name (optional)
                 </Typography>
-                <Text field='full_name'/>
+                <TextInput field='full_name'/>
               </label>
               <label>
                 <Typography>
                   website (optional)
                 </Typography>
-                <Text field='website'/>
+                <TextInput field='website'/>
               </label>
             </Box>
           </Box>
@@ -160,7 +141,7 @@ const RegisterForm = () => {
               <Typography>
                 biography (optional)
               </Typography>
-              <TextArea field='biography'/>
+              <TextInput multiline field='biography'/>
             </label>
           </Box>
           <Box marginTop={1} flexGrow={1} display='flex' marginLeft={3}>

@@ -2,14 +2,21 @@
 
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Form, Text, TextArea } from 'informed'
+import { Form } from 'informed'
 import SaveIcon from '@material-ui/icons/Save'
 import { Box, Typography, IconButton } from '@material-ui/core'
 import { editAccount } from '../../store/authReducer'
+import TextInput from '../TextInput'
 
 const AccountForm = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.auth.user)
+
+  const displayNameValidate = value => {
+    if (!value || value.length < 5) {
+      return 'Too short displayname'
+    }
+  }
 
   return (
     <Box flexGrow={1} padding={2}>
@@ -18,27 +25,41 @@ const AccountForm = () => {
           <Box padding={2}>
             <label>
               <Typography>displayname:</Typography>
-              <Text field='display_name' initialValue={user.display_name}/>
+              <TextInput
+                field='display_name'
+                initialValue={user.display_name}
+                validate={displayNameValidate}
+              />
             </label>
           </Box>
           <Box padding={2}>
             <label>
               <Typography>full name:</Typography>
-              <Text field='full_name' initialValue={user.full_name}/>
+              <TextInput
+                field='full_name'
+                initialValue={user.full_name}
+              />
             </label>
           </Box>
         </Box>
         <Box padding={2}>
           <label>
             <Typography>website:</Typography>
-            <Text field='website' initialValue={user.website}/>
+            <TextInput
+              field='website'
+              initialValue={user.website}
+            />
           </label>
         </Box>
         <Box display='flex'>
           <Box padding={2}>
             <label>
               <Typography>biography:</Typography>
-              <TextArea field='biography' initialValue={user.biography}/>
+              <TextInput
+                multiline
+                field='biography'
+                initialValue={user.biography}
+              />
             </label>
           </Box>
           <Box
