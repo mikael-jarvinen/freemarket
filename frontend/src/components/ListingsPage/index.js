@@ -37,14 +37,16 @@ const ListingsPage = () => {
   }
 
   useEffect(() => {
-    if (!search.page || !search.ordering) {
+    const s = queryString.parse(history.location.search)
+
+    if (!s.page || !s.ordering) {
       history.push({ search: '?page=1&ordering=created' })
-    } else if (!pages[search.page] && !resolving) {
-      dispatch(loadPage(search.page, search))
-    } else if (!_.isEqual(filters, removeFrontFilters(search))) {
-      dispatch(loadPage(search.page, search))
+    } else if (!pages[s.page] && !resolving) {
+      dispatch(loadPage(s.page, s))
+    } else if (!_.isEqual(filters, removeFrontFilters(s)) && !resolving) {
+      dispatch(loadPage(s.page, s))
     }
-  }, [dispatch, history.location.search, pages, history])
+  }, [dispatch, history.location.search, pages, history, filters, resolving])
 
   if (!pages[search.page]) {
     return <Typography>Loading</Typography>

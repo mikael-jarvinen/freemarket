@@ -25,7 +25,7 @@ const ListingView = ({ listing }) => {
     if (listing && !users.find(({ id }) => id === listing.owner)) {
       dispatch(loadUser(listing.owner))
     }
-  }, [dispatch, listing])
+  }, [dispatch, listing, users])
 
   if (!listing) {
     return null
@@ -38,7 +38,7 @@ const ListingView = ({ listing }) => {
 
   return (
     <Box
-      borderLeft={1}
+      borderLeft='1px solid lightgrey'
       borderColor='primary.light'
       padding={2}
     >

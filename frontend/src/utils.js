@@ -13,4 +13,4 @@ export const removeListingFilter = ({ listing, ...rest }) => rest
 // takes an object containing filters and returns an object
 // with frontend specific filter 'dialog' removed
 // eslint-disable-next-line no-unused-vars
-export const removeDialogFilter = ({ dialog, ...rest }) => rest
+export const removeDialogFilter = ({ dialog, accountform, ...rest }) => rest

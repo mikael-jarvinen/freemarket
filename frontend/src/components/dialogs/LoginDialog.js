@@ -1,6 +1,6 @@
 // this component renders a dialog modal which contains a login form
 
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Dialog, Box, Typography, Button } from '@material-ui/core'
@@ -13,12 +13,12 @@ import { removeDialogFilter } from '../../utils'
 import TextInput from '../TextInput'
 
 const LoginDialog = () => {
+  const [error, setError] = useState(null)
   const history = useHistory()
   const dispatch = useDispatch()
   const search = queryString.parse(history.location.search)
 
   const user = useSelector(state => state.auth.user)
-  const message = useSelector(state => state.loginForm.message)
 
   // if login succesfull or already logged on 
   // redirect to '/'
@@ -26,8 +26,13 @@ const LoginDialog = () => {
     return <Redirect to='/'/>
   }
 
-  const handleSubmit = ({ email, password}) => {
-    dispatch(login(email, password))
+  const handleSubmit = async ({ email, password}) => {
+    try {
+      await login(email, password)(dispatch)
+    } catch (e) {
+      setError(JSON.stringify(e.response.data))
+    }
+    
   }
 
   return (
@@ -44,7 +49,7 @@ const LoginDialog = () => {
             Login to Freemarket
           </Typography>
         </Box>
-        <Alert alert={message}/>
+        <Alert alert={error}/>
         <Box padding={2} paddingLeft={8} paddingRight={8}>
           <Form onSubmit={handleSubmit}>
             <label>

@@ -1,14 +1,16 @@
 // renders a form where you can edit a logged on user resource
 
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Form } from 'informed'
 import SaveIcon from '@material-ui/icons/Save'
 import { Box, Typography, IconButton } from '@material-ui/core'
+import { Alert } from '@material-ui/lab'
 import { editAccount } from '../../store/authReducer'
 import TextInput from '../TextInput'
 
 const AccountForm = () => {
+  const [error, setError] = useState(null)
   const dispatch = useDispatch()
   const user = useSelector(state => state.auth.user)
 
@@ -18,9 +20,20 @@ const AccountForm = () => {
     }
   }
 
+  const handleSubmit = async values => {
+    try {
+      await editAccount(values)(dispatch)
+    } catch (e) {
+      setError(JSON.stringify(e.response.data))
+    }
+  }
+
   return (
     <Box flexGrow={1} padding={2}>
-      <Form onSubmit={values => dispatch(editAccount(values))}>
+      <Form onSubmit={handleSubmit}>
+        <Box>
+          <Alert severity='error' alert={error}/>
+        </Box>
         <Box display='flex' flexWrap='wrap'>
           <Box padding={2}>
             <label>

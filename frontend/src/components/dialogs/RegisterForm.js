@@ -1,22 +1,19 @@
 // unmodular registerform component to be used in the logindialog
 
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Box, Typography, Button} from '@material-ui/core'
 import { Form } from 'informed'
 import { register } from '../../services/userService'
-import { responseAlert } from '../../store/registerFormReducer'
 import Alert from '../Alert'
 import TextButton from '../TextButton'
 import queryString from 'query-string'
 import TextInput from '../TextInput'
 
 const RegisterForm = () => {
-  const dispatch = useDispatch()
+  const [error, setError] = useState(null)
   const history = useHistory()
   const search = queryString.parse(history.location.search)
-  const messages = useSelector(state => state.registerForm)
 
   const handleSubmit = ({
     email,
@@ -37,8 +34,8 @@ const RegisterForm = () => {
       .then(() => {
         history.replace('/login')
       })
-      .catch(error => {
-        dispatch(responseAlert(Object.values(error.response.data).join()))
+      .catch(e=> {
+        setError(JSON.stringify(e.response.data))
       })
   }
 
@@ -74,7 +71,7 @@ const RegisterForm = () => {
         </Typography>
       </Box>
       <Box padding={2}>
-        <Alert severity='error' alert={messages.response}/>
+        <Alert severity='error' alert={error}/>
         <Form onSubmit={handleSubmit}>
           <Box display='flex' flexWrap='wrap'>
             <Box margin={3}>

@@ -48,7 +48,7 @@ const AccountControl = ({ user }) => {
         <MenuItem
           onClick={() => history.push({ search: queryString.stringify({
             ...search,
-            dialog: null
+            dialog: 'account'
           }) })}
         >
           my account
