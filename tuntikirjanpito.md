@@ -49,3 +49,4 @@
 | 10.6.2020 | 3 | kategoria filltteröinnin korjausta, käyttöönottoa ja stylausta |
 || 4 | stylausta ja debuggausta |
 || 4 | Kuvan lisääminen listaukseen ja kuvanhostauksen rakentamista. Debuggausta |
+| 11.6.2020 | 7 | Listauksen postauksen muutosta palveluissa ja formissa. react-dropzone, react-informed ja axios dokumentaation lukemista |
