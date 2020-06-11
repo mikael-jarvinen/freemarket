@@ -9,13 +9,16 @@ import {
   Box,
   Typography,
   Container,
-  Button
+  Button,
+  MenuItem,
+  Divider
 } from '@material-ui/core'
 import { Form } from 'informed'
 import Alert from '../Alert'
 import queryString from 'query-string'
 import { removeDialogFilter } from '../../utils'
 import TextInput from '../TextInput'
+import SelectInput from '../SelectInput'
 
 const AddListingDialog = () => {
   const [error, setError] = useState(null)
@@ -95,17 +98,55 @@ const AddListingDialog = () => {
                 </label>
               </Box>
             </Box>
-            <Box padding={2}>
-              <label>
-                <Typography>
+            <Box display='flex' flexWrap='wrap'>
+              <Box padding={2} marginRight={2}>
+                <label>
+                  <Typography>
                   Postal code:
-                </Typography>
-                <TextInput
-                  field='postal_code'
-                  validate={postalCodeValidate}
-                  validateOnBlur
-                />
-              </label>
+                  </Typography>
+                  <TextInput
+                    field='postal_code'
+                    validate={postalCodeValidate}
+                    validateOnBlur
+                  />
+                </label>
+              </Box>
+              <Box padding={2} marginRight={2}>
+                <label>
+                  <Typography>
+                    Category:
+                  </Typography>
+                  <SelectInput
+                    field='category'
+                  >
+                    <MenuItem value='ELECTRONICS'>Electronics</MenuItem>
+                    <MenuItem value='COMPUTERS'>computers</MenuItem>
+                    <MenuItem value='SMARTPHONES'>smartphones</MenuItem>
+                    <MenuItem value='SMARTDEVICES'>smartdevices</MenuItem>
+                    <MenuItem value='PERIPHERALS'>peripherals</MenuItem>
+                    <MenuItem value='TELEVISIONS'>televisions</MenuItem>
+                    <Divider/>
+                    <MenuItem value='VEHICLES'>Vehicles</MenuItem>
+                    <MenuItem value='CARS'>cars</MenuItem>
+                    <MenuItem value='MOTORCYCLES'>motorcycles</MenuItem>
+                    <MenuItem value='BICYCLES'>bicycles</MenuItem>
+                    <Divider/>
+                    <MenuItem value='CLOTHES'>Clothes</MenuItem>
+                    <MenuItem value='SHOES'>shoes</MenuItem>
+                    <MenuItem value='PANTS'>pants</MenuItem>
+                    <MenuItem value='SHIRTS'>shirts</MenuItem>
+                    <MenuItem value='JACKETS'>jackets</MenuItem>
+                    <MenuItem value='HATS'>hats</MenuItem>
+                    <Divider/>
+                    <MenuItem value='HOME'>Home</MenuItem>
+                    <MenuItem value='KITCHEN'>kitchen</MenuItem>
+                    <MenuItem value='APPLIANCES'>appliances</MenuItem>
+                    <MenuItem value='FURNITURE'>furniture</MenuItem>
+                    <Divider/>
+                    <MenuItem value='OTHER'>Other</MenuItem>
+                  </SelectInput>
+                </label>
+              </Box>
             </Box>
             <Box padding={2} display='flex' flexWrap='wrap'>
               <Box>
