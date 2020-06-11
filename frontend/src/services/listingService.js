@@ -6,9 +6,17 @@ const baseUrl = '/api/listings/'
 
 // posts a new listing
 export const post = async listing => {
+  const body = new FormData()
+  body.set('title', listing.title)
+  body.set('price', listing.price)
+  body.set('postal_code', listing.postal_code)
+  body.set('category', listing.category)
+  body.set('description', listing.description)
+  body.append('picture', listing.picture)
+
   const response = await axios.post(
     baseUrl,
-    listing
+    body
   )
   return response.data
 }

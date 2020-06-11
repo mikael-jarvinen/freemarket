@@ -90,6 +90,7 @@ const ListingsPage = () => {
                   })}
                   style={{ cursor: 'pointer' }}
                 >
+                  <img src={listing.picture} alt='listing picture'/>
                   <GridListTileBar
                     title={listing.title}
                   />

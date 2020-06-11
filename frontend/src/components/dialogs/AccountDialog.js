@@ -14,7 +14,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import queryString from 'query-string'
 import AccountForm from './AccountForm'
-import { removeDialogFilter } from '../../utils'
+import { removeDialogFilter, removeAFormFilter } from '../../utils'
 
 const AccountDialog = () => {
   const history = useHistory()
@@ -42,9 +42,9 @@ const AccountDialog = () => {
             flexGrow={1}
           >
             <IconButton
-              onClick={() => history.push({
-                search: '?dialog=account'
-              })}
+              onClick={() => history.push({ search: queryString.stringify(
+                removeAFormFilter(search)
+              )})}
             >
               <ArrowBackIcon/>
             </IconButton>
@@ -76,9 +76,10 @@ const AccountDialog = () => {
           flexGrow={1}
         >
           <IconButton
-            onClick={() => history.push({
-              search: '?dialog=account&accountform=true'
-            })}
+            onClick={() => history.push({ search: queryString.stringify({
+              ...search,
+              accountform: true
+            })})}
           >
             <EditIcon/>
           </IconButton>

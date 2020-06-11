@@ -19,6 +19,7 @@ import queryString from 'query-string'
 import { removeDialogFilter } from '../../utils'
 import TextInput from '../TextInput'
 import SelectInput from '../SelectInput'
+import PictureDrop from '../PictureDrop'
 
 const AddListingDialog = () => {
   const [error, setError] = useState(null)
@@ -52,6 +53,7 @@ const AddListingDialog = () => {
 
   const handleSubmit = async values => {
     try {
+      console.log(values)
       await addListing(values)(dispatch)
     } catch (e) {
       setError(JSON.stringify(e.response.data))
@@ -148,8 +150,8 @@ const AddListingDialog = () => {
                 </label>
               </Box>
             </Box>
-            <Box padding={2} display='flex' flexWrap='wrap'>
-              <Box>
+            <Box display='flex' flexWrap='wrap'>
+              <Box padding={2} marginRight={2}>
                 <label>
                   <Typography>
                     Description:
@@ -164,15 +166,18 @@ const AddListingDialog = () => {
                   />
                 </label>
               </Box>
-              <Box
-                display='flex'
-                flexDirection='row-reverse'
-                padding={2}
-                flexGrow={1}
-                alignItems='center'
-              >
-                <Button variant='contained' type='submit'>Post</Button>
+              <Box padding={2} maxWidth={200}>
+                <PictureDrop field='picture'/>
               </Box>
+            </Box>
+            <Box
+              display='flex'
+              flexDirection='row-reverse'
+              padding={2}
+              flexGrow={1}
+              alignItems='center'
+            >
+              <Button variant='contained' type='submit'>Post</Button>
             </Box>
           </Container>
         </Box>

@@ -41,7 +41,7 @@ const LoginDialog = () => {
     ) })}>
       <Box>
         <Box
-          bgcolor='primary.main'
+          bgcolor='primary.light'
           flexGrow={1}
           padding={3}
         >
@@ -49,7 +49,7 @@ const LoginDialog = () => {
             Login to Freemarket
           </Typography>
         </Box>
-        <Alert alert={error}/>
+        <Alert severity='error' alert={error}/>
         <Box padding={2} paddingLeft={8} paddingRight={8}>
           <Form onSubmit={handleSubmit}>
             <label>

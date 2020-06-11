@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Form } from 'informed'
 import SaveIcon from '@material-ui/icons/Save'
 import { Box, Typography, IconButton } from '@material-ui/core'
-import { Alert } from '@material-ui/lab'
+import Alert from '../Alert'
 import { editAccount } from '../../store/authReducer'
 import TextInput from '../TextInput'
 
@@ -30,10 +30,8 @@ const AccountForm = () => {
 
   return (
     <Box flexGrow={1} padding={2}>
+      <Alert severity='error' alert={error}/>
       <Form onSubmit={handleSubmit}>
-        <Box>
-          <Alert severity='error' alert={error}/>
-        </Box>
         <Box display='flex' flexWrap='wrap'>
           <Box padding={2}>
             <label>
