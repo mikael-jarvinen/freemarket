@@ -62,6 +62,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     biography = models.TextField(max_length=1000, blank=True)
     website = models.URLField(blank=True)
     is_active = models.BooleanField(default=True)
+    avatar = models.ImageField(blank=True)
 
     objects = UserManager()
 

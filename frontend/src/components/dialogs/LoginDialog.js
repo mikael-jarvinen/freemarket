@@ -41,7 +41,7 @@ const LoginDialog = () => {
     ) })}>
       <Box>
         <Box
-          bgcolor='primary.light'
+          bgcolor='primary.main'
           flexGrow={1}
           padding={3}
         >

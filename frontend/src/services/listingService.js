@@ -5,14 +5,15 @@ import { removeFrontFilters } from '../utils'
 const baseUrl = '/api/listings/'
 
 // posts a new listing
-export const post = async listing => {
+export const post = async values => {
   const body = new FormData()
-  body.set('title', listing.title)
-  body.set('price', listing.price)
-  body.set('postal_code', listing.postal_code)
-  body.set('category', listing.category)
-  body.set('description', listing.description)
-  body.append('picture', listing.picture)
+  for (const key in values) {
+    if (key === 'picture') {
+      body.append('picture', values.picture)
+    } else {
+      body.set(key, values[key])
+    }
+  }
 
   const response = await axios.post(
     baseUrl,

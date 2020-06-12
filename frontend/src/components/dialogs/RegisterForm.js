@@ -9,28 +9,15 @@ import Alert from '../Alert'
 import TextButton from '../TextButton'
 import queryString from 'query-string'
 import TextInput from '../TextInput'
+import PictureDrop from '../PictureDrop'
 
 const RegisterForm = () => {
   const [error, setError] = useState(null)
   const history = useHistory()
   const search = queryString.parse(history.location.search)
 
-  const handleSubmit = ({
-    email,
-    password1,
-    display_name,
-    full_name,
-    biography,
-    website
-  }) => {
-    register(
-      email,
-      password1,
-      display_name,
-      full_name,
-      biography,
-      website
-    )
+  const handleSubmit = values => {
+    register(values)
       .then(() => {
         history.replace('/login')
       })
@@ -107,6 +94,12 @@ const RegisterForm = () => {
                   validateOnBlur
                 />
               </label>
+              <label>
+                <Typography>
+                  biography (optional)
+                </Typography>
+                <TextInput multiline field='biography'/>
+              </label>
             </Box>
             <Box margin={3}>
               <label>
@@ -131,15 +124,13 @@ const RegisterForm = () => {
                 </Typography>
                 <TextInput field='website'/>
               </label>
+              <label>
+                <Typography>
+                  Avatar:
+                </Typography>
+                <PictureDrop field='avatar'/>
+              </label>
             </Box>
-          </Box>
-          <Box marginLeft={3}>
-            <label>
-              <Typography>
-                biography (optional)
-              </Typography>
-              <TextInput multiline field='biography'/>
-            </label>
           </Box>
           <Box marginTop={1} flexGrow={1} display='flex' marginLeft={3}>
             <Box justifyContent='left' flexGrow={1}>

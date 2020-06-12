@@ -39,23 +39,23 @@ export const login = async (email, password) => {
 }
 
 // posts a new user
-export const register = async (
-  email,
-  password,
-  display_name,
-  full_name,
-  biography,
-  website
-) => {
-  const response = await axios.post(baseUrl, {
-    email,
-    password,
-    display_name,
-    full_name,
-    biography,
-    website
-  })
-  return response
+export const register = async values => {
+  const body = new FormData()
+  for (const key in values) {
+    if (key === 'avatar') {
+      body.append('avatar', values.avatar)
+    } else if (key === 'password1' || key === 'password2') {
+      body.set('password', values.password1)
+    } else {
+      body.set(key, values[key])
+    }
+  }
+
+  const response = await axios.post(
+    baseUrl,
+    body
+  )
+  return response.data
 }
 
 // returns a single user by id

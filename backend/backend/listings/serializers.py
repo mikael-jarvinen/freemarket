@@ -44,7 +44,8 @@ class UserSerializer(serializers.ModelSerializer):
             'website',
             'listings',
             'reviews',
-            'given_reviews'
+            'given_reviews',
+            'avatar'
         ]
 
 
