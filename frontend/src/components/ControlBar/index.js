@@ -4,7 +4,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Box, Button, useTheme } from '@material-ui/core'
+import { Box, Button } from '@material-ui/core'
 import LogoButton from './LogoButton'
 import SearchBar from './SearchBar'
 import AccountControl from './AccountControl'
@@ -14,7 +14,6 @@ import queryString from 'query-string'
 const ControlBar = () => {
   const history = useHistory()
   const { user } = useSelector(state => state.auth)
-  const theme = useTheme()
   const search = queryString.parse(history.location.search)
 
   return (
@@ -34,16 +33,12 @@ const ControlBar = () => {
         flexGrow={1}
         padding={2}
         alignItems='center'
-        position='fixed'
-        width='100%'
-        zIndex={theme.zIndex.drawer + 1}
       >
         <LogoButton />
         <Box
           display='flex'
           flexGrow={1}
           flexDirection='row-reverse'
-          marginRight={3}
         >
           {user &&
             <AccountControl user={user}/>

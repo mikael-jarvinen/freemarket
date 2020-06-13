@@ -167,7 +167,12 @@ const AddListingDialog = () => {
                 </label>
               </Box>
               <Box padding={2} maxWidth={200}>
-                <PictureDrop field='picture'/>
+                <label>
+                  <Typography>
+                    Picture:
+                  </Typography>
+                  <PictureDrop field='picture'/>
+                </label>
               </Box>
             </Box>
             <Box
