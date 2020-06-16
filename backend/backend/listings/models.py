@@ -10,21 +10,17 @@ from .managers import UserManager
 
 class Listing(models.Model):
     CATEGORY_CHOICES = [
-        ('VEHICLES', 'vehicles'),
         ('CARS', 'cars'),
         ('MOTORCYCLES', 'motorcycles'),
         ('BICYCLES', 'bicycles'),
-        ('ELECTRONICS', 'electronics'),
         ('COMPUTERS', 'computers'),
         ('SMARTPHONES', 'smartphones'),
         ('SMARTDEVICES', 'smartdevices'),
         ('PERIPHERALS', 'peripherals'),
         ('TELEVISIONS', 'televisions'),
-        ('HOME', 'home'),
         ('APPLIANCES', 'appliances'),
         ('FURNITURE', 'furniture'),
         ('KITCHEN', 'kitchen'),
-        ('CLOTHES', 'clothes'),
         ('SHOES', 'shoes'),
         ('PANTS', 'pants'),
         ('SHIRTS', 'shirts'),
