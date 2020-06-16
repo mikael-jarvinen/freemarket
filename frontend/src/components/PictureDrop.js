@@ -56,6 +56,7 @@ const PictureDrop = props => {
                   <img
                     src={URL.createObjectURL(value)}
                     style={{ maxWidth: '100%', height: 'auto' }}
+                    alt='preview'
                   />
                 )
                 : (<Typography variant='caption'>
