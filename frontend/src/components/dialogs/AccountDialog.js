@@ -14,6 +14,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import queryString from 'query-string'
 import AccountForm from './AccountForm'
+import AvatarImage from '../AvatarImage'
 import { removeDialogFilter, removeAFormFilter } from '../../utils'
 
 const AccountDialog = () => {
@@ -86,6 +87,18 @@ const AccountDialog = () => {
         </Box>
       </Box>
       <Box flexGrow={1} padding={2}>
+        <Box
+          display='flex'
+          flexGrow={1}
+          justifyContent='center'
+          marginBottom={2}
+        >
+          <AvatarImage
+            src={user.avatar}
+            alt={`${user.display_name} avatar`}
+            radius={75}
+          />
+        </Box>
         <Container>
           <Box display='flex' flexGrow={1}>
             <Box

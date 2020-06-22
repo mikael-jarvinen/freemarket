@@ -65,19 +65,46 @@ const CategoryButton = ({ children, category }) => {
       boxShadow={3}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={() => history.push({
-        search: queryString.stringify(newSearch),
-        pathname: '/listings'
-      })}
     >
-      <Typography color='textSecondary'>{category}</Typography>
+      <Typography
+        style={{ cursor: 'pointer' }}
+        color='textSecondary'
+        onClick={() => history.push({
+          search: queryString.stringify(newSearch),
+          pathname: '/listings'
+        })}
+      >
+        {category}
+      </Typography>
+      {hover && children
+        ? <Box
+          position='fixed'
+          bgcolor='white'
+          borderRadius={3}
+          border='1px solid lightgrey'
+          boxShadow={3}
+          padding={1}
+          marginLeft={10}
+          marginTop={-3}
+        >
+          {children}
+        </Box>
+        : null
+      }
     </Box>
   )
 }
 
 CategoryButton.propTypes = {
-  category: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.func)
+  category: PropTypes.oneOf([
+    'Browse All',
+    'Electronics',
+    'Vehicles',
+    'Clothes',
+    'Home',
+    'Other'
+  ]),
+  children: PropTypes.arrayOf(PropTypes.element)
 }
 
 export default CategoryButton

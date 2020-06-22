@@ -55,6 +55,10 @@ const AddListingDialog = () => {
     try {
       console.log(values)
       await addListing(values)(dispatch)
+
+      // if above expression not caught, it means a successfull post
+      // so we close the AddListingDialog
+      history.push({ search: queryString.stringify(removeDialogFilter(search)) })
     } catch (e) {
       setError(JSON.stringify(e.response.data))
     }
@@ -65,7 +69,7 @@ const AddListingDialog = () => {
       removeDialogFilter(search)
     )})}>
       <Box padding={2} bgcolor='primary.main'>
-        <Typography>
+        <Typography color='textSecondary'>
           Add Listing
         </Typography>
       </Box>
@@ -121,26 +125,22 @@ const AddListingDialog = () => {
                   <SelectInput
                     field='category'
                   >
-                    <MenuItem value='ELECTRONICS'>Electronics</MenuItem>
                     <MenuItem value='COMPUTERS'>computers</MenuItem>
                     <MenuItem value='SMARTPHONES'>smartphones</MenuItem>
                     <MenuItem value='SMARTDEVICES'>smartdevices</MenuItem>
                     <MenuItem value='PERIPHERALS'>peripherals</MenuItem>
                     <MenuItem value='TELEVISIONS'>televisions</MenuItem>
                     <Divider/>
-                    <MenuItem value='VEHICLES'>Vehicles</MenuItem>
                     <MenuItem value='CARS'>cars</MenuItem>
                     <MenuItem value='MOTORCYCLES'>motorcycles</MenuItem>
                     <MenuItem value='BICYCLES'>bicycles</MenuItem>
                     <Divider/>
-                    <MenuItem value='CLOTHES'>Clothes</MenuItem>
                     <MenuItem value='SHOES'>shoes</MenuItem>
                     <MenuItem value='PANTS'>pants</MenuItem>
                     <MenuItem value='SHIRTS'>shirts</MenuItem>
                     <MenuItem value='JACKETS'>jackets</MenuItem>
                     <MenuItem value='HATS'>hats</MenuItem>
                     <Divider/>
-                    <MenuItem value='HOME'>Home</MenuItem>
                     <MenuItem value='KITCHEN'>kitchen</MenuItem>
                     <MenuItem value='APPLIANCES'>appliances</MenuItem>
                     <MenuItem value='FURNITURE'>furniture</MenuItem>

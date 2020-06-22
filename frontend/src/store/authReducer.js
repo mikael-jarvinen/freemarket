@@ -7,7 +7,6 @@ import {
   put
 } from '../services/userService'
 import { post } from '../services/listingService'
-import { push } from 'connected-react-router'
 
 // fetches possible login information from localstorage
 const initialState = () => {
@@ -30,9 +29,6 @@ export const addListing = listing => {
         newListing
       }
     })
-
-    // if succesfull close AddListingDialog
-    dispatch(push({ search: null }))
   }
 }
 

@@ -5,17 +5,11 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { loadPage } from '../../store/listingsReducer'
-import {
-  Box,
-  GridList,
-  GridListTile,
-  GridListTileBar,
-  Typography,
-  useMediaQuery
-} from '@material-ui/core'
+import { Box, Typography } from '@material-ui/core'
 import { Pagination } from '@material-ui/lab'
 import queryString from 'query-string'
 import ListingView from './ListingView'
+import Listing from './Listing'
 import FilterPanel from './FilterPanel'
 import _ from 'lodash'
 import { removeFrontFilters } from '../../utils'
@@ -25,16 +19,6 @@ const ListingsPage = () => {
   const search = queryString.parse(history.location.search)
   const dispatch = useDispatch()
   const { pages, pageCount, filters, resolving } = useSelector(state => state.listings)
-
-  // determining the gridlist columns amount depending on screensize
-  // and if a valid 'listing' query string has been provided to URL, when
-  // a listingview is rendered
-  let cols = 5 // default cols value
-  if (!useMediaQuery(theme => theme.breakpoints.up('sm'))) {
-    cols = 1 // for small screens 1 column is enough
-  } else if (search.listing) {
-    cols = 4 // when a listing querystring has been provided
-  }
 
   useEffect(() => {
     const s = queryString.parse(history.location.search)
@@ -53,7 +37,7 @@ const ListingsPage = () => {
   }
 
   return (
-    <Box display='flex'>
+    <Box display='flex' flexGrow={1}>
       <Box
         padding={2}
         flexGrow={1}
@@ -79,25 +63,16 @@ const ListingsPage = () => {
             </Box>
           </Box>
         </Box>
-        <Box overflow='auto' maxHeight='60vh' padding={2}>
-          <GridList cols={cols} cellHeight={200}>
-            {
-              pages[search.page].listings.map(listing => 
-                <GridListTile
-                  key={listing.id}
-                  onClick={() => history.push({
-                    search: queryString.stringify({ ...search, listing: listing.id })
-                  })}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <img src={listing.picture} alt='listing'/>
-                  <GridListTileBar
-                    title={listing.title}
-                  />
-                </GridListTile>
-              )
-            }
-          </GridList>
+        <Box
+          height='60vh'
+          padding={2}
+          display='flex'
+          flexGrow={1}
+          flexWrap='wrap'
+          overflow='auto'
+        >
+          {pages[search.page].listings.map(l => 
+            <Listing key={l.id} listing={l}/>)}
         </Box>
       </Box>
       <ListingView listing={pages[search.page].listings.find(({ id }) =>

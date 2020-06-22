@@ -10,7 +10,7 @@ import { useField } from 'informed'
 import PropTypes from 'prop-types'
 
 const validate = file => {
-  if (file.size > 51200) {
+  if (file.size > 512000000) {
     return 'File is too large, >50mb'
   } else if (file.type !== 'image/png' && file.type !== 'image/jpeg') {
     return 'File is not of type jpeg or png'

@@ -7,13 +7,14 @@ import { useHistory } from 'react-router-dom'
 import {
   Box,
   Typography,
-  Paper,
   Button
 } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import { loadUser } from '../../store/usersReducer'
 import queryString from 'query-string'
 import { removeListingFilter } from '../../utils'
+import ImageContainer from '../ImageContainer'
+import AvatarImage from '../AvatarImage'
 
 const ListingView = ({ listing }) => {
   const dispatch = useDispatch()
@@ -39,21 +40,34 @@ const ListingView = ({ listing }) => {
   return (
     <Box
       borderLeft='1px solid lightgrey'
-      borderColor='primary.light'
       padding={2}
+      overflow='auto'
+      maxHeight='75vh'
+      minWidth='25vw'
     >
-      <Paper elevation={3}>
-        <Box padding={3} margin={2}>
-          <Typography variant='h4'>
-            {listing.title}
-          </Typography>
-          <Typography variant='h6'>
-            €{listing.price}
-          </Typography>
-        </Box>
-      </Paper>
-      <Paper elevation={3}>
-        <Box padding={3} margin={2}>
+      <Box
+        padding={3}
+        border='1px solid lightgrey'
+        borderRadius={5}
+        boxShadow={3}
+        marginBottom={2}
+        display='flex'
+        flexDirection='column'
+      >
+        <Typography variant='h4'>
+          {listing.title}
+        </Typography>
+        <Typography variant='h6'>
+          <Box color='red'>
+            € {listing.price}
+          </Box>
+        </Typography>
+        <ImageContainer src={listing.picture} alt='listing detail'/>
+        <Box
+          borderTop='1px solid lightgrey'
+          marginTop={2}
+          paddingTop={2}
+        >
           <Typography>
             {listing.description}
           </Typography>
@@ -63,9 +77,16 @@ const ListingView = ({ listing }) => {
             </Typography>
           </Box>
         </Box>
-      </Paper>
-      <Paper elevation={3}>
-        <Box padding={3} margin={2}>
+      </Box>
+      <Box
+        padding={3}
+        border='1px solid lightgrey'
+        borderRadius={5}
+        boxShadow={3}
+        marginBottom={2}
+        display='flex'
+      >
+        <Box>
           <Typography variant='h6'>
             seller {owner.display_name}
           </Typography>
@@ -73,7 +94,19 @@ const ListingView = ({ listing }) => {
             {owner.email}
           </Typography>
         </Box>
-      </Paper>
+        <Box
+          display='flex'
+          flexGrow={1}
+          justifyContent='flex-end'
+        >
+          <AvatarImage
+            src={owner.avatar}
+            alt={`${owner.display_name} avatar`}
+            radius={35}
+            border='1px solid black'
+          />
+        </Box>
+      </Box>
       <Box flexGrow={1}>
         <Button
           variant='outlined'
@@ -97,7 +130,8 @@ ListingView.propTypes = {
     created: PropTypes.string,
     postal_code: PropTypes.number,
     owner: PropTypes.any,
-    questions: PropTypes.array
+    questions: PropTypes.array,
+    picture: PropTypes.string
   })
 }
 

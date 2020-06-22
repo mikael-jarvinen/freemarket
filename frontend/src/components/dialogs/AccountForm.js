@@ -8,6 +8,7 @@ import { Box, Typography, IconButton } from '@material-ui/core'
 import Alert from '../Alert'
 import { editAccount } from '../../store/authReducer'
 import TextInput from '../TextInput'
+import PictureDrop from '../PictureDrop'
 
 const AccountForm = () => {
   const [error, setError] = useState(null)
@@ -53,14 +54,22 @@ const AccountForm = () => {
             </label>
           </Box>
         </Box>
-        <Box padding={2}>
-          <label>
-            <Typography>website:</Typography>
-            <TextInput
-              field='website'
-              initialValue={user.website}
-            />
-          </label>
+        <Box display='flex'>
+          <Box padding={2}>
+            <label>
+              <Typography>website:</Typography>
+              <TextInput
+                field='website'
+                initialValue={user.website}
+              />
+            </label>
+          </Box>
+          <Box padding={2}>
+            <label>
+              <Typography>Avatar:</Typography>
+              <PictureDrop field='avatar'/>
+            </label>
+          </Box>
         </Box>
         <Box display='flex'>
           <Box padding={2}>

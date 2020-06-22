@@ -39,7 +39,6 @@ const FilterPanel = () => {
         <Select
           onChange={event => history.push({ search: `?page=1&ordering=${event.target.value}` })}
           value={sortFilters}
-          multiple
         >
           <MenuItem value='price'>price asc.</MenuItem>
           <MenuItem value='-price'>price desc.</MenuItem>
