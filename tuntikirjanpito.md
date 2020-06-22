@@ -51,3 +51,4 @@
 || 4 | Kuvan lisääminen listaukseen ja kuvanhostauksen rakentamista. Debuggausta |
 | 11.6.2020 | 7 | Listauksen postauksen muutosta palveluissa ja formissa. react-dropzone, react-informed ja axios dokumentaation lukemista |
 | 14.6.2020 | 3 | Drawerin korvaus categorydrawerilla |
+| 22.6.2020 | 8 | Categorydrawerin viimeistely, testilistausten lisäily, päivitettiin komponentit ja lomakkeet, näyttämään listausten kuvat ja käyttäjien avatarit, rakennettiin uusi listausten listaus |
