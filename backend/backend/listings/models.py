@@ -121,8 +121,17 @@ class Question(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         null=True,
+        on_delete=models.CASCADE,
+        related_name='questions'
+    )
+    seller = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
         on_delete=models.CASCADE
     )
 
     class Meta:
         ordering = ['created']
+
+    def get_seller(self):
+        return self.listing.owner

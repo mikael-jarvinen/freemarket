@@ -4,8 +4,10 @@ import React, { useState } from 'react'
 import { Typography } from '@material-ui/core'
 import PropTypes from 'prop-types'
 
-const TextButton = ({ onClick, text, ...rest }) => {
+const TextButton = ({ onClick, text, ...props }) => {
   const [ hover, setHover ] = useState(false)
+
+  const { color, ...rest } = props
 
   return (
     <Typography
@@ -14,7 +16,7 @@ const TextButton = ({ onClick, text, ...rest }) => {
       {...rest}
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
-      color={hover ? 'secondary' : 'textPrimary'}
+      color={hover ? 'secondary' : color || 'textPrimary'}
       fontWeight='bold'
     >
       {text}
@@ -24,7 +26,8 @@ const TextButton = ({ onClick, text, ...rest }) => {
 
 TextButton.propTypes = {
   text: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  color: PropTypes.string
 }
 
 export default TextButton

@@ -6,6 +6,10 @@ import { update } from '../store/authReducer'
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('access')
 
 const refreshAuthLogic = async failedRequest => {
+  if (failedRequest.config.url === '/api/token/') {
+    return Promise.resolve()
+  }
+
   const response = await axios.post(
     '/api/token/refresh/',
     {

@@ -8,7 +8,7 @@ from .permissions import (
     QuestionPermissions,
     ReviewPermissions
 )
-from listings.models import Listing, User, Review, Question
+from .models import Listing, User, Review, Question
 from .serializers import (
     ListingSerializer,
     UserSerializer,
@@ -88,4 +88,11 @@ class QuestionViewSet(viewsets.ModelViewSet):
     ]
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        listing_id = self.request.data['listing']
+        seller_id = ListingSerializer(
+            Listing.objects.get(id=listing_id)
+        ).data['owner']
+        serializer.save(
+            author=self.request.user,
+            seller=User.objects.get(id=seller_id)
+        )

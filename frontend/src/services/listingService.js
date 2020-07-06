@@ -22,11 +22,17 @@ export const post = async values => {
   return response.data
 }
 
-// gets listings and parses the price field to type Number
+// gets listings
 export const get = async (offset, filters) => {
   const response = await axios.get(`${baseUrl}?${queryString.stringify({
     ...removeFrontFilters(filters),
     offset
   })}`)
+  return response.data
+}
+
+// gets a single listing by id
+export const getById = async id => {
+  const response = await axios.get(baseUrl + id)
   return response.data
 }

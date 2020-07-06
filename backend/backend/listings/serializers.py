@@ -1,21 +1,12 @@
 from rest_framework import serializers
-from listings.models import Listing, User, Review, Question
-
-
-class ListingSerializer(serializers.ModelSerializer):
-    questions = serializers.PrimaryKeyRelatedField(
-        many=True,
-        read_only=True
-    )
-    owner = serializers.ReadOnlyField(source='owner.id')
-
-    class Meta:
-        model = Listing
-        fields = '__all__'
+from .models import Listing, User, Review, Question
 
 
 class UserSerializer(serializers.ModelSerializer):
-    listings = ListingSerializer(many=True, read_only=True)
+    listings = serializers.PrimaryKeyRelatedField(
+        many=True,
+        read_only=True
+    )
     reviews = serializers.PrimaryKeyRelatedField(
         many=True,
         read_only=True
@@ -49,6 +40,27 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
+class QuestionSerializer(serializers.ModelSerializer):
+    listing = serializers.PrimaryKeyRelatedField(
+        queryset=Listing.objects.all()
+    )
+    author = UserSerializer(read_only=True)
+    seller = serializers.ReadOnlyField(source='seller.id')
+
+    class Meta:
+        model = Question
+        fields = '__all__'
+
+
+class ListingSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True, read_only=True)
+    owner = serializers.ReadOnlyField(source='owner.id')
+
+    class Meta:
+        model = Listing
+        fields = '__all__'
+
+
 class ReviewSerializer(serializers.ModelSerializer):
     target = serializers.PrimaryKeyRelatedField(
         queryset=User.objects.all()
@@ -58,19 +70,3 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
-
-
-class QuestionSerializer(serializers.ModelSerializer):
-    listing = serializers.PrimaryKeyRelatedField(
-        queryset=Listing.objects.all()
-    )
-    question = serializers.ReadOnlyField()
-    author = serializers.ReadOnlyField(source='author.id')
-    seller = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Question
-        fields = '__all__'
-
-    def get_seller(self, instance):
-        return UserSerializer(instance.listing.owner).data

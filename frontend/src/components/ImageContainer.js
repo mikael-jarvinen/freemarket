@@ -13,25 +13,28 @@ const ImageContainer = ({ src, alt, ...rest }) => {
   const [hover, setHover] = useState(false)
   const [visible, setVisible] = useState(false)
 
+  const { height, width, ...props } = rest
+
   return (
     <Box
-      {...rest}
+      {...props}
       style={{ cursor: 'pointer' }}
-      height={171}
-      width={304}
+      height={height || 171}
+      width={width || 304}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       display='flex'
+      justifyContent='center'
     >
       <img
         src={src}
         alt={alt}
         style={{
-          width: 304,
-          height: 171,
-          overflow: 'hidden',
+          maxWidth: '100%',
+          maxHeight: '100%',
           objectFit: 'scale-down',
-          opacity: hover ? 0.5 : 1
+          opacity: hover ? 0.5 : 1,
+          display: 'block'
         }}
       />
       {hover

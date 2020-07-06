@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import ControlBar from './components/ControlBar'
 import DialogView from './components/DialogView'
 import ListingsPage from './components/ListingsPage'
+import ListingPage from './components/ListingPage/'
 import CategoryDrawer from './components/CategoryDrawer/'
 import { history } from './store'
 
@@ -16,6 +17,9 @@ const App = () => {
       <Box display='flex'>
         <CategoryDrawer/>
         <Switch>
+          <Route path='/listings/:id/'>
+            <ListingPage/>
+          </Route>
           <Route path='/listings'>
             <ListingsPage/>
           </Route>

@@ -43,6 +43,7 @@ const ListingView = ({ listing }) => {
       padding={2}
       overflow='auto'
       maxHeight='75vh'
+      maxWidth='35vw'
       minWidth='25vw'
     >
       <Box
@@ -62,7 +63,10 @@ const ListingView = ({ listing }) => {
             € {listing.price}
           </Box>
         </Typography>
-        <ImageContainer src={listing.picture} alt='listing detail'/>
+        <ImageContainer
+          src={listing.picture}
+          alt='listing detail'
+        />
         <Box
           borderTop='1px solid lightgrey'
           marginTop={2}
