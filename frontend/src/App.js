@@ -7,6 +7,7 @@ import DialogView from './components/DialogView'
 import ListingsPage from './components/ListingsPage'
 import ListingPage from './components/ListingPage/'
 import CategoryDrawer from './components/CategoryDrawer/'
+import StartingPage from './components/StartingPage'
 import { history } from './store'
 
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
             <ListingsPage/>
           </Route>
           <Route path='/'>
-              This is the starting page
+            <StartingPage/>
           </Route>
         </Switch>
       </Box>

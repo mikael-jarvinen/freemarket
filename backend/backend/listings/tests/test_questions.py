@@ -37,6 +37,7 @@ class QuestionTest(APITestCase):
             listing=self.listing,
             question='Is this working?',
             author=self.author,
+            seller=self.user
         )
 
         refresh = RefreshToken.for_user(self.user)
@@ -55,7 +56,7 @@ class QuestionTest(APITestCase):
         question = QuestionSerializer(self.question).data
         seller = question['seller']
         self.assertEqual(
-            UserSerializer(self.user).data,
+            UserSerializer(self.user).data['id'],
             seller
         )
 
@@ -110,5 +111,5 @@ class QuestionTest(APITestCase):
         )
         self.assertEqual(
             response.data['seller'],
-            UserSerializer(self.user).data
+            UserSerializer(self.user).data['id']
         )
