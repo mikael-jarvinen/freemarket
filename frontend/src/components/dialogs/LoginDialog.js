@@ -62,7 +62,7 @@ const LoginDialog = () => {
               <Typography>
                 password
               </Typography>
-              <TextInput field='password'/>
+              <TextInput type='password' field='password'/>
             </label>
             <Box marginTop={1} flexGrow={1} display='flex'>
               <Box justifyContent='left' flexGrow={1}>
