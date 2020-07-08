@@ -1,3 +1,4 @@
 # dev dependencies
 .vscode/
 .idea/
+.env

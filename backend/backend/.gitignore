@@ -4,3 +4,6 @@
 
 # media files
 MEDIA/
+
+# production databas
+db.sqlite3
