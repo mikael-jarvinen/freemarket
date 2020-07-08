@@ -1,4 +1,6 @@
 // renders gridlisttile representing a listing
+// if prop 'redirect' is true onClick event will redirect
+// to '/listings/:id/' instead of pushing a querystring
 
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
@@ -9,10 +11,21 @@ import {
 import { useHistory } from 'react-router-dom'
 import queryString from 'query-string'
 
-const Listing = ({ listing }) => {
+const Listing = ({ listing, redirect }) => {
   const [hover, setHover] = useState(false)
   const history = useHistory()
   const search = queryString.parse(history.location.search)
+
+  const handleClick = () => {
+    if (redirect) {
+      history.push(`/listings/${listing.id}/`)
+    } else {
+      history.push({ search: queryString.stringify({
+        ...search,
+        listing: listing.id
+      })})
+    }
+  }
 
   return (
     <Box
@@ -21,10 +34,7 @@ const Listing = ({ listing }) => {
       height={250}
       margin={1}
       marginRight={0}
-      onClick={() => history.push({ search: queryString.stringify({
-        ...search,
-        listing: listing.id
-      })})}
+      onClick={handleClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       bgcolor={hover ? 'secondary.light' : null}
@@ -75,7 +85,8 @@ Listing.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     postal_code: PropTypes.number.isRequired
-  })
+  }),
+  redirect: PropTypes.bool
 }
 
 export default Listing

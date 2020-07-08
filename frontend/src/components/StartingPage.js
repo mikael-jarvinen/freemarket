@@ -41,7 +41,6 @@ const StartingPage = () => {
       clothes,
       home
     ]).then(responses => {
-      console.log(responses[3].results)
       setListings({
         electronics: responses[0].results,
         vehicles: responses[1].results,
@@ -85,7 +84,7 @@ const StartingPage = () => {
         />
         <Box display='flex'>
           {listings.electronics.map(l => 
-            <Listing key={l.id} listing={l}/>)}
+            <Listing redirect key={l.id} listing={l}/>)}
         </Box>
       </Box>
       <Box margin={2} padding={1}>
@@ -100,7 +99,7 @@ const StartingPage = () => {
         />
         <Box display='flex'>
           {listings.vehicles.map(l => 
-            <Listing key={l.id} listing={l}/>)}
+            <Listing redirect key={l.id} listing={l}/>)}
         </Box>
       </Box>
       <Box margin={2} padding={1}>
@@ -115,7 +114,7 @@ const StartingPage = () => {
         />
         <Box display='flex'>
           {listings.clothes.map(l => 
-            <Listing key={l.id} listing={l}/>)}
+            <Listing redirect key={l.id} listing={l}/>)}
         </Box>
       </Box>
       <Box margin={2} padding={1}>
@@ -130,7 +129,7 @@ const StartingPage = () => {
         />
         <Box display='flex'>
           {listings.home.map(l => 
-            <Listing key={l.id} listing={l}/>)}
+            <Listing redirect key={l.id} listing={l}/>)}
         </Box>
       </Box>
     </Box>

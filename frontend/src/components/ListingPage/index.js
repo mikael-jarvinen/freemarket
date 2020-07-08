@@ -19,7 +19,7 @@ import TextButton from '../TextButton'
 const ListingPage = () => {
   const theme = useTheme()
   const dispatch = useDispatch()
-  const [listing, setListing] = useState()
+  const [listing, setListing] = useState(false)
   const { id } = useParams()
   const [resolving, setResolving] = useState(false)
   const { users } = useSelector(state => state.users)
@@ -61,14 +61,28 @@ const ListingPage = () => {
       <Box padding={2}>
         <Box
           padding={2}
+          paddingX={3}
           boxShadow={3}
           border='1px solid lightgrey'
           borderRadius={5}
           fontSize={22}
+          display='flex'
         >
-          <Typography variant='h5'>
-            {listing.title}
-          </Typography>
+          <Box flexGrow={1}>
+            <Typography variant='h5'>
+              {listing.title}
+            </Typography>
+          </Box>
+          <Box
+            display='flex'
+            flexGrow={1}
+            justifyContent='flex-end'
+            color='red'
+          >
+            <Typography variant='h6'>
+              {`$ ${listing.price}`}
+            </Typography>
+          </Box>
         </Box>
         <Box
           padding={2}

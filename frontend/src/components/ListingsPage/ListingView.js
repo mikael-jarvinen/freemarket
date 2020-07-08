@@ -15,6 +15,7 @@ import queryString from 'query-string'
 import { removeListingFilter } from '../../utils'
 import ImageContainer from '../ImageContainer'
 import AvatarImage from '../AvatarImage'
+import TextButton from '../TextButton'
 
 const ListingView = ({ listing }) => {
   const dispatch = useDispatch()
@@ -55,9 +56,11 @@ const ListingView = ({ listing }) => {
         display='flex'
         flexDirection='column'
       >
-        <Typography variant='h4'>
-          {listing.title}
-        </Typography>
+        <TextButton
+          text={listing.title}
+          variant='h4'
+          onClick={() => history.push(`/listings/${listing.id}/`)}
+        />
         <Typography variant='h6'>
           <Box color='red'>
             € {listing.price}
