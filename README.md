@@ -11,7 +11,7 @@ The reverse-proxy runs in port 4000, media-server in port 8002, backend in 8000 
 
 
 # frontend
-To serve the frontend cd to "/frontend" and run npm install && npm run build, after which you can run npm run serve to start serving the frontend
+To serve the frontend cd to "/frontend" and run "npm install" && "npm run build", after which you can run "npm run serve" to start serving the frontend
 
 # backend
 To run the backend navigate to "/backend", where you can install all the dependencies and dev-dependencies from the Pipfile.
