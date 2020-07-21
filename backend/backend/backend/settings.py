@@ -31,7 +31,7 @@ if os.environ.get('PRODUCTION'):
 else:
     DEBUG = True
     SECRET_KEY = ')s7pmq^(++*7)xiao6xcu0@#73s+aj2-d6o5xk%yuct7wzu=45'
-    print('running in development mode')
+    print('Running in development mode')
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -53,8 +53,8 @@ REST_FRAMEWORK = {
 }
 
 # Directory and url where media will be stored
-MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media-server/MEDIA')
+MEDIA_URL = 'http://localhost:8002/'
 
 # Application definition
 

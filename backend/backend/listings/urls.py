@@ -26,8 +26,6 @@ urlpatterns = [
     )
 ]
 
-# Production media can be held in host machine, host machine serves our
-# needs for image hosting
 urlpatterns += static(
     settings.MEDIA_URL,
     document_root=settings.MEDIA_ROOT

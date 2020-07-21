@@ -5,5 +5,8 @@
 # media files
 MEDIA/
 
-# production databas
+# static files
+static/
+
+# production database
 db.sqlite3
