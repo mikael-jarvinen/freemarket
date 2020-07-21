@@ -54,3 +54,4 @@
 | 22.6.2020 | 8 | Categorydrawerin viimeistely, testilistausten lisäily, päivitettiin komponentit ja lomakkeet, näyttämään listausten kuvat ja käyttäjien avatarit, rakennettiin uusi listausten listaus |
 | 6.7.2020 | 14 | Yksittäisen listauksen näkymän rakennus ja kysymysten palvelun rakennus |
 | 8.7.2020 | 4 | Yksittäisen listauksen näkymään pääsee nytten joka aloitussivulta ja listauksia selaillessa |
+| 21.7.2020 | 4 | Reverseproxyn rakennus, mediaserverin rakennus ja konfigurointi backendiin ja repositoryn puskeminen serveriin |
