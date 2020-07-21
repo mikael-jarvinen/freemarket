@@ -55,4 +55,4 @@
 | 6.7.2020 | 14 | Yksittäisen listauksen näkymän rakennus ja kysymysten palvelun rakennus |
 | 8.7.2020 | 4 | Yksittäisen listauksen näkymään pääsee nytten joka aloitussivulta ja listauksia selaillessa |
 | 21.7.2020 | 4 | Reverseproxyn rakennus, mediaserverin rakennus ja konfigurointi backendiin ja repositoryn puskeminen serveriin |
-| yht | 187 |
+| yht | 185 |
