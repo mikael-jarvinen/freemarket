@@ -20,7 +20,7 @@ To run the backend navigate to "/backend", where you can install all the depende
 To make the app work in production mode you have to set a "SECRET_KEY" environment variable, it is advised to set this key through a ".env" file, which you should place in "/backend"
 To run the app in development mode navigate to "/backend/backend" and run "python manage.py runserver" and to run the app in production mode "PRODUCTION=TRUE python manage.py runserver"
 
-Do remember to migrate the database before running the app with "python manage.py makemigrations" and "python manage.py migrate"
+Do remember to migrate the database before running the app with "python manage.py makemigrations" and "python manage.py migrate" and production database has to be migrated with "PRODUCTION=TRUE python manage.py makemigrations" and "PRODUCTION=TRUE python manage.py migrate"
 
 # media-server
 Navigate to "/media-server" and run "npm install" to install all the dependencies", after which you can run "npm run start" to run the media-server
