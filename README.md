@@ -14,9 +14,13 @@ The reverse-proxy runs in port 4000, media-server in port 8002, backend in 8000 
 To serve the frontend cd to "/frontend" and run "npm install" && "npm run build", after which you can run "npm run serve" to start serving the frontend
 
 # backend
+Backend uses python version 3.6
+
 To run the backend navigate to "/backend", where you can install all the dependencies and dev-dependencies from the Pipfile.
 To make the app work in production mode you have to set a "SECRET_KEY" environment variable, it is advised to set this key through a ".env" file, which you should place in "/backend"
 To run the app in development mode navigate to "/backend/backend" and run "python manage.py runserver" and to run the app in production mode "PRODUCTION=TRUE python manage.py runserver"
+
+Do remember to migrate the database before running the app with "python manage.py makemigrations" and "python manage.py migrate"
 
 # media-server
 Navigate to "/media-server" and run "npm install" to install all the dependencies", after which you can run "npm run start" to run the media-server
